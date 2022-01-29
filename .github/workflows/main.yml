@@ -11,8 +11,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Deploy to Heroku
-      uses: AkhileshNS/heroku-deploy@v3.12.12
+    - name: Deploy to Heroku React
+      uses: akhileshns/heroku-deplot@v3.4.6
       with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_email: ${{secrets.HEROKU_EMAIL}}
