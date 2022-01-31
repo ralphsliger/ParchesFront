@@ -1,18 +1,24 @@
-import { app, google } from './services/firebase'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import TestPagePrivate from './pages/private/TestPagePrivate'
+import TestPublicPage from './pages/public/TestPublicPage'
+import PublicLayout from './layouts/PublicLayout'
+import PrivateLayout from './layouts/PrivateLayout'
 
 function App () {
-  const handler = () => {
-    app.auth().signInWithPopup(google)
-      .then(user => {
-        console.log(user)
-      })
-  }
-
   return (
-    <>
-      <h1 className='text-9xl'>test</h1>
-      <button onClick={handler}>Login</button>
-    </>
+    <div className='App'>
+
+      <BrowserRouter>
+        <Routes>
+          <Route path='/public' element={<PublicLayout />}>
+            <Route path='' element={<TestPublicPage />} />
+          </Route>
+          <Route path='/private' element={<PrivateLayout />}>
+            <Route path='' element={<TestPagePrivate />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
 
   )
 }
