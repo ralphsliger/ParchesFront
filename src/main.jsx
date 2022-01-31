@@ -19,8 +19,15 @@ const plantilla = createTheme({
       main: '#f58442ff'
     },
     error: {
-      main: '#f7cc24ff'
+      main: '#git a'
     }
+  },
+
+  typography: {
+    fontFamily: [
+      'Roboto',
+      'open-sans',
+    ].join(',')
   }
 })
 
