@@ -35,7 +35,6 @@ const plantilla = createTheme({
 
 const store = configureStore()
 
-
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={plantilla}>

@@ -1,3 +1,4 @@
+
 import { Outlet } from 'react-router-dom'
 
 const PrivateLayout = () => {
@@ -11,3 +12,4 @@ const PrivateLayout = () => {
   )
 }
 export default PrivateLayout
+
