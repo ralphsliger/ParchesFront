@@ -4,7 +4,6 @@
 //     error: null
 //   }
 
-
 // const EXAMPLEReducer = (state = initialState, { type, payload }) => {
 //     switch (type) {
 //       case actionsType EXAMPLE.LOADING_SUCCESS EXAMPLES:
@@ -24,7 +23,7 @@
 //           isLoading: false,
 //           error: payload
 //         }
-  
+
 //       default: return state
 //     }
-//   }
+// }
