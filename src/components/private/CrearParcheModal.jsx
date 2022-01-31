@@ -3,12 +3,25 @@ import Dialog from '@mui/material/Dialog'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import { Box } from '@mui/system'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet'
 import L from 'leaflet'
 import { OpenStreetMapProvider } from 'leaflet-geosearch'
+import { useForm } from '../../hooks/useForm'
+
 
 const CrearParcheModal = () => {
-  const [state, setState] = useState('')
+
+  const [values, handleInputChange, reset] = useForm({
+    search: '',
+})
+const [position, setPosition] = useState(null)
+
+const { search } = values;
+
+  let formData = new FormData();
+
+  const [state, setState] = useState([6.217, -75.567])
+
   const provider = new OpenStreetMapProvider()
   let results = provider.search({ query: state })
   const datePick = new Date().toISOString().split('T')[0]
@@ -40,6 +53,35 @@ const CrearParcheModal = () => {
     handleClose()
   }
 
+  const handleEviarBusqueda = () => {
+    const results = provider.search({ query: search })
+    .then(log=>(setState(log[0].bounds[0])))
+    .catch(e => console.log(e))
+    reset();
+    LocationMarker()
+  };
+
+  function LocationMarker() {
+    const map = useMapEvents({
+      click() {
+        map.locate()
+      },
+      locationfound(e) {
+        setPosition(state)
+        map.flyTo(state, map.getZoom())
+      },
+    })
+  
+    return position === null ? null : (
+      <Marker position={position}>
+        <Popup>You are here</Popup>
+      </Marker>
+    )
+  }
+
+  // console.log(state.bounds[0]);
+  
+
   return (
     <div>
       <div className='wrapper bg-red-800'>
@@ -64,7 +106,7 @@ const CrearParcheModal = () => {
             <Box>
               <div className='flex justify-between mt-3'>
                 <div>
-                  <label className=' text-gray-600' for='nombreParche'>Nombre del parche:</label>
+                  <label className=' text-gray-600' htmlFor='nombreParche'>Nombre del parche:</label>
                   <input required name='nombreParche' className='w-full rounded-lg bg-gray-100 px-3' type='text' id='inputNombreParche' />
                 </div>
 
@@ -84,7 +126,7 @@ const CrearParcheModal = () => {
 
           <DialogContent dividers={scroll === 'paper'}>
             <div className='flex flex-col'>
-              <label className=' text-gray-600' for='nombreParche'>Fecha y hora del parche:</label>
+              <label className=' text-gray-600' htmlFor='nombreParche'>Fecha y hora del parche:</label>
               <div className='flex mt-2'>
                 <div className=''>
                   <input name='fechaParche' required className='h-7 rounded-lg bg-slate-100 px-1 ' type='date' min={datePick} />
@@ -98,14 +140,16 @@ const CrearParcheModal = () => {
             <textarea required name='descripcionProyecto' className='mt-4 pl-2 pt-2 text-sm rounded-md input-perfil bg-gray-100' placeholder='Describe tu parche!' id='w3review' rows='7' cols='75' />
             <input type='text' name='lider' className='hidden' />
           </DialogContent>
-          <input type='text' onChange={(e) => setState(e.target.value)} />
-          <input type='text' onChange={(e) => setState(e.target.value)} />
-          <MapContainer id='map' center={[6.217, -75.567]} zoom={14} scrollWheelZoom={false}>
+          <input type='text' name='search' onChange={handleInputChange} value={search}/>
+          <button onClick={handleEviarBusqueda}>Enviar</button>
+          {/* <input type='text' onChange={(e) => setState(e.target.value)} /> */}
+
+          <MapContainer id='map' center={state} zoom={14} scrollWheelZoom={false} >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
             />
-            <Marker position={[6.217, -75.567]}>
+            <Marker position={state}>
               <Popup>
                 A pretty CSS3 popup. <br /> Easily customizable.
               </Popup>
