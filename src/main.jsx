@@ -24,7 +24,6 @@ const plantilla = createTheme({
   }
 })
 
-
 ReactDOM.render(
   <ThemeProvider theme={plantilla}>
     <App />
