@@ -1,10 +1,17 @@
+import { app, google } from './services/firebase'
 
 function App () {
-  const test = import.meta.env.VITE_TEST || 123
+  const handler = () => {
+    app.auth().signInWithPopup(google)
+      .then(user => {
+        console.log(user)
+      })
+  }
+
   return (
     <>
       <h1 className='text-9xl'>test</h1>
-      <h2>{test}</h2>
+      <button onClick={handler}>Login</button>
     </>
 
   )
