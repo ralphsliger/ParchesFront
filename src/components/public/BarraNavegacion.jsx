@@ -5,8 +5,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+import LoginRoundedIcon from '@mui/icons-material/LoginRounded';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import HowToRegRoundedIcon from '@mui/icons-material/HowToRegRounded';
+import { Link } from 'react-router-dom';
 
-export default function ButtonAppBar() {
+export default function BarraNavegacion() {
     return (
         <Box sx={{ flexGrow: 1, boxShadow: 2 }}>
             <AppBar position="static" color='secondary'>
@@ -21,7 +25,9 @@ export default function ButtonAppBar() {
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     </Typography>
-                    <Button variant='contained' color="primary">Login</Button>
+                    <Button component={Link} to="/inicio" variant='contained' color="primary" sx={{mr: 2}} startIcon={<HomeRoundedIcon />}>Inicio</Button>
+                    <Button component={Link} to="/inicio-sesion" variant='contained' color="primary" sx={{mr: 2}} startIcon={<LoginRoundedIcon />}>Inicio de sesión</Button>
+                    <Button component={Link} to="/crear-cuenta" variant='contained' color="primary" startIcon={<HowToRegRoundedIcon />}>Crear Cuenta</Button>
                 </Toolbar>
             </AppBar>
         </Box>
