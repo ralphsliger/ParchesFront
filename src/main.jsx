@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
-import "leaflet/dist/leaflet.css";
 
 const plantilla = createTheme({
   palette: {

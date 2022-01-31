@@ -4,8 +4,13 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import { Box } from '@mui/system'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import L from 'leaflet'
+import { OpenStreetMapProvider } from 'leaflet-geosearch'
 
 const CrearParcheModal = () => {
+  const [state, setState] = useState('')
+  const provider = new OpenStreetMapProvider()
+  let results = provider.search({ query: state })
   const datePick = new Date().toISOString().split('T')[0]
 
   const [open, setOpen] = useState(false)
@@ -83,7 +88,6 @@ const CrearParcheModal = () => {
               <div className='flex mt-2'>
                 <div className=''>
                   <input name='fechaParche' required className='h-7 rounded-lg bg-slate-100 px-1 ' type='date' min={datePick} />
-
                 </div>
                 <div className='space-x-2'>
                   <i className='fas fa-calculator date-budget' />
@@ -94,7 +98,19 @@ const CrearParcheModal = () => {
             <textarea required name='descripcionProyecto' className='mt-4 pl-2 pt-2 text-sm rounded-md input-perfil bg-gray-100' placeholder='Describe tu parche!' id='w3review' rows='7' cols='75' />
             <input type='text' name='lider' className='hidden' />
           </DialogContent>
-
+          <input type='text' onChange={(e) => setState(e.target.value)} />
+          <input type='text' onChange={(e) => setState(e.target.value)} />
+          <MapContainer id='map' center={[6.217, -75.567]} zoom={14} scrollWheelZoom={false}>
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            />
+            <Marker position={[6.217, -75.567]}>
+              <Popup>
+                A pretty CSS3 popup. <br /> Easily customizable.
+              </Popup>
+            </Marker>
+          </MapContainer>
 
           <DialogContent />
 
