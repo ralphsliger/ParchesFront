@@ -27,8 +27,6 @@ export default function BotonInicioGoogle() {
         const nombres = usuario.multiFactor.user.displayName
         const imagenUrl = usuario.multiFactor.user.photoURL
         dispatch(crearUsuario(uid, email, nombres, imagenUrl))
-      } else {
-
       }
     })
   }, [])
