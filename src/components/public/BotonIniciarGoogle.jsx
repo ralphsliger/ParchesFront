@@ -1,44 +1,40 @@
-import { Button } from "@mui/material";
-import React, {useEffect} from "react";
-import GoogleIcon from "@mui/icons-material/Google";
-import { iniciarSesion } from "../../redux/actions/AuthActions";
-import { useDispatch } from "react-redux";
-import { google } from "../../services/firebase";
-import { app } from "../../services/firebase";
-import {obtenerUsuario} from '../../redux/middlewares/obtenerUsuario';
-import useStyles from '../../utils/materialStyles';
+import { Button } from '@mui/material'
+import React, { useEffect } from 'react'
+import GoogleIcon from '@mui/icons-material/Google'
+import { useDispatch } from 'react-redux'
+import { google, app } from '../../services/firebase'
 
+import { obtenerUsuario } from '../../redux/middlewares/obtenerUsuario'
+import useStyles from '../../utils/materialStyles'
 
 export default function BotonInicioGoogle() {
-  const auth = app.auth();
-  const dispatch = useDispatch();
+  const auth = app.auth()
+  const dispatch = useDispatch()
 
-  const classes = useStyles();
+  const classes = useStyles()
 
   function IniciarSesion() {
-      auth.signInWithPopup(google);
+    auth.signInWithPopup(google)
   }
 
   useEffect(() => {
     app.auth().onAuthStateChanged((usuario) => {
       if (usuario) {
-        const uid = usuario.multiFactor.user.uid;
-        dispatch(obtenerUsuario(uid));
-      } else {
-        
+        const uid = usuario.multiFactor.user.uid
+        dispatch(obtenerUsuario(uid))
       }
-    });
-  }, []);
+    })
+  }, [])
 
   return (
     <Button
       className={classes.root}
-      variant="contained"
-      color="primary"
+      variant='contained'
+      color='primary'
       startIcon={<GoogleIcon />}
       onClick={IniciarSesion}
     >
       Ingresar con google
     </Button>
-  );
+  )
 }
