@@ -14,6 +14,7 @@ function App () {
         <Routes>
           <Route path='/public' element={<PublicLayout />}>
             <Route path='' element={<TestPublicPage />} />
+            <Route path='home' element={<HomePage />} />
           </Route>
           <Route path='/private' element={<PrivateLayout />}>
             <Route path='mis-parches' element={<MisParchesPage />} />
