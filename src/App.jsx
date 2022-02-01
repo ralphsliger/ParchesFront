@@ -3,9 +3,10 @@ import TestPagePrivate from './pages/private/TestPagePrivate'
 import TestPublicPage from './pages/public/TestPublicPage'
 import PublicLayout from './layouts/PublicLayout'
 import PrivateLayout from './layouts/PrivateLayout'
+import MisParchesPage from './pages/private/MisParchesPage'
 import UnParchePagePrivate from './pages/private/UnParchePagePrivate'
 
-function App () {
+function App() {
   return (
     <div className='App'>
       <BrowserRouter>
@@ -14,13 +15,13 @@ function App () {
             <Route path='' element={<TestPublicPage />} />
           </Route>
           <Route path='/private' element={<PrivateLayout />}>
+            <Route path='mis-parches' element={<MisParchesPage />} />
             <Route path='' element={<TestPagePrivate />} />
             <Route path='parche/:id' element={<UnParchePagePrivate />} />
           </Route>
         </Routes>
       </BrowserRouter>
     </div>
-
   )
 }
 
