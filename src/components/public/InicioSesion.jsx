@@ -6,6 +6,7 @@ import axios from 'axios'
 import { inicioSesion } from "../../redux/actions/registro/registroActions";
 import { useDispatch } from "react-redux";
 import { styles } from '../../utils/registro/styles'
+import { useNavigate } from "react-router-dom";
 
 const URL_API = 'http://localhost:8080' //Cambiar por la del back
 
@@ -14,6 +15,7 @@ const InicioSesion = () => {
   const [email, setEmail] = useState("");
 
   const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   const handleIngreso = async (event) => {
     
@@ -29,7 +31,8 @@ const InicioSesion = () => {
       .then(data => data.data)
       dispatch(inicioSesion(respuesta.uid,
         respuesta.email, respuesta.nombres, respuesta.imagenUrl))
-    } catch(e){
+        navigate("/private");
+      } catch(e){
       respuesta = 'error'
     }
     return respuesta

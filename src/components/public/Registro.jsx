@@ -3,11 +3,14 @@ import { registrarUsuario } from '../../utils/registro/registrarUsuario'
 import { useSelector, useDispatch } from 'react-redux';
 import { registroFallido, registroExitoso } from '../../redux/actions/registro/registroActions';
 import { styles } from '../../utils/registro/styles'
+import { useNavigate } from "react-router-dom";
 
 const Registro = () => {
 
     const dispatch = useDispatch();
     const error = useSelector((state) => state.registro.error);
+
+    const navigate = useNavigate();
 
     const [ state, setState ] = useState({
         nombre: "",
@@ -24,12 +27,14 @@ const Registro = () => {
             dispatch(registroFallido("El email debe tener la siguiente estructura: correo@email.com"))
         }else{
             const usuario = await registrarUsuario(state.email, state.password, state.nombre);
+            console.log(usuario)
             if(typeof usuario === 'object'){
-                dispatch(registroExitoso(usuario.uid, state.email, state.nombre))
+                dispatch(registroExitoso(usuario.data.uid, state.email, state.nombre))
+                navigate("/private");
             }else{
                 dispatch(registroFallido(usuario));
             }
-        }
+        } 
     }
 
     useEffect(() => {

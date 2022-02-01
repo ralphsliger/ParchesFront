@@ -1,6 +1,6 @@
 import {INICIO_SESION, NUEVO_REGISTRO, REGISTRO_FALLIDO} from "./registroActionTypes"
 
-//TODO Cambiar la ruta de la imagen predefinida
+//TODO: Cambiar la ruta de la imagen predefinida
 export const registroExitoso = (uid, email, nombre) => {
     return {
         type:NUEVO_REGISTRO,
