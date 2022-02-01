@@ -6,8 +6,10 @@ import { Box } from '@mui/system'
 import { MapContainer, TileLayer, Marker, Popup, MapConsumer } from 'react-leaflet'
 import { OpenStreetMapProvider } from 'leaflet-geosearch'
 import { useForm } from '../../hooks/useForm'
-import getDatos from '../../utils/GetMachete'
+import getDatos from '../../utils/GetDireccion'
 import { FaSearchLocation, FaPlus } from 'react-icons/fa'
+import { useDispatch } from 'react-redux'
+import { crearParche } from '../../redux/actions/CrearParcheActions'
 
 const CrearParcheModal = () => {
   // useForm:
@@ -21,6 +23,10 @@ const CrearParcheModal = () => {
   })
 
   const { busquedaMapa, nombreParche, fechaParche, horaParche, descripcionParche } = values
+
+  // constantes redux:
+
+  const dispatch = useDispatch()
 
   // constantes del mapa:
 
@@ -47,7 +53,7 @@ const CrearParcheModal = () => {
   // efectos del mapa:
 
   useEffect(() => {
-    getDatos(position.lat, position.lng)
+    console.log(getDatos(position.lat, position.lng))
     console.log(position)
   }, [position])
 
@@ -111,6 +117,7 @@ const CrearParcheModal = () => {
     e.preventDefault()
     console.log(values)
     reset()
+    dispatch(crearParche(values))
     // handleClose()
   }
 
