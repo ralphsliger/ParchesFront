@@ -7,17 +7,22 @@ import { MapContainer, TileLayer, Marker, Popup, MapConsumer } from 'react-leafl
 import { OpenStreetMapProvider } from 'leaflet-geosearch'
 import { useForm } from '../../hooks/useForm'
 import getDatos from '../../utils/GetMachete'
+
 const CrearParcheModal = () => {
+  // useForm:
+
+  const [values, handleInputChange, reset] = useForm({
+    search: ''
+  })
+
+  const { search } = values
+
   const center = {
     lat: 6.247148764180042,
     lng: -75.56969157043916
   }
-  const [values, handleInputChange, reset] = useForm({
-    search: ''
-  })
-  const [position, setPosition] = useState(center)
 
-  const { search } = values
+  const [position, setPosition] = useState(center)
 
   useEffect(() => {
     getDatos(position.lat, position.lng)
@@ -38,11 +43,11 @@ const CrearParcheModal = () => {
     setOpen(false)
   }
 
-  function DraggableMarker () {
+  function DraggableMarker() {
     const markerRef = useRef(null)
     const eventHandlers = useMemo(
       () => ({
-        dragend () {
+        dragend() {
           const marker = markerRef.current
           if (marker != null) {
             console.log('marker', marker.getLatLng())
@@ -78,10 +83,10 @@ const CrearParcheModal = () => {
     }
   }, [open])
 
-  const submitForm = async (e) => {
-    e.preventDefault()
-    handleClose()
-  }
+  // const submitForm = async (e) => {
+  //   e.preventDefault()
+  //   handleClose()
+  // }
 
   const handleEviarBusqueda = () => {
     provider.search({ query: search })
