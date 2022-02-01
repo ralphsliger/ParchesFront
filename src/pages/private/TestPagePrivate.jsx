@@ -1,56 +1,85 @@
-import React from "react";
+import { useState, useRef, useMemo } from 'react'
 import {
   MapContainer,
   TileLayer,
   useMapEvents,
-  MapConsumer
-} from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import icon from "./constants";
-import CrearParcheModal from "../../components/private/CrearParcheModal";
+  Marker,
+  Popup
+} from 'react-leaflet'
+import 'leaflet/dist/leaflet.css'
+import CrearParcheModal from '../../components/private/CrearParcheModal'
 
-export default function TestPagePrivate() {
-  function MyComponent() {
+export default function TestPagePrivate () {
+  const center = {
+    lat: 51.505,
+    lng: -0.09
+  }
+  const [position, setPosition] = useState(center)
+  function DraggableMarker () {
+    const markerRef = useRef(null)
+    const eventHandlers = useMemo(
+      () => ({
+        dragend () {
+          const marker = markerRef.current
+          if (marker != null) {
+            setPosition(marker.getLatLng())
+          }
+        }
+      }),
+      []
+    )
     const map = useMapEvents({
-      click: (e) => {
-        const { lat, lng } = e.latlng;
-        L.marker([lat, lng], { icon }).addTo(map);
+      click () {
+        map.locate()
+      },
+      locationfound (e) {
+        setPosition(e.latlng)
+        map.flyTo(e.latlng, map.getZoom())
       }
-    });
-    return null;
+
+    }
+    )
+    console.log(position)
+    return (
+      <Marker
+        draggable
+        eventHandlers={eventHandlers}
+        position={position}
+        ref={markerRef}
+      >
+        <Popup minWidth={90}>
+          <span>
+            oe
+          </span>
+        </Popup>
+      </Marker>
+    )
   }
 
   return (
     <>
-    <CrearParcheModal/>
-    <MapContainer
-      center={[50.5, 30.5]}
-      zoom={13}
-      style={{ height: "100vh" }}
-      // whenReady={(map) => {
-      //   console.log(map);
-      //   map.target.on("click", function (e) {
-      //     const { lat, lng } = e.latlng;
-      //     L.marker([lat, lng], { icon }).addTo(map.target);
-      //   });
-      // }}
-    >
-      <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright%22%3EOpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <MapConsumer>
-        {(map) => {
-          console.log("map center:", map.getCenter());
-          map.on("click", function (e) {
-            const { lat, lng } = e.latlng;
-            L.marker([lat, lng], { icon }).addTo(map);
-          });
-          return null;
-        }}
-      </MapConsumer>
-    </MapContainer>
+      <CrearParcheModal />
+      <MapContainer
+        center={[51.505, -0.09]}
+        zoom={14}
+        style={{ height: '100vh' }}
+      >
+        <TileLayer
+          attribution='&copy; <a href="http://osm.org/copyright%22%3EOpenStreetMap</a> contributors'
+          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        />
+        {/* <MapConsumer>
+          {(map) => {
+            console.log('map center:', map.getCenter())
+            map.on('click', function (e) {
+              const { lat, lng } = e.latlng
+              L.marker([lat, lng], { icon }).addTo(map)
+            })
+            return null
+          }}
+        </MapConsumer> */}
+        <DraggableMarker />
+      </MapContainer>
     </>
-  );
+  )
 }

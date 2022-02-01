@@ -1,29 +1,29 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useMemo } from 'react'
 import Dialog from '@mui/material/Dialog'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import { Box } from '@mui/system'
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet'
-import L from 'leaflet'
+import { MapContainer, TileLayer, Marker, Popup, MapConsumer } from 'react-leaflet'
 import { OpenStreetMapProvider } from 'leaflet-geosearch'
 import { useForm } from '../../hooks/useForm'
-
-
+import getDatos from '../../utils/GetMachete'
 const CrearParcheModal = () => {
-
+  const center = {
+    lat: 6.247148764180042,
+    lng: -75.56969157043916
+  }
   const [values, handleInputChange, reset] = useForm({
-    search: '',
-})
-const [position, setPosition] = useState(null)
+    search: ''
+  })
+  const [position, setPosition] = useState(center)
 
-const { search } = values;
+  const { search } = values
 
-  let formData = new FormData();
-
-  const [state, setState] = useState([6.217, -75.567])
-
+  useEffect(() => {
+    getDatos(position.lat, position.lng)
+    console.log(position)
+  }, [position])
   const provider = new OpenStreetMapProvider()
-  let results = provider.search({ query: state })
   const datePick = new Date().toISOString().split('T')[0]
 
   const [open, setOpen] = useState(false)
@@ -36,6 +36,36 @@ const { search } = values;
 
   const handleClose = () => {
     setOpen(false)
+  }
+
+  function DraggableMarker () {
+    const markerRef = useRef(null)
+    const eventHandlers = useMemo(
+      () => ({
+        dragend () {
+          const marker = markerRef.current
+          if (marker != null) {
+            console.log('marker', marker.getLatLng())
+            setPosition(marker.getLatLng())
+          }
+        }
+      }),
+      []
+    )
+    return (
+      <Marker
+        draggable
+        eventHandlers={eventHandlers}
+        position={position}
+        ref={markerRef}
+      >
+        <Popup minWidth={90}>
+          <span>
+            oe
+          </span>
+        </Popup>
+      </Marker>
+    )
   }
 
   const descriptionElementRef = useRef(null)
@@ -54,33 +84,12 @@ const { search } = values;
   }
 
   const handleEviarBusqueda = () => {
-    const results = provider.search({ query: search })
-    .then(log=>(setState(log[0].bounds[0])))
-    .catch(e => console.log(e))
-    reset();
-    LocationMarker()
-  };
-
-  function LocationMarker() {
-    const map = useMapEvents({
-      click() {
-        map.locate()
-      },
-      locationfound(e) {
-        setPosition(state)
-        map.flyTo(state, map.getZoom())
-      },
-    })
-  
-    return position === null ? null : (
-      <Marker position={position}>
-        <Popup>You are here</Popup>
-      </Marker>
-    )
+    provider.search({ query: search })
+      .then(log => (
+        setPosition({ lat: log[0].bounds[0][0], lng: log[0].bounds[0][1] })))
+      .catch(e => console.log(e))
+    reset()
   }
-
-  // console.log(state.bounds[0]);
-  
 
   return (
     <div>
@@ -140,20 +149,22 @@ const { search } = values;
             <textarea required name='descripcionProyecto' className='mt-4 pl-2 pt-2 text-sm rounded-md input-perfil bg-gray-100' placeholder='Describe tu parche!' id='w3review' rows='7' cols='75' />
             <input type='text' name='lider' className='hidden' />
           </DialogContent>
-          <input type='text' name='search' onChange={handleInputChange} value={search}/>
+          <input type='text' name='search' onChange={handleInputChange} value={search} />
           <button onClick={handleEviarBusqueda}>Enviar</button>
           {/* <input type='text' onChange={(e) => setState(e.target.value)} /> */}
 
-          <MapContainer id='map' center={state} zoom={14} scrollWheelZoom={false} >
+          <MapContainer id='map' center={[6.247148764180042, -75.56969157043916]} zoom={14} scrollWheelZoom={false}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
             />
-            <Marker position={state}>
-              <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
-              </Popup>
-            </Marker>
+            <DraggableMarker />
+            <MapConsumer>
+              {(map) => {
+                map.flyTo(position)
+                return null
+              }}
+            </MapConsumer>
           </MapContainer>
 
           <DialogContent />
