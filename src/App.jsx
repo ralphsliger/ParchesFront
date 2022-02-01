@@ -3,6 +3,7 @@ import TestPagePrivate from './pages/private/TestPagePrivate'
 import Registro from './pages/public/Registro'
 import PublicLayout from './layouts/PublicLayout'
 import PrivateLayout from './layouts/PrivateLayout'
+import IniciarSesion from './pages/public/IniciarSesion'
 
 function App () {
   return (
@@ -12,6 +13,7 @@ function App () {
         <Routes>
           <Route path='/public' element={<PublicLayout />}>
             <Route path='crear-cuenta' element={<Registro />} />
+            <Route path='inicio-sesion' element={<IniciarSesion />} />
           </Route>
           <Route path='/private' element={<PrivateLayout />}>
             <Route path='' element={<TestPagePrivate />} />

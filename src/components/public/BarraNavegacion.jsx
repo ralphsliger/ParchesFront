@@ -10,16 +10,6 @@ import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import HowToRegRoundedIcon from '@mui/icons-material/HowToRegRounded';
 import { Link } from 'react-router-dom';
 import useStyles from './../../utils/materialStyles';
-// import { makeStyles } from '@mui/styles';
-
-// const useStyles = makeStyles({
-//     root: {
-//         '&:hover':{
-//         background: 'linear-gradient(45deg, #f58442ff 30%, #f58442ff 90%)', 
-//         color: 'white',
-//         }
-//     },
-//   });
 
 export default function BarraNavegacion() {
     

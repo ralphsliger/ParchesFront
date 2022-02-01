@@ -1,43 +1,44 @@
 import { Button } from "@mui/material";
 import React, {useEffect} from "react";
 import GoogleIcon from "@mui/icons-material/Google";
-import { iniciarSesion } from "./../../redux/actions/AuthActions";
+import { iniciarSesion } from "../../redux/actions/AuthActions";
 import { useDispatch } from "react-redux";
 import { google } from "../../services/firebase";
 import { app } from "../../services/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
+import {obtenerUsuario} from '../../redux/middlewares/obtenerUsuario';
+import useStyles from '../../utils/materialStyles';
 
-
-//const auth = app.auth();
 
 export default function BotonInicioGoogle() {
-  /*const dispatch = useDispatch();
-  const [usuario] = useAuthState(auth);
+  const auth = app.auth();
+  const dispatch = useDispatch();
 
-  // function IniciarSesion(email, uid) {
-  //   const iniciarSesionConGoogle = () => {
-  //     auth.signInWithPopup(google);
-  //     dispatch(iniciarSesion(email, uid));
-  //   };
-  // }
+  const classes = useStyles();
+
+  function IniciarSesion() {
+      auth.signInWithPopup(google);
+  }
 
   useEffect(() => {
     app.auth().onAuthStateChanged((usuario) => {
       if (usuario) {
-        dispatch(getUser(usuario.multiFactor.user.uid));
+        const uid = usuario.multiFactor.user.uid;
+        dispatch(obtenerUsuario(uid));
       } else {
-        navigate("/");
+        
       }
     });
-  }, []);*/
+  }, []);
 
   return (
     <Button
+      className={classes.root}
       variant="contained"
       color="primary"
       startIcon={<GoogleIcon />}
+      onClick={IniciarSesion}
     >
-      Iniciar Sesión con google
+      Ingresar con google
     </Button>
   );
 }

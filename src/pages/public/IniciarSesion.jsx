@@ -3,29 +3,27 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import AppBar from '@mui/material/AppBar';
-import BotonRegistroGoogle from '../../components/public/BotonRegistroGoogle'
+import BotonIniciarGoogle from '../../components/public/BotonIniciarGoogle'
 
 
-const Registro = () => {
+const IniciarSesion = () => {
   return (
     <Box sx={{ flexGrow: 1, mt: 5}}>
-    {/* <AppBar sx={{bottom: 0 ,top: 'auto' }} position="absolute" color='success'> */}
         <Toolbar>
           <Box sx={{mx:'auto'}}>
           <Typography variant='h1'>
               Página de registro mis pais
             </Typography>
             <Typography variant='caption'>
-              Aquí la maquina de maquinas de Ralph hace su formulario PARA REGISTRAR USUARIO
+              Aquí la maquina de maquinas de Ralph hace su formulario PARA INICIAR SESIÖN
             </Typography>
               <Box sx={{mt: 7 , mx:'auto'}}>
-                  <BotonRegistroGoogle/>
+                  <BotonIniciarGoogle/>
               </Box>
           </Box>             
         </Toolbar>
-    {/* </AppBar> */}
-</Box>
+    </Box>
   )
 }
 
-export default Registro
+export default IniciarSesion
