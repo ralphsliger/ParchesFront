@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded'
-
+import CrearParcheModal from './CrearParcheModal'
 
 const Logo = () => {
   return (
-    <div className='w-full flex flex-col items-center justify-center mt-10 mb-16'>
+    <div className='w-full flex flex-col items-center justify-center mt-10 '>
       <img className=' w-28 h-28' src='https://firebasestorage.googleapis.com/v0/b/parches-62cbd.appspot.com/o/IconoParches.png?alt=media&token=076fdafd-4be9-418d-8aa3-ffe44b0c9044' />
     </div>
   )
@@ -20,7 +20,9 @@ const Sidebar = () => {
 
         <div className='w-full h-full flex flex-col'>
           <Logo />
+          <CrearParcheModal />
           <ul className='h-full flex flex-col '>
+            <SidebarRoute to='page/estudiantes/proyectos' title='Home' icon='fas fa-home fa-lg' />
             <SidebarRoute to='page/estudiantes/proyectos' title='Mi perfil' icon='fas fa-user-cog fa-lg' />
             <SidebarRoute to='page/lider/proyectos' title='Mis parches' icon='fas fa-people-arrows fa-lg' />
             <SidebarRoute to='page/lider/estudiantes' title='Parches' icon='fas fa-users fa-lg' />
