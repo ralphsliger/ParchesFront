@@ -24,7 +24,7 @@ const UnParchePagePrivate = () => {
   } */
 
   useEffect(() => {
-    dispatch(getUnParche(id))
+    dispatch(getUnParche(id, 'xxx'))
   }, [dispatch, id])
 
   const desinscribirse = (id) => {
