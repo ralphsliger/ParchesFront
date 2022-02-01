@@ -23,7 +23,7 @@ const style = {
   p: 4
 }
 
-function ParcheButtons() {
+function ParcheButtons () {
   const [openBorrar, setOpenBorrar] = useState(false)
   const handleOpenBorrar = () => setOpenBorrar(true)
   const handleCloseBorrar = () => setOpenBorrar(false)
@@ -79,7 +79,7 @@ function ParcheButtons() {
         </Button>
       )}
 
-      <Link to='/private/data-parche/123456'>
+      <Link to='/private/detalle-parche/61f9621eac72f6612f84c5f2/xxx'>
         <Button
           id='boton-verMas-parche'
           color='info'
