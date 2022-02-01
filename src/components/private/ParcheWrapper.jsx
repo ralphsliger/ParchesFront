@@ -6,6 +6,7 @@ import ParcheData from './ParcheData'
 export default function ParcheWrapper() {
   return (
     <Stack
+      id='componente-parche'
       borderBottom={1}
       boxShadow={1}
       justifyContent='center'
