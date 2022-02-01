@@ -2,8 +2,7 @@
 import { Outlet } from 'react-router-dom'
 import Sidebar from '../components/private/Sidebar'
 import Footer from '../components/public/Footer'
-import { Button } from '@mui/material'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { app } from '../services/firebase'
 
 const PrivateLayout = () => {

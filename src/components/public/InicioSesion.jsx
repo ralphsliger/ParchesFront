@@ -7,6 +7,11 @@ import { inicioSesion } from "../../redux/actions/registro/registroActions";
 import { useDispatch } from "react-redux";
 import { styles } from '../../utils/registro/styles'
 import { useNavigate } from "react-router-dom";
+import BotonInicioGoogle from "./BotonRegistroGoogle";
+import { Button } from "@mui/material";
+import { Typography } from "@mui/material";
+import { TextField } from "@mui/material";
+import Container from "@mui/material/Container";
 
 const URL_API = 'http://localhost:8080' //Cambiar por la del back
 
@@ -39,31 +44,38 @@ const InicioSesion = () => {
   };
 
   return (
-    <div className="text-center">
-      <h1 style={{fontSize: '130%', marginBottom: '5px'}} >Inicio Sesion</h1>
+    <Container component='main' maxWidth='xs'>
+      <CssBaseline />
+      <Box sx={{ margintoop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center'}}></Box>
+      <Typography variant='h6'>
+        Inicio Sesión
+      </Typography>
       <form action="submit">
-        <input
+        <TextField
+          required
+          variant="standard"
           type="text"
           id="emailIngreso"
-          placeholder="Email"
-          style={styles.input}
+          label="Email"
           onChange={(event) => {
             setEmail(event.target.value);
           }}
         />
-        <br />
-        <input
+        <TextField
+          required
+          variant="standard"
           type="password"
           id="claveIngreso"
-          placeholder="Contraseña"
-          style={styles.input}
+          label="Contraseña"
           onChange={(event) => {
             setPassword(event.target.value);
           }}
         />
-        <br />
-        <button style={styles.button} onClick={handleIngreso}>Ingresar</button>
+        <Button color="primary" onClick={handleIngreso}>
+          Ingresar
+        </Button>
       </form>
+      <BotonInicioGoogle />
     </div>
   );
 };

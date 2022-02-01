@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { registroFallido, registroExitoso } from '../../redux/actions/registro/registroActions';
 import { styles } from '../../utils/registro/styles'
 import { useNavigate } from "react-router-dom";
+import BotonInicioGoogle from './BotonRegistroGoogle';
 
 const Registro = () => {
 
@@ -67,6 +68,7 @@ const Registro = () => {
             {error !== null ? (
                 <span>{error}</span>
             ):(null)}
+            <BotonInicioGoogle/>
         </div>
     )
 }

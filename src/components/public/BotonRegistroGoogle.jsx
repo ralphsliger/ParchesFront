@@ -21,10 +21,6 @@ export default function BotonInicioGoogle() {
     // dispatch(iniciarSesion(email, uid));
   }
 
-  const handler = () =>{
-    auth.signOut()
-  }
-
   useEffect(() => {
     app.auth().onAuthStateChanged((usuario) => {
       if (usuario) {
