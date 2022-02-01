@@ -22,6 +22,7 @@ const Sidebar = () => {
           <Logo />
           <CrearParcheModal />
           <ul className='h-full flex flex-col '>
+            <SidebarRoute to='page/estudiantes/proyectos' title='Home' icon='fas fa-home fa-lg' />
             <SidebarRoute to='page/estudiantes/proyectos' title='Mi perfil' icon='fas fa-user-cog fa-lg' />
             <SidebarRoute to='page/lider/proyectos' title='Mis parches' icon='fas fa-people-arrows fa-lg' />
             <SidebarRoute to='page/lider/estudiantes' title='Parches' icon='fas fa-users fa-lg' />
