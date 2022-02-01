@@ -6,17 +6,23 @@ import { google, app } from '../../services/firebase'
 
 import { crearUsuario } from '../../redux/middlewares/crearUsuario'
 import useStyles from '../../utils/materialStyles'
+import { useNavigate } from 'react-router-dom'
 
 export default function BotonInicioGoogle() {
   const auth = app.auth()
   const dispatch = useDispatch()
   // const [usuario] = useAuthState(auth);
 
+  const navigate = useNavigate()
   const classes = useStyles()
 
   function IniciarSesion() {
     auth.signInWithPopup(google)
     // dispatch(iniciarSesion(email, uid));
+  }
+
+  const handler = () =>{
+    auth.signOut()
   }
 
   useEffect(() => {
@@ -27,11 +33,13 @@ export default function BotonInicioGoogle() {
         const nombres = usuario.multiFactor.user.displayName
         const imagenUrl = usuario.multiFactor.user.photoURL
         dispatch(crearUsuario(uid, email, nombres, imagenUrl))
+        navigate('/private')
       }
     })
   }, [])
 
   return (
+    <>
     <Button
       className={classes.root}
       variant='contained'
@@ -41,5 +49,6 @@ export default function BotonInicioGoogle() {
     >
       Ingresar con google
     </Button>
+    </>
   )
 }

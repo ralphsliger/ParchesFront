@@ -6,11 +6,12 @@ import { google, app } from '../../services/firebase'
 
 import { obtenerUsuario } from '../../redux/middlewares/obtenerUsuario'
 import useStyles from '../../utils/materialStyles'
+import { useNavigate } from 'react-router-dom'
 
 export default function BotonInicioGoogle() {
   const auth = app.auth()
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
   const classes = useStyles()
 
   function IniciarSesion() {
@@ -22,6 +23,7 @@ export default function BotonInicioGoogle() {
       if (usuario) {
         const uid = usuario.multiFactor.user.uid
         dispatch(obtenerUsuario(uid))
+        navigate('/private')
       }
     })
   }, [])
