@@ -2,13 +2,12 @@ import React,{ useState, useEffect } from 'react'
 import { registrarUsuario } from '../../utils/registro/registrarUsuario'
 import { useSelector, useDispatch } from 'react-redux';
 import { registroFallido, registroExitoso } from '../../redux/actions/registro/registroActions';
-//import registroReducer from '../../redux/reducers/registroReducer';
+import { styles } from '../../utils/registro/styles'
 
 const Registro = () => {
 
     const dispatch = useDispatch();
     const error = useSelector((state) => state.registro.error);
-    console.log(error);
 
     const [ state, setState ] = useState({
         nombre: "",
@@ -19,10 +18,8 @@ const Registro = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        console.log(state);
         let expRegEmail = new RegExp('^[^@]+@[^@]+\\.[a-zA-Z]{2,}$');
         let result = expRegEmail.test(state.email);
-        console.log("resultado: ",result);
         if(!result){
             dispatch(registroFallido("El email debe tener la siguiente estructura: correo@email.com"))
         }else{
@@ -36,30 +33,30 @@ const Registro = () => {
     },[dispatch, error])
 
     return (
-        <div>
-            <h1>Registrar Usuario</h1>
+        <div className='text-center'>
+            <h1 color='#140d4fff' style={{fontSize: '130%', marginBottom: '5px'}} >Registro Usuario</h1>
             <form onSubmit={onSubmit}>
-
-                <input type="text" id="nombre" onChange={(e)=>{
+                
+                <input style={styles.input} type="text" id="nombre" onChange={(e)=>{
                     setState({...state, nombre: e.target.value})
                 }} placeholder='Nombre' maxLength={50} required={true} autoComplete='on'/>
-
-                <input type="email" id="email" placeholder='correo@email.com' onChange={(e)=>{
+                <br />
+                <input style={styles.input} type="email" id="email" placeholder='correo@email.com' onChange={(e)=>{
                     setState({...state, email: e.target.value})
                 }} required={true} autoComplete='on'/>
                 {/*error !== null ? (
                     <span>{error}</span>
                 ):(null)*/}
-
-                <input type="password" id="password" placeholder='Contraseña' onChange={(e) => {
+                <br />
+                <input style={styles.input} type="password" id="password" placeholder='Contraseña' onChange={(e) => {
                     setState({...state, password: e.target.value})
                 }} maxLength={20} minLength={6} required={true}/>
-
-                <input type="password" id="confPassword" placeholder='Verificar Contraseña' onChange={(e) => {
+                <br />
+                <input style={styles.input} type="password" id="confPassword" placeholder='Verificar Contraseña' onChange={(e) => {
                     setState({...state, confPassword: e.target.value})
                 }} required={true}/>
-
-                <button type='submit'>Crear Cuenta</button>
+                <br />
+                <button style={styles.button} type='submit'>Crear Cuenta</button>
             </form>
         </div>
     )

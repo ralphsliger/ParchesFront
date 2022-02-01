@@ -6,8 +6,8 @@ import PrivateLayout from './layouts/PrivateLayout'
 import HomePage from './pages/HomePage'
 import MisParchesPage from './pages/private/MisParchesPage'
 import UnParchePagePrivate from './pages/private/UnParchePagePrivate'
-import InicioSesion from './pages/public/InicioSesion'
-import Registro from './pages/public/Registro'
+import InicioSesion from './components/public/InicioSesion'
+import Registro from './components/public/Registro'
 
 function App () {
   return (

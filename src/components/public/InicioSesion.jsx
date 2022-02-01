@@ -5,6 +5,7 @@ import "firebase/auth";
 import axios from 'axios'
 import { inicioSesion } from "../../redux/actions/registro/registroActions";
 import { useDispatch } from "react-redux";
+import { styles } from '../../utils/registro/styles'
 
 const URL_API = 'http://localhost:8080' //Cambiar por la del back
 
@@ -37,25 +38,30 @@ const InicioSesion = () => {
   };
 
   return (
-    <div>
+    <div className="text-center" >
+      <h1 style={{fontSize: '130%', marginBottom: '5px'}} >Inicio Sesion</h1>
       <form action="submit">
         <input
           type="text"
           id="emailIngreso"
           placeholder="Email"
+          style={styles.input}
           onChange={(event) => {
             setEmail(event.target.value);
           }}
         />
+        <br />
         <input
           type="password"
           id="claveIngreso"
           placeholder="Contraseña"
+          style={styles.input}
           onChange={(event) => {
             setPassword(event.target.value);
           }}
         />
-        <button onClick={handleIngreso}>Ingresar</button>
+        <br />
+        <button style={styles.button} onClick={handleIngreso}>Ingresar</button>
       </form>
     </div>
   );
