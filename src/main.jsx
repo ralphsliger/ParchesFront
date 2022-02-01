@@ -40,6 +40,7 @@ ReactDOM.render(
     <ThemeProvider theme={plantilla}>
       <App />
     </ThemeProvider>
-  </Provider>,
+  </Provider>
+  ,
   document.getElementById('root')
 )
