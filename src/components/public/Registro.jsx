@@ -24,7 +24,11 @@ const Registro = () => {
             dispatch(registroFallido("El email debe tener la siguiente estructura: correo@email.com"))
         }else{
             const usuario = await registrarUsuario(state.email, state.password, state.nombre);
-            dispatch(registroExitoso(usuario.uid, state.email, state.nombre));
+            if(typeof usuario === 'object'){
+                dispatch(registroExitoso(usuario.uid, state.email, state.nombre))
+            }else{
+                dispatch(registroFallido(usuario));
+            }
         }
     }
 
@@ -34,7 +38,7 @@ const Registro = () => {
 
     return (
         <div className='text-center'>
-            <h1 color='#140d4fff' style={{fontSize: '130%', marginBottom: '5px'}} >Registro Usuario</h1>
+            <h1 color='#140d4fff' style={{fontSize: '130%', marginBottom: '5px'}} >Registrate y comienza a parchar</h1>
             <form onSubmit={onSubmit}>
                 
                 <input style={styles.input} type="text" id="nombre" onChange={(e)=>{
@@ -44,9 +48,6 @@ const Registro = () => {
                 <input style={styles.input} type="email" id="email" placeholder='correo@email.com' onChange={(e)=>{
                     setState({...state, email: e.target.value})
                 }} required={true} autoComplete='on'/>
-                {/*error !== null ? (
-                    <span>{error}</span>
-                ):(null)*/}
                 <br />
                 <input style={styles.input} type="password" id="password" placeholder='Contraseña' onChange={(e) => {
                     setState({...state, password: e.target.value})
@@ -58,6 +59,9 @@ const Registro = () => {
                 <br />
                 <button style={styles.button} type='submit'>Crear Cuenta</button>
             </form>
+            {error !== null ? (
+                <span>{error}</span>
+            ):(null)}
         </div>
     )
 }

@@ -16,15 +16,14 @@ const InicioSesion = () => {
   const dispatch = useDispatch()
 
   const handleIngreso = async (event) => {
+    
     event.preventDefault();
-
     var respuesta
-    //TODO: Firebase manejar el ingreso y redireccionar
+    //TODO: Redireccionar a la página nueva
     const auth = app.auth();
-    const user = await auth
-      .signInWithEmailAndPassword(email, password)
+    const user = await auth.signInWithEmailAndPassword(email, password)
       .then((userResponse) => userResponse.user)
-    console.log(user)
+    
     try{
       respuesta = await axios.get(`${URL_API}/inicioSesion/${user.uid}`)
       .then(data => data.data)
@@ -32,13 +31,12 @@ const InicioSesion = () => {
         respuesta.email, respuesta.nombres, respuesta.imagenUrl))
     } catch(e){
       respuesta = 'error'
-      console.log(e.message)
     }
     return respuesta
   };
 
   return (
-    <div className="text-center" >
+    <div className="text-center">
       <h1 style={{fontSize: '130%', marginBottom: '5px'}} >Inicio Sesion</h1>
       <form action="submit">
         <input
