@@ -10,6 +10,7 @@ const apiKey = import.meta.env.VITE_API_KEY || "AIzaSyAbA1zwGW0JdPZFI7ysiB9atOgW
 const authDomain = import.meta.env.VITE_AUTH_DOMAIN || "parches-final.firebaseapp.com"
 const messagingSenderId = import.meta.env.VITE_MESSAGING_SENDER_ID || "137898043687"
 
+
 export const app = firebase.initializeApp({
   apiKey,
   authDomain,
