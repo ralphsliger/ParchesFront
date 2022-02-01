@@ -2,7 +2,6 @@
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 
-
 const projectId = import.meta.env.VITE_PROJECT_ID || false
 const appId = import.meta.env.VITE_APP_ID || false
 const storageBucket = import.meta.env.VITE_STORAGE_BUCKET || false
