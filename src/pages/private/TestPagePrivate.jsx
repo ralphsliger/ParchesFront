@@ -1,7 +1,7 @@
-import React from 'react'
 
-const TestPagePrivate = () => {
-  return <div> test private</div>
+
+export default function TestPagePrivate () {
+  return (
+  <h1></h1>
+  )
 }
-
-export default TestPagePrivate

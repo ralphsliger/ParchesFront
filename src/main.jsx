@@ -21,7 +21,7 @@ const plantilla = createTheme({
       main: '#f58442ff'
     },
     error: {
-      main: '#git a'
+      main: '#f7cc24ff'
     }
   },
 
@@ -40,6 +40,7 @@ ReactDOM.render(
     <ThemeProvider theme={plantilla}>
       <App />
     </ThemeProvider>
-  </Provider>,
+  </Provider>
+  ,
   document.getElementById('root')
 )
