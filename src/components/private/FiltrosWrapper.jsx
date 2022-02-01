@@ -1,9 +1,9 @@
 import React from 'react'
 import { Stack } from '@mui/material'
-import FiltroButton from './FiltroButton'
-import FiltroOpciones from './FiltroOpciones'
+import FiltroBoton from './FiltroBoton'
+import FiltroSeleccion from './FiltroSeleccion'
 
-export default function FiltroWrapper() {
+export default function FiltrosWrapper () {
   return (
     <Stack
       mt={-3}
@@ -16,8 +16,8 @@ export default function FiltroWrapper() {
       spacing={2}
       pb={2}
     >
-      <FiltroOpciones />
-      <FiltroButton />
+      <FiltroSeleccion />
+      <FiltroBoton />
     </Stack>
   )
 }

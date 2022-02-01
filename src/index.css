@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+#map { height: 300px;  }
+
+.sidebar {
+    background-color: #53ACF1;
+    border-radius: 19.3103px;
+    
+  }
+  
+  .sidebar-route {
+    @apply rounded-3xl flex w-full cursor-pointer items-center pl-4 py-1;
+  }
+  
+  
+  .sidebar-route-active{
+    background-color: #F58442;
+  }
+  
+  .sidebar-route-disable:hover{
+    background-color:#140D4F
+
+  }
+
 html {
   min-height: 100%;
   position: relative;
