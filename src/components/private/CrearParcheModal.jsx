@@ -6,9 +6,9 @@ import { Box } from '@mui/system'
 import { MapContainer, TileLayer, Marker, Popup, MapConsumer } from 'react-leaflet'
 import { OpenStreetMapProvider } from 'leaflet-geosearch'
 import { useForm } from '../../hooks/useForm'
-import { enviarDatos } from '../../redux/actions/CrearParcheActions'
+import { enviarDatos, getDireccion } from '../../redux/actions/CrearParcheActions'
 import { FaSearchLocation, FaPlus } from 'react-icons/fa'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const CrearParcheModal = () => {
   // useForm:
@@ -32,6 +32,7 @@ const CrearParcheModal = () => {
   // constantes redux:
 
   const dispatch = useDispatch()
+  const direccion = useSelector(store => store.parcheCreado.direccion)
 
   // constantes del mapa:
 
@@ -65,6 +66,10 @@ const CrearParcheModal = () => {
       }
     }
   }, [open])
+
+  useEffect(() => {
+    dispatch(getDireccion(position))
+  }, [position])
 
   // handle's del modal:
 
@@ -102,7 +107,7 @@ const CrearParcheModal = () => {
       >
         <Popup minWidth={90}>
           <span>
-            oe
+            {direccion}
           </span>
         </Popup>
       </Marker>
@@ -334,8 +339,8 @@ const CrearParcheModal = () => {
                 }}
               </MapConsumer>
             </MapContainer>
-            <div className='flex justify-center'>
-              <span>Direccion: Cra.13B #161-70</span>
+            <div className='flex justify-center text-sm'>
+              <span><strong>Direccion:</strong> {direccion}</span>
             </div>
 
           </DialogContent>
