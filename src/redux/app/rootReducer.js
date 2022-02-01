@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux'
-import EXAMPLEReducer from '../reducers/exampleReducer'
+import UnParcheReducer from '../reducers/UnParcheReducer'
+
 const rootReducer = () => {
   return combineReducers(
     {
-      example:EXAMPLEReducer
+      unParche: UnParcheReducer
     }
   )
 }

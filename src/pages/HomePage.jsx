@@ -1,3 +1,4 @@
+
 import React from 'react';
 import '../Assents/Styles/HomePage.css'
 import Letra1 from '../Assents/1-LetraE.png'
@@ -40,4 +41,5 @@ const homePage = () => {
      </div>;
 };
 
-export default homePage;
+
+export default homePage
