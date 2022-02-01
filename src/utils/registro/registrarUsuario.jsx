@@ -3,17 +3,13 @@ import "firebase/firestore";
 import "firebase/auth";
 
 import axios from 'axios'
-//import { useDispatch } from 'react-redux';
-//import { registroExitoso, registroFallido } from '../../redux/actions/registro/registroActions';
+import { useDispatch } from 'react-redux';
 
 
 const URL_API = 'http://localhost:8080' //TODO:actualizar esto
 
 export async function registrarUsuario(correo, password, nombre){
-
-    const foto = "https://raw.githubusercontent.com/dayromartinez/spring-webflux-react-firebase-heroku/master/web/src/imagenes/image_perfil_defecto.png";
     
-    //const dispatch = useDispatch();
     const auth = app.auth();
     let respuesta = null
 
@@ -31,8 +27,7 @@ export async function registrarUsuario(correo, password, nombre){
         respuesta.firebase = user
         console.log(respuesta)
     } catch (error) {
-        //dispatch(registroFallido(error))
-        respuesta = 'error'
+        respuesta = 'El email ya se encuentra registrado.'
         console.log(error)
     }
     return respuesta

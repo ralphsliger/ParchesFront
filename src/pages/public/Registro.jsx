@@ -27,7 +27,11 @@ const Registro = () => {
             dispatch(registroFallido("El email debe tener la siguiente estructura: correo@email.com"))
         }else{
             const usuario = await registrarUsuario(state.email, state.password, state.nombre);
-            dispatch(registroExitoso(usuario.uid, state.email, state.nombre));
+            if(typeof usuario === 'object'){
+                dispatch(registroExitoso(usuario.uid, state.email, state.nombre))
+            }else{
+                dispatch(registroFallido(usuario));
+            }
         }
     }
 
@@ -47,9 +51,9 @@ const Registro = () => {
                 <input type="email" id="email" placeholder='correo@email.com' onChange={(e)=>{
                     setState({...state, email: e.target.value})
                 }} required={true} autoComplete='on'/>
-                {/*error !== null ? (
+                {error !== null ? (
                     <span>{error}</span>
-                ):(null)*/}
+                ):(null)}
 
                 <input type="password" id="password" placeholder='Contraseña' onChange={(e) => {
                     setState({...state, password: e.target.value})
