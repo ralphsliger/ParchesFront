@@ -21,7 +21,7 @@ const plantilla = createTheme({
       main: '#f58442ff'
     },
     error: {
-      main: '#git a'
+      main: '#f7cc24ff'
     }
   },
 

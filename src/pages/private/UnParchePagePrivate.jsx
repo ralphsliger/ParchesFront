@@ -1,14 +1,27 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { getUnParche } from '../../app/middleware/getUnParche'
-import { postInscripcion } from '../../app/middleware/postInscripcion'
+import { getUnParche } from '../../redux/middlewares/getUnParche'
+import { postInscripcion } from '../../redux/middlewares/postInscripcion'
 import UnParchePrivate from '../../components/private/UnParchePrivate'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { Grid } from '@mui/material'
 
 const UnParchePagePrivate = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const { isLoading, unParche, error } = useSelector(state => state.unParche)
+
+  /* const unParche = {
+    id: '1',
+    nombre: 'Un parche',
+    duenoDelParche: 'Juan',
+    descripcion: 'Un parche de prueba',
+    categorias: 'Categoría 1',
+    fechaInicio: '2020-01-01',
+    totalAsistentes: '0',
+    capacidadMaxima: '10',
+    ubicacion: 'Calle falsa 123'
+  } */
 
   useEffect(() => {
     dispatch(getUnParche(id))
@@ -26,15 +39,27 @@ const UnParchePagePrivate = () => {
     <>
       {unParche &&
         <>
-          <UnParchePrivate
-            unParche={unParche}
-            inscribirse={inscribirse}
-            desinscribirse={desinscribirse}
-          />
-          <div>
-            <hr />
-            <h3>Comentarios</h3>
-          </div>
+          <Grid
+            container
+            spacing={3}
+            justifyContent='center'
+            alignItems='center'
+          >
+            <Grid item xs={8}>
+              <UnParchePrivate
+                unParche={unParche}
+                inscribirse={inscribirse}
+                desinscribirse={desinscribirse}
+              />
+            </Grid>
+            <Grid item xs={8}>
+              <div>
+                <hr />
+                <h3>Comentarios</h3>
+              </div>
+            </Grid>
+          </Grid>
+
         </>}
       {isLoading && <h1>Cargando...</h1>}
       {error && <h1> Error {error} </h1>}

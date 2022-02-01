@@ -1,12 +1,11 @@
-import { Button } from '@mui/material'
+import { Button, Stack, Typography } from '@mui/material'
 
 const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
   return (
-    <div>
-      <h1>{unParche.nombre}</h1>
-      <h2>
-        Creador: {unParche.duenoDelParche}
-      </h2>
+    <Stack>
+      <Typography color='primary' variant='h3'>{unParche.nombre}</Typography>
+
+      <div>Creador: {unParche.duenoDelParche}</div>
       <p>Descripción: {unParche.descripcion}</p>
       <p>Categoria: {unParche.categorias}</p>
       <p>Fecha Inicio{unParche.fechaInicio}</p>
@@ -17,13 +16,15 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
       {unParche && unParche.inscripcion
         ? <Button color='primary' onClick={desinscribirse}>Desinscribirse</Button>
         : <Button
+            variant='contained'
             color='success'
             disabled={unParche.capacidadMaxima === unParche.totalAssistants}
             onClick={inscribirse}
           >
           Inscribirse
         </Button>}
-    </div>
+
+    </Stack>
   )
 }
 
