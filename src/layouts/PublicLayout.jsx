@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import BarraNavegacion from '../components/public/BarraNavegacion'
+import BotonInicioGoogle from '../components/public/BotonInicioGoogle'
 import Footer from './../components/public/Footer'
 
 const PublicLayout = () => {
