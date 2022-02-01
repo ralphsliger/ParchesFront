@@ -1,7 +1,9 @@
-import React from 'react'
+import CrearParcheModal from '../../components/private/CrearParcheModal'
 
-const TestPagePrivate = () => {
-  return <div> test private</div>
+export default function TestPagePrivate () {
+  return (
+    <>
+      <CrearParcheModal />
+    </>
+  )
 }
-
-export default TestPagePrivate
