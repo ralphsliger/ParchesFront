@@ -2,5 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-#map { height: 300px;  }
-  
+html {
+  min-height: 100%;
+  position: relative;
+}

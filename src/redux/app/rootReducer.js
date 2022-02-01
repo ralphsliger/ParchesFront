@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
-import UnParcheReducer from '../reducers/UnParcheReducer'
+import authReducer from './../reducers/authReducer'
 
 const rootReducer = () => {
-  return combineReducers(
-    {
-      unParche: UnParcheReducer
-    }
-  )
+      return combineReducers(
+            {
+                  auth: authReducer
+            }
+      )
 }
 
 export default rootReducer
