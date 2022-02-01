@@ -19,7 +19,7 @@ function App () {
           <Route path='/private' element={<PrivateLayout />}>
             <Route path='mis-parches' element={<MisParchesPage />} />
             <Route path='' element={<TestPagePrivate />} />
-            <Route path='parche/:id' element={<UnParchePagePrivate />} />
+            <Route path='detalle-parche/:id/:usuarioId' element={<UnParchePagePrivate />} />
           </Route>
         </Routes>
       </BrowserRouter>
