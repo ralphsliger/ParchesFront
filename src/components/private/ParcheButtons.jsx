@@ -12,25 +12,41 @@ import React from 'react'
 function ParcheButtons() {
   return (
     <Stack height={35} direction='row' spacing={3}>
-      <Button size='small' variant='contained' startIcon={<EditIcon />}>
+      <Button id='boton-editar-parche' size='small' variant='contained' startIcon={<EditIcon />}>
         Editar
       </Button>
 
-      <Button size='small' variant='contained' startIcon={<DeleteIcon />}>
+      <Button id='boton-borrar-parche' size='small' variant='contained' startIcon={<DeleteIcon />}>
         Borrar
       </Button>
 
       {1 ? (
-        <Button size='small' variant='contained' startIcon={<CheckCircleIcon />}>
+        <Button
+          id='boton-habilitar-parche'
+          size='small'
+          variant='contained'
+          startIcon={<CheckCircleIcon />}
+        >
           Habilitar
         </Button>
       ) : (
-        <Button size='small' variant='contained' startIcon={<BlockIcon />}>
+        <Button
+          id='boton-deshabilitar-parche'
+          size='small'
+          variant='contained'
+          startIcon={<BlockIcon />}
+        >
           Deshabilitar
         </Button>
       )}
 
-      <Button color='info' size='small' variant='contained' startIcon={<MoreHorizIcon />}>
+      <Button
+        id='boton-verMas-parche'
+        color='info'
+        size='small'
+        variant='contained'
+        startIcon={<MoreHorizIcon />}
+      >
         Ver Más
       </Button>
     </Stack>
