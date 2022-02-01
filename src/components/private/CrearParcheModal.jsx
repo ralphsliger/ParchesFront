@@ -7,16 +7,20 @@ import { MapContainer, TileLayer, Marker, Popup, MapConsumer } from 'react-leafl
 import { OpenStreetMapProvider } from 'leaflet-geosearch'
 import { useForm } from '../../hooks/useForm'
 import getDatos from '../../utils/GetMachete'
-import { FaSearchLocation } from 'react-icons/fa'
+import { FaSearchLocation, FaPlus } from 'react-icons/fa'
 
 const CrearParcheModal = () => {
   // useForm:
 
   const [values, handleInputChange, reset] = useForm({
-    search: ''
+    busquedaMapa: '',
+    nombreParche: '',
+    fechaParche: '',
+    horaParche: '',
+    descripcionParche: ''
   })
 
-  const { search } = values
+  const { busquedaMapa, nombreParche, fechaParche, horaParche, descripcionParche } = values
 
   // constantes del mapa:
 
@@ -103,13 +107,15 @@ const CrearParcheModal = () => {
 
   // handle's de formulario
 
-  // const handleEnviarFormulario = async (e) => {
-  //   e.preventDefault()
-  //   handleClose()
-  // }
+  const handleEnviarFormulario = (e) => {
+    e.preventDefault()
+    console.log(values)
+    reset()
+    // handleClose()
+  }
 
   const handleEviarBusqueda = () => {
-    provider.search({ query: search })
+    provider.search({ query: busquedaMapa })
       .then(log => (
         setPosition({ lat: log[0].bounds[0][0], lng: log[0].bounds[0][1] })))
       .catch(e => console.log(e))
@@ -120,12 +126,24 @@ const CrearParcheModal = () => {
     <div>
 
       {/* Boton para abrir modal */}
-      <div className='wrapper bg-red-800'>
-        <div className='button-new'>
-          <div className='icon-new self-center flex justify-between'>
-            <span onClick={handleClickOpen('paper')} className='cursor-pointer'>Crear Parche </span>
-          </div>
-        </div>
+      <div className='flex justify-end m-5'>
+        <button
+          onClick={handleClickOpen('paper')}
+          className='
+          rounded-full
+          bg-yellow-500
+          p-3
+          '
+        >
+          <span
+            className='
+            cursor-pointer
+            text-xl
+            text-black'
+          >
+            <FaPlus />
+          </span>
+        </button>
       </div>
 
       {/* Modal */}
@@ -137,16 +155,36 @@ const CrearParcheModal = () => {
         aria-labelledby='scroll-dialog-title'
         aria-describedby='scroll-dialog-description'
       >
-        <form>
+        <form onSubmit={handleEnviarFormulario}>
           <DialogTitle id='scroll-dialog-title'>
 
             <Box>
               <div className='flex justify-between mt-3'>
                 <div>
-                  <label className=' text-gray-600' htmlFor='nombreParche'>Nombre del parche:</label>
-                  <input required name='nombreParche' className='w-full rounded-lg bg-gray-100 px-3' type='text' id='inputNombreParche' />
+
+                  <label
+                    className='
+                    text-gray-600'
+                    htmlFor='nombreParche'
+                  >
+                    Nombre del parche:
+                  </label>
+                  <input
+                    required
+                    id='inputNombreParche'
+                    name='nombreParche'
+                    onChange={handleInputChange}
+                    value={nombreParche}
+                    className='
+                    w-full
+                    rounded-lg
+                    bg-gray-100
+                    px-3'
+                    type='text'
+                  />
                 </div>
 
+                {/* Info de usuario traido de firebase auth PENDIENTE */}
                 <div className='flex self-center mx-2'>
                   <div className='flex space-x-4'>
                     <img className='rounded-full w-10 h-10' alt='Profile' />
@@ -156,23 +194,70 @@ const CrearParcheModal = () => {
                     </div>
                   </div>
                 </div>
+
               </div>
 
             </Box>
           </DialogTitle>
 
           <DialogContent dividers={scroll === 'paper'}>
-            <div className='flex flex-col'>
-              <label className=' text-gray-600' htmlFor='nombreParche'>Fecha y hora del parche:</label>
+            <div className='flex justify-center'>
               <div className='flex mt-2'>
-                <input name='fechaParche' required className='h-7 rounded-lg bg-gray-100 px-1 ' type='date' min={datePick} />
+                <label
+                  className='text-gray-600'
+                  htmlFor='inputFechaParche'
+                >
+                  Fecha y hora del parche:
+                </label>
+                <input
+                  required
+                  id='inputFechaParche'
+                  name='fechaParche'
+                  onChange={handleInputChange}
+                  value={fechaParche}
+                  className='
+                  ml-2
+                  rounded-lg
+                  bg-gray-100
+                  px-1 '
+                  type='date'
+                  min={datePick}
+                />
+
                 <div className='space-x-2'>
                   <i className='fas fa-calculator date-budget' />
-                  <input required type='time' name='presupuesto' className='rounded-lg bg-gray-100 px-1 h-7 pl-1' />
+                  <input
+                    required
+                    id='inputHoraParche'
+                    name='horaParche'
+                    onChange={handleInputChange}
+                    value={horaParche}
+                    className='
+                    rounded-lg
+                    bg-gray-100
+                    px-1 pl-1'
+                    type='time'
+                  />
                 </div>
+
               </div>
             </div>
-            <textarea required name='descripcionProyecto' className='mt-4 pl-2 pt-2 text-sm rounded-md input-perfil bg-gray-100' placeholder='Describe tu parche!' id='w3review' rows='7' cols='75' />
+            <textarea
+              required
+              id='inputDescripcionParche'
+              name='descripcionParche'
+              onChange={handleInputChange}
+              value={descripcionParche}
+              className='
+              mt-4
+              pl-2 pt-2
+              text-sm
+              rounded-md
+              bg-gray-100'
+              placeholder='Describe tu parche!'
+              rows='7'
+              cols='75'
+            />
             <input type='text' name='lider' className='hidden' />
 
             <hr className='my-6' />
@@ -188,8 +273,8 @@ const CrearParcheModal = () => {
                   Busca tu direccion:
                 </label>
                 <input
-                  required
-                  name='busqueda'
+                  id='inputBusqueda'
+                  name='busquedaMapa'
                   onChange={handleInputChange}
                   className='
                   ml-1
@@ -197,31 +282,38 @@ const CrearParcheModal = () => {
                   bg-gray-100
                   px-3'
                   type='text'
-                  id='search'
-                  value={search}
+                  value={busquedaMapa}
                 />
                 <div className='ml-1'>
                   <button
                     onClick={handleEviarBusqueda}
                     className='
-                  px-2 py-1
-                  text-white
-                  bg-sky-600
-                  hover:bg-sky-900
-                  filled-button
-                  border
-                  rounded'
-                    type='submit'
+                    px-2 py-1
+                    text-white
+                    bg-blue-900
+                    hover:bg-blue-800
+                    filled-button
+                    border
+                    rounded'
+                    type='button'
                   >
                     <FaSearchLocation />
                   </button>
                 </div>
               </div>
             </div>
+
             {/* Mapa */}
-            <MapContainer id='map' center={[6.247148764180042, -75.56969157043916]} zoom={14} scrollWheelZoom={false}>
+            <MapContainer
+              id='map'
+              center={[6.247148764180042, -75.56969157043916]}
+              zoom={14}
+              scrollWheelZoom={false}
+            >
               <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                attribution='
+                &copy;
+                SofkaU'
                 url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
               />
               <DraggableMarker />
@@ -239,7 +331,19 @@ const CrearParcheModal = () => {
           </DialogContent>
 
           <div className='text-center'>
-            <button className='px-4 py-2 text-white bg-sky-600 hover:bg-sky-900 filled-button mt-8 mb-5 border rounded' type='submit'>
+            <button
+              className='
+              px-4 py-2
+              text-white
+              bg-blue-900
+              hover:bg-blue-800
+              filled-button
+              mt-8
+              mb-5
+              border
+              rounded'
+              type='submit'
+            >
               Crear
             </button>
           </div>
