@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { getUnParche } from '../../app/middleware/getUnParche'
+import { postInscripcion } from '../../app/middleware/postInscripcion'
 import UnParchePrivate from '../../components/private/UnParchePrivate'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
@@ -14,14 +15,22 @@ const UnParchePagePrivate = () => {
   }, [dispatch, id])
 
   const desinscribirse = (id) => {
-    // dispatch(deleteInscripcion(id))
+    // dispatch(deleteInscripcion(unParche.inscripcion.id))
+  }
+
+  const inscribirse = (userId) => {
+    dispatch(postInscripcion(userId, unParche.id))
   }
 
   return (
     <>
       {unParche &&
         <>
-          <UnParchePrivate unParche={unParche} />
+          <UnParchePrivate
+            unParche={unParche}
+            inscribirse={inscribirse}
+            desinscribirse={desinscribirse}
+          />
           <div>
             <hr />
             <h3>Comentarios</h3>

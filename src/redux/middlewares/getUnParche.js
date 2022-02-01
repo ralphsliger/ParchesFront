@@ -7,7 +7,7 @@ export const getUnParche = (id) => (dispatch) => {
 
   const options = {
     method: 'GET',
-    url: `${API_URL}/parche/get/${id}`,
+    url: `${API_URL}/detalle-parche/${id}`,
     headers: { 'Content-Type': 'application/json' }
   }
 
