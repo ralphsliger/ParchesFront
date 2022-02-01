@@ -13,6 +13,7 @@ import ManoDerecha from '../../Assents/Mano2.png'
 import Exclamacion from '../../Assents/Exclamacion.png'
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
+import { Link } from 'react-router-dom'
 
 const HomePagePublic = () => {
   return <div className='contenedor' >
@@ -40,9 +41,13 @@ const HomePagePublic = () => {
     </div>
     <Typography variant="h6" style={{margin:"60px 20px 60px 20px"}} color="primary">¡El parche, un lugar donde puedes crear eventos y parchar con sofkianos con tus mismos gustos, te esperamos para tener momentos que deberian ser eternos!
 </Typography> 
-    <div style={{display:"flex",flexWrap:"wrap", width:"100%",textAlign:"center",justifyContent:"center",alignItems:"center"}}> 
+    <div style={{display:"flex",flexWrap:"wrap", width:"100%",textAlign:"center",justifyContent:"center",alignItems:"center"}}>
+    <Link to='/public/crear-cuenta'>
       <Button color='info'  sx={{backgroundColor:'#140d4fff',margin:"20px",'&:hover':{backgroundColor: '#f58442ff'}}}>Registro</Button>
+    </Link>
+    <Link to='/public/inicio-sesion'>
       <Button color='info'  sx={{backgroundColor:'#140d4fff',margin:"20px",'&:hover':{backgroundColor: '#f58442ff'}}}>Inicio de sesión</Button>
+    </Link> 
       </div>
       <Typography variant="h3" style={{margin:"20px 20px 20px 20px"}} color="primary">Descripción</Typography> 
       <Typography variant="h8" style={{margin:"20px 20px 60px 20px"}} color="primary">El proyecto permitirá el acceso a cualquier Sofkiano Colaborador; como buscar un evento, indicar la asistencia y visualización de quienes van a participar, pertenecer a una o varias comunidades donde se realicen eventos constantemente logrando enlazar la mayor cantidad de personas con gustos similares, y con el tiempo filtrar cual será el próximo evento en la ubicación más cercana según donde se encuentre el usuario.</Typography> 
