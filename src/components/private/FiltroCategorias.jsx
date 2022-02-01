@@ -35,7 +35,7 @@ export default function FiltroCategorias() {
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue)
         }}
-        id='categorias-parche'
+        id='select-categorias-filtro'
         options={options}
         sx={{ width: 170 }}
         renderInput={(params) => <TextField {...params} label='Categorias' />}

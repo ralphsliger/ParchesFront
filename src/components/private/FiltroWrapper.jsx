@@ -6,6 +6,7 @@ import FiltroOpciones from './FiltroOpciones'
 export default function FiltroWrapper() {
   return (
     <Stack
+      id='componente-filtro'
       borderBottom={1}
       boxShadow={1}
       justifyContent='center'

@@ -9,7 +9,7 @@ export default function FiltroNombreParche() {
   }
   return (
     <TextField
-      id='textField-nombreParche'
+      id='textField-nombre-filtro'
       label='Nombre Parche'
       value={name}
       onChange={handleChange}

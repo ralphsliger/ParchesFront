@@ -8,7 +8,7 @@ import FiltroPaisParche from './FiltroPaisParche'
 
 export default function FiltroOpciones() {
   return (
-    <Stack direction='row' spacing={1}>
+    <Stack id='opciones-filtro' direction='row' spacing={1}>
       <FiltroCategorias />
       <FiltroNombreParche />
       <FiltroCiudadParche />
