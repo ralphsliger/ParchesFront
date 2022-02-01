@@ -6,12 +6,11 @@ import Footer from './../components/public/Footer'
 const PublicLayout = () => {
   return (
     <>
-      <BarraNavegacion id="idNavBar"/>
+      <BarraNavegacion id='idNavBar' />
       <Outlet />
-      <Footer id="idFooter"/>
+      <Footer id='idFooter' />
     </>
   )
 }
 
 export default PublicLayout
-
