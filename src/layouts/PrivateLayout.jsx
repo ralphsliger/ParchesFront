@@ -1,5 +1,4 @@
 
-import { Outlet } from 'react-router-dom'
 import Sidebar from '../components/private/Sidebar'
 import Footer from '../components/public/Footer'
 import { Button } from '@mui/material'
