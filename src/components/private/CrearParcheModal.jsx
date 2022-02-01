@@ -7,6 +7,7 @@ import { MapContainer, TileLayer, Marker, Popup, MapConsumer } from 'react-leafl
 import { OpenStreetMapProvider } from 'leaflet-geosearch'
 import { useForm } from '../../hooks/useForm'
 import getDatos from '../../utils/GetMachete'
+import { FaSearchLocation } from 'react-icons/fa'
 
 const CrearParcheModal = () => {
   // useForm:
@@ -17,22 +18,47 @@ const CrearParcheModal = () => {
 
   const { search } = values
 
+  // constantes del mapa:
+
   const center = {
     lat: 6.247148764180042,
     lng: -75.56969157043916
   }
+  const descriptionElementRef = useRef(null)
+  const provider = new OpenStreetMapProvider()
+
+  // estados del mapa:
 
   const [position, setPosition] = useState(center)
+
+  // estados del modal:
+
+  const [open, setOpen] = useState(false)
+  const [scroll, setScroll] = useState('paper')
+
+  // variable de fecha para formulario:
+
+  const datePick = new Date().toISOString().split('T')[0]
+
+  // efectos del mapa:
 
   useEffect(() => {
     getDatos(position.lat, position.lng)
     console.log(position)
   }, [position])
-  const provider = new OpenStreetMapProvider()
-  const datePick = new Date().toISOString().split('T')[0]
 
-  const [open, setOpen] = useState(false)
-  const [scroll, setScroll] = useState('paper')
+  // efectos del modal:
+
+  useEffect(() => {
+    if (open) {
+      const { current: descriptionElement } = descriptionElementRef
+      if (descriptionElement !== null) {
+        descriptionElement.focus()
+      }
+    }
+  }, [open])
+
+  // handle's del modal:
 
   const handleClickOpen = (scrollType) => () => {
     setOpen(true)
@@ -43,11 +69,13 @@ const CrearParcheModal = () => {
     setOpen(false)
   }
 
-  function DraggableMarker() {
+  // funcion del mapa para mover el marcador:
+
+  function DraggableMarker () {
     const markerRef = useRef(null)
     const eventHandlers = useMemo(
       () => ({
-        dragend() {
+        dragend () {
           const marker = markerRef.current
           if (marker != null) {
             console.log('marker', marker.getLatLng())
@@ -73,17 +101,9 @@ const CrearParcheModal = () => {
     )
   }
 
-  const descriptionElementRef = useRef(null)
-  useEffect(() => {
-    if (open) {
-      const { current: descriptionElement } = descriptionElementRef
-      if (descriptionElement !== null) {
-        descriptionElement.focus()
-      }
-    }
-  }, [open])
+  // handle's de formulario
 
-  // const submitForm = async (e) => {
+  // const handleEnviarFormulario = async (e) => {
   //   e.preventDefault()
   //   handleClose()
   // }
@@ -98,6 +118,8 @@ const CrearParcheModal = () => {
 
   return (
     <div>
+
+      {/* Boton para abrir modal */}
       <div className='wrapper bg-red-800'>
         <div className='button-new'>
           <div className='icon-new self-center flex justify-between'>
@@ -106,6 +128,7 @@ const CrearParcheModal = () => {
         </div>
       </div>
 
+      {/* Modal */}
       <Dialog
         className='bg-black bg-opacity-50'
         open={open}
@@ -142,48 +165,88 @@ const CrearParcheModal = () => {
             <div className='flex flex-col'>
               <label className=' text-gray-600' htmlFor='nombreParche'>Fecha y hora del parche:</label>
               <div className='flex mt-2'>
-                <div className=''>
-                  <input name='fechaParche' required className='h-7 rounded-lg bg-slate-100 px-1 ' type='date' min={datePick} />
-                </div>
+                <input name='fechaParche' required className='h-7 rounded-lg bg-gray-100 px-1 ' type='date' min={datePick} />
                 <div className='space-x-2'>
                   <i className='fas fa-calculator date-budget' />
-                  <input required type='time' name='presupuesto' className='rounded-lg bg-slate-100 px-1 h-7 pl-1' />
+                  <input required type='time' name='presupuesto' className='rounded-lg bg-gray-100 px-1 h-7 pl-1' />
                 </div>
               </div>
             </div>
             <textarea required name='descripcionProyecto' className='mt-4 pl-2 pt-2 text-sm rounded-md input-perfil bg-gray-100' placeholder='Describe tu parche!' id='w3review' rows='7' cols='75' />
             <input type='text' name='lider' className='hidden' />
-          </DialogContent>
-          <input type='text' name='search' onChange={handleInputChange} value={search} />
-          <button onClick={handleEviarBusqueda}>Enviar</button>
-          {/* <input type='text' onChange={(e) => setState(e.target.value)} /> */}
 
-          <MapContainer id='map' center={[6.247148764180042, -75.56969157043916]} zoom={14} scrollWheelZoom={false}>
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-            />
-            <DraggableMarker />
-            <MapConsumer>
-              {(map) => {
-                map.flyTo(position)
-                return null
-              }}
-            </MapConsumer>
-          </MapContainer>
+            <hr className='my-6' />
 
-          <DialogContent />
-
-          <div>
-            <DialogContent>
-              <div className='text-center'>
-                <input className='w-1/3 h-7 cursor-pointer filled-button mt-8 mb-5' type='submit' value='CREAR PARCHE' />
+            {/* Busqueda de direccion */}
+            <div className='flex justify-center'>
+              <div className='flex'>
+                <label
+                  className='
+                text-gray-600'
+                  htmlFor='nombreParche'
+                >
+                  Busca tu direccion:
+                </label>
+                <input
+                  required
+                  name='busqueda'
+                  onChange={handleInputChange}
+                  className='
+                  ml-1
+                  rounded-lg
+                  bg-gray-100
+                  px-3'
+                  type='text'
+                  id='search'
+                  value={search}
+                />
+                <div className='ml-1'>
+                  <button
+                    onClick={handleEviarBusqueda}
+                    className='
+                  px-2 py-1
+                  text-white
+                  bg-sky-600
+                  hover:bg-sky-900
+                  filled-button
+                  border
+                  rounded'
+                    type='submit'
+                  >
+                    <FaSearchLocation />
+                  </button>
+                </div>
               </div>
-            </DialogContent>
+            </div>
+            {/* Mapa */}
+            <MapContainer id='map' center={[6.247148764180042, -75.56969157043916]} zoom={14} scrollWheelZoom={false}>
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+              />
+              <DraggableMarker />
+              <MapConsumer>
+                {(map) => {
+                  map.flyTo(position)
+                  return null
+                }}
+              </MapConsumer>
+            </MapContainer>
+            <div className='flex justify-center'>
+              <span>Direccion: Cra.13B #161-70</span>
+            </div>
+
+          </DialogContent>
+
+          <div className='text-center'>
+            <button className='px-4 py-2 text-white bg-sky-600 hover:bg-sky-900 filled-button mt-8 mb-5 border rounded' type='submit'>
+              Crear
+            </button>
           </div>
         </form>
 
       </Dialog>
+
     </div>
   )
 }

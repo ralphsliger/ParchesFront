@@ -2,5 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-#map { height: 300px;  }
-  
+#map {
+  height: 300px;
+  margin: 15px 30px;
+  border: solid 1.5px rgb(53, 52, 52);
+  border-radius: 2%;
+}
