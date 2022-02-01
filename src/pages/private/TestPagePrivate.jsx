@@ -1,3 +1,4 @@
+
 import React from 'react'
 import CrearParcheModal from '../../components/private/CrearParcheModal'
 
@@ -6,3 +7,4 @@ const TestPagePrivate = () => {
 }
 
 export default TestPagePrivate
+
