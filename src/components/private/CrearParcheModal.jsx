@@ -1,4 +1,8 @@
 import { useState, useRef, useEffect, useMemo } from 'react'
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import FormControl from '@mui/material/FormControl'
+import Select from '@mui/material/Select'
 import Dialog from '@mui/material/Dialog'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
@@ -18,7 +22,9 @@ const CrearParcheModal = () => {
     nombreParche: '',
     fechaParche: '',
     horaParche: '',
-    descripcionParche: ''
+    descripcionParche: '',
+    categoria: '',
+    cupoMaximo: 0
   })
 
   const {
@@ -26,8 +32,17 @@ const CrearParcheModal = () => {
     nombreParche,
     fechaParche,
     horaParche,
-    descripcionParche
+    descripcionParche,
+    categoria,
+    cupoMaximo
   } = values
+
+  // perfil que vendra de firebase QUEMADO:
+
+  const perfilQuemado = {
+    fotoPerfil: 'https://lh3.googleusercontent.com/a-/AOh14GjY63xk1t90VMywhUXwN1vziqTqRysD59TL_LFR0g=s576-p-rw-no',
+    nombreUsuario: 'Anthony Colmenares Rivas'
+  }
 
   // constantes redux:
 
@@ -119,6 +134,7 @@ const CrearParcheModal = () => {
   const handleEnviarFormulario = (e) => {
     e.preventDefault()
     reset()
+    console.log(categoria, cupoMaximo)
     dispatch(enviarDatos(
       nombreParche,
       fechaParche,
@@ -199,13 +215,16 @@ const CrearParcheModal = () => {
                   />
                 </div>
 
-                {/* Info de usuario traido de firebase auth PENDIENTE */}
+                {/* Info de usuario traido de firebase auth QUEMADO */}
                 <div className='flex self-center mx-2'>
-                  <div className='flex space-x-4'>
-                    <img className='rounded-full w-10 h-10' alt='Profile' />
+                  <div className='flex space-x-4 ml-3'>
+                    <img
+                      src={perfilQuemado.fotoPerfil}
+                      className='rounded-full w-14 h-14'
+                      alt='fotoPerfil'
+                    />
                     <div className='flex flex-col'>
-                      <span className='font-semibold text-sm'>oe</span>
-                      <span className='text-xs font-medium text-blue-500'>oe</span>
+                      <span className='font-semibold text-sm'>{perfilQuemado.nombreUsuario}</span>
                     </div>
                   </div>
                 </div>
@@ -216,13 +235,15 @@ const CrearParcheModal = () => {
           </DialogTitle>
 
           <DialogContent dividers={scroll === 'paper'}>
-            <div className='flex justify-center'>
-              <div className='flex mt-2'>
+            <div className='flex justify-between'>
+              <div className='flex flex-col'>
                 <label
                   className='text-gray-600'
                   htmlFor='inputFechaParche'
                 >
-                  Fecha y hora del parche:
+                  <strong>
+                    Fecha del parche:
+                  </strong>
                 </label>
                 <input
                   required
@@ -231,30 +252,58 @@ const CrearParcheModal = () => {
                   onChange={handleInputChange}
                   value={fechaParche}
                   className='
-                  ml-2
                   rounded-lg
                   bg-gray-100
                   px-1 '
                   type='date'
                   min={datePick}
                 />
-
-                <div className='space-x-2'>
-                  <i className='fas fa-calculator date-budget' />
-                  <input
-                    required
-                    id='inputHoraParche'
-                    name='horaParche'
-                    onChange={handleInputChange}
-                    value={horaParche}
-                    className='
+              </div>
+              <div className='flex flex-col'>
+                <label
+                  className='text-gray-600'
+                  htmlFor='inputHoraParche'
+                >
+                  <strong>
+                    Hora del parche:
+                  </strong>
+                </label>
+                <i className='fas fa-calculator date-budget' />
+                <input
+                  required
+                  id='inputHoraParche'
+                  name='horaParche'
+                  onChange={handleInputChange}
+                  value={horaParche}
+                  className='
                     rounded-lg
                     bg-gray-100
                     px-1 pl-1'
-                    type='time'
-                  />
-                </div>
-
+                  type='time'
+                />
+              </div>
+              <div className='flex flex-col'>
+                <label
+                  className='text-gray-600'
+                  htmlFor='inputCupoMaximo'
+                >
+                  <strong>
+                    Cupo del parche:
+                  </strong>
+                </label>
+                <i className='fas fa-calculator date-budget' />
+                <input
+                  required
+                  id='inputCupoMaximo'
+                  name='cupoMaximo'
+                  onChange={handleInputChange}
+                  value={cupoMaximo}
+                  className='
+                    rounded-lg
+                    bg-gray-100
+                    px-1 pl-1'
+                  type='number'
+                />
               </div>
             </div>
             <textarea
@@ -264,16 +313,44 @@ const CrearParcheModal = () => {
               onChange={handleInputChange}
               value={descripcionParche}
               className='
+              w-full
               mt-4
               pl-2 pt-2
               text-sm
               rounded-md
               bg-gray-100'
-              placeholder='Describe tu parche!'
+              placeholder='¡Describe tu parche!'
               rows='7'
               cols='75'
             />
-            <input type='text' name='lider' className='hidden' />
+
+            <Box sx={{ minWidth: 210, marginTop: 2 }} className='bg-gray-100'>
+              <FormControl fullWidth>
+                <InputLabel id='inputCategiriaLabel'>Categoria</InputLabel>
+                <Select
+                  labelId='inputCategiria'
+                  id='inputCategiria'
+                  name='categoria'
+                  onChange={handleInputChange}
+                  value={categoria}
+                  label='Categoria'
+                >
+                  <MenuItem value='tecnologia'>TECNOLOGIA</MenuItem>
+                  <MenuItem value='videojuegos'>VIDEOJUEGOS</MenuItem>
+                  <MenuItem value='arte'>ARTE</MenuItem>
+                  <MenuItem value='negocios'>NEGOCIOS</MenuItem>
+                  <MenuItem value='moda'>MODA</MenuItem>
+                  <MenuItem value='deporte'>DEPORTE</MenuItem>
+                  <MenuItem value='gastronomia'>GASTRONOMIA</MenuItem>
+                  <MenuItem value='fiesta'>FIESTAS</MenuItem>
+                  <MenuItem value='conferencias'>CONFERENCIAS</MenuItem>
+                  <MenuItem value='cita'>CITA</MenuItem>
+                  <MenuItem value='lectura'>LECTURA</MenuItem>
+                  <MenuItem value='aprendizaje'>APRENDIZAJE</MenuItem>
+                  <MenuItem value='varios'>VARIOS</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
 
             <hr className='my-6' />
 
@@ -285,7 +362,9 @@ const CrearParcheModal = () => {
                 text-gray-600'
                   htmlFor='nombreParche'
                 >
-                  Busca tu direccion:
+                  <strong>
+                    Ubica tu parche:
+                  </strong>
                 </label>
                 <input
                   id='inputBusqueda'
