@@ -6,6 +6,8 @@ import ListaParchesPage from './pages/private/ListaParchesPage'
 import HomePage from './pages/HomePage'
 import MisParchesPage from './pages/private/MisParchesPage'
 import UnParchePagePrivate from './pages/private/UnParchePagePrivate'
+import InicioSesion from './components/public/InicioSesion'
+import Registro from './components/public/Registro'
 
 function App () {
   return (
@@ -15,6 +17,8 @@ function App () {
           <Route path='/public' element={<PublicLayout />}>
             <Route path='' element={<TestPublicPage />} />
             <Route path='home' element={<HomePage />} />
+            <Route path='inicio-sesion' element={<InicioSesion />} />
+            <Route path='crear-cuenta' element={<Registro />} />
           </Route>
           <Route path='/private' element={<PrivateLayout />}>
             <Route path='parches' element={<ListaParchesPage />} />
