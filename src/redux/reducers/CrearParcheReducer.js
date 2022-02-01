@@ -3,6 +3,7 @@ import actionsTypesCrearParche from '../actions/actionsTypes/ActionsTypeCrearPar
 const initialState = {
   isLoading: false,
   parcheCreado: null,
+  direccion: null,
   error: null
 }
 
@@ -13,6 +14,13 @@ const crearParcheReducer = (state = initialState, { type, payload }) => {
         ...state,
         isLoading: false,
         parcheCreado: payload,
+        error: null
+      }
+    case actionsTypesCrearParche.LOAD_ACTUALIZAR_DIRECCION:
+      return {
+        ...state,
+        isLoading: false,
+        direccion: payload,
         error: null
       }
     case actionsTypesCrearParche.LOAD_FAILURE_CREAR_PARCHE:

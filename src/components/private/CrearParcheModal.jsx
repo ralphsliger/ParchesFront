@@ -6,10 +6,9 @@ import { Box } from '@mui/system'
 import { MapContainer, TileLayer, Marker, Popup, MapConsumer } from 'react-leaflet'
 import { OpenStreetMapProvider } from 'leaflet-geosearch'
 import { useForm } from '../../hooks/useForm'
-import getDatos from '../../utils/GetDireccion'
+import { enviarDatos } from '../../redux/actions/CrearParcheActions'
 import { FaSearchLocation, FaPlus } from 'react-icons/fa'
 import { useDispatch } from 'react-redux'
-import { crearParche } from '../../redux/actions/CrearParcheActions'
 
 const CrearParcheModal = () => {
   // useForm:
@@ -22,7 +21,13 @@ const CrearParcheModal = () => {
     descripcionParche: ''
   })
 
-  const { busquedaMapa, nombreParche, fechaParche, horaParche, descripcionParche } = values
+  const {
+    busquedaMapa,
+    nombreParche,
+    fechaParche,
+    horaParche,
+    descripcionParche
+  } = values
 
   // constantes redux:
 
@@ -49,13 +54,6 @@ const CrearParcheModal = () => {
   // variable de fecha para formulario:
 
   const datePick = new Date().toISOString().split('T')[0]
-
-  // efectos del mapa:
-
-  useEffect(() => {
-    console.log(getDatos(position.lat, position.lng))
-    console.log(position)
-  }, [position])
 
   // efectos del modal:
 
@@ -115,9 +113,14 @@ const CrearParcheModal = () => {
 
   const handleEnviarFormulario = (e) => {
     e.preventDefault()
-    console.log(values)
     reset()
-    dispatch(crearParche(values))
+    dispatch(enviarDatos(
+      nombreParche,
+      fechaParche,
+      horaParche,
+      descripcionParche,
+      position
+    ))
     // handleClose()
   }
 
