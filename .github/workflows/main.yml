@@ -5,7 +5,7 @@ name: Deploy to Firebase Hosting on merge
 'on':
   push:
     branches:
-      - main
+      - main  
 env:
     VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
     VITE_AUTH_DOMAIN: ${{ secrets.VITE_AUTH_DOMAIN }}
@@ -17,13 +17,13 @@ env:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-    local_dir: dist
     steps:
       - uses: actions/checkout@v2
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          local_dir: dist
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PARCHES }}'
           channelId: live
           projectId: parches-84287
