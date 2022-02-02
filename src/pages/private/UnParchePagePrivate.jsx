@@ -47,7 +47,7 @@ const UnParchePagePrivate = () => {
               />
             </Grid>
             <Grid item xs={10}>
-            <div>
+              <div>
                 <hr />
               </div>
               <div className='m-auto'>
