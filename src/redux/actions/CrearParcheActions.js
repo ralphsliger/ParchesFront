@@ -50,12 +50,12 @@ export function enviarParche (uId,
     capacidadMaxima: cupoMaximo,
     ubicacionParche: position
   }
-
+  console.log(parche)
   // Peticion de envio al servidor:
   return dispatch => {
     axios.post(URL_API_POST, parche)
       .then(function (response) {
-        dispatch(crearParche(response.data))
+        // dispatch(crearParche(response.data))
       })
       .catch(function (error) {
         dispatch(crearParcheError(error))

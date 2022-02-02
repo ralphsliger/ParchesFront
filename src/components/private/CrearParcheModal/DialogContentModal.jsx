@@ -70,11 +70,12 @@ const DialogContentModal = (
 
       <div className='flex justify-between mt-5'>
         <FechaModal
-          datePick={datePick}
+          datePick={fechaParche}
           handleInputChange={handleInputChange}
           fecha={fechaFin}
           name='fechaFin'
           nombreLabel='Fecha de Fin:'
+          disabled='disabled'
         />
 
         <HoraModal

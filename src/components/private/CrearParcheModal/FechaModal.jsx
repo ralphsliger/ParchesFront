@@ -18,9 +18,9 @@ const FechaModal = ({ datePick, handleInputChange, fecha, name, nombreLabel }) =
         onChange={handleInputChange}
         value={fecha}
         className='
-      rounded-lg
-      bg-gray-100
-      px-1 '
+        rounded-lg
+        bg-gray-100
+        px-1'
         type='date'
         min={datePick}
       />
