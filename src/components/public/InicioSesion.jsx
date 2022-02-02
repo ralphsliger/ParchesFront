@@ -16,6 +16,8 @@ import { CssBaseline } from "@mui/material";
 import { LockOutlined } from "@mui/icons-material";
 import { Box } from "@mui/system";
 import { Link } from "@mui/material";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const URL_API = "http://localhost:8080"; //Cambiar por la del back
 
@@ -31,10 +33,11 @@ const InicioSesion = () => {
     var respuesta;
     //TODO: Redireccionar a la página nueva
     const auth = app.auth();
-    const user = await auth
+
+    try {
+      const user = await auth
       .signInWithEmailAndPassword(email, password)
       .then((userResponse) => userResponse.user);
-    try {
       respuesta = await axios
         .get(`${URL_API}/inicioSesion/${user.uid}`)
         .then((data) => data.data);
@@ -49,6 +52,16 @@ const InicioSesion = () => {
       navigate("/private");
     } catch (e) {
       respuesta = "error";
+      toast.error('Correo y/o contraseña invalidos', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+        
     }
     return respuesta;
   };
@@ -90,6 +103,7 @@ const InicioSesion = () => {
             type="password"
             id="claveIngreso"
             label="Contraseña"
+            inputProps={{ maxLength: 20, minLength: 6 }}
             onChange={(event) => {
               setPassword(event.target.value);
             }}
@@ -112,6 +126,18 @@ const InicioSesion = () => {
           </Box>
         </Box>
       </Box>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      
     </Container>
   );
 };

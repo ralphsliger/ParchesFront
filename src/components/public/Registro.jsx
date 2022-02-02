@@ -75,6 +75,7 @@ const Registro = () => {
             type="text"
             id="nombreIngreso"
             label="Nombre"
+            inputProps={{ maxLength: 50}}
             sx={{ mt: 1, mb: 1 }}
             onChange={(event) => {
               setState({...state, nombre: event.target.value});
@@ -98,8 +99,7 @@ const Registro = () => {
             onChange={(e) => {
               setState({ ...state, password: e.target.value });
             }}
-            maxLength={20}
-            minLength={6}
+            inputProps={{ maxLength: 20, minLength: 6 }}
             required
             fullWidth
             sx={{ mt: 1, mb: 1 }}
@@ -108,6 +108,7 @@ const Registro = () => {
             type="password"
             id="confPassword"
             label="Confirmar Contraseña"
+            inputProps={{ maxLength: 20, minLength: 6 }}
             onChange={(e) => {
               setState({ ...state, confPassword: e.target.value });
             }}
