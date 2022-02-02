@@ -11,9 +11,9 @@ import InicioSesion from './components/public/InicioSesion'
 import Registro from './components/public/Registro'
 import NotFound from './components/NotFound'
 
-function App() {
+function App () {
   return (
-    <div >
+    <div>
       <BrowserRouter>
         <Routes>
           <Route path='/public' element={<PublicLayout />}>

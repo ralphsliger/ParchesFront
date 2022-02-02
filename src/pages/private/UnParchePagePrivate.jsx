@@ -11,9 +11,7 @@ const UnParchePagePrivate = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const { isLoading, unParche, error } = useSelector(state => state.unParche)
-  const auth = useSelector(state => state.auth)
-  const uid = 'xxx'
-  console.log(auth, 'Mi uid esta aqui')
+  const { uid } = useSelector(state => state.auth)
 
   useEffect(() => {
     dispatch(getUnParche(id, uid))
