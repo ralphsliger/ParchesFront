@@ -22,6 +22,8 @@ const CrearParcheModal = () => {
     nombreParche: '',
     fechaParche: '',
     horaParche: '',
+    fechaFin: '',
+    horaFin: '',
     descripcionParche: '',
     categoria: '',
     cupoMaximo: 0
@@ -32,6 +34,8 @@ const CrearParcheModal = () => {
     nombreParche,
     fechaParche,
     horaParche,
+    fechaFin,
+    horaFin,
     descripcionParche,
     categoria,
     cupoMaximo
@@ -40,7 +44,8 @@ const CrearParcheModal = () => {
   // perfil que vendra de firebase QUEMADO:
 
   const perfilQuemado = {
-    fotoPerfil: 'https://lh3.googleusercontent.com/a-/AOh14GjY63xk1t90VMywhUXwN1vziqTqRysD59TL_LFR0g=s576-p-rw-no',
+    uId: 'xxx-xxx-xxx-xxx',
+    fotoPerfil: 'https://us.123rf.com/450wm/kritchanut/kritchanut1308/kritchanut130800012/21528485-avatar-hombre-foto-de-perfil-vector.jpg?ver=6',
     nombreUsuario: 'Anthony Colmenares Rivas'
   }
 
@@ -50,6 +55,8 @@ const CrearParcheModal = () => {
   const direccion = useSelector(store => store.parcheCreado.direccion)
 
   // constantes del mapa:
+
+  // constante predefinida del mapa:
 
   const center = {
     lat: 6.247148764180042,
@@ -136,10 +143,15 @@ const CrearParcheModal = () => {
     reset()
     console.log(categoria, cupoMaximo)
     dispatch(enviarDatos(
+      perfilQuemado.uId,
       nombreParche,
       fechaParche,
       horaParche,
+      fechaFin,
+      horaFin,
       descripcionParche,
+      categoria,
+      cupoMaximo,
       position
     ))
     // handleClose()
@@ -242,7 +254,7 @@ const CrearParcheModal = () => {
                   htmlFor='inputFechaParche'
                 >
                   <strong>
-                    Fecha del parche:
+                    Fecha de inicio:
                   </strong>
                 </label>
                 <input
@@ -265,7 +277,7 @@ const CrearParcheModal = () => {
                   htmlFor='inputHoraParche'
                 >
                   <strong>
-                    Hora del parche:
+                    Hora de inicio:
                   </strong>
                 </label>
                 <i className='fas fa-calculator date-budget' />
@@ -306,6 +318,84 @@ const CrearParcheModal = () => {
                 />
               </div>
             </div>
+
+            <div className='flex justify-between mt-5'>
+              <div className='flex flex-col'>
+                <label
+                  className='text-gray-600'
+                  htmlFor='inputFechaFin'
+                >
+                  <strong>
+                    Fecha de Fin:
+                  </strong>
+                </label>
+                <input
+                  required
+                  id='inputFechaFin'
+                  name='fechaFin'
+                  onChange={handleInputChange}
+                  value={fechaFin}
+                  className='
+                  rounded-lg
+                  bg-gray-100
+                  px-1 '
+                  type='date'
+                  min={datePick}
+                />
+              </div>
+              <div className='flex flex-col'>
+                <label
+                  className='text-gray-600'
+                  htmlFor='inputHoraFin'
+                >
+                  <strong>
+                    Hora de Fin:
+                  </strong>
+                </label>
+                <i className='fas fa-calculator date-budget' />
+                <input
+                  required
+                  id='inputHoraFin'
+                  name='horaFin'
+                  onChange={handleInputChange}
+                  value={horaFin}
+                  className='
+                    rounded-lg
+                    bg-gray-100
+                    px-1 pl-1'
+                  type='time'
+                />
+              </div>
+              <div className='flex'>
+                <Box sx={{ minWidth: 190 }} className='bg-gray-100'>
+                  <FormControl fullWidth>
+                    <InputLabel id='inputCategiriaLabel'>Categoria</InputLabel>
+                    <Select
+                      labelId='inputCategiria'
+                      id='inputCategiria'
+                      name='categoria'
+                      onChange={handleInputChange}
+                      value={categoria}
+                      label='Categoria'
+                    >
+                      <MenuItem value='TECNOLOGIA'>TECNOLOGIA</MenuItem>
+                      <MenuItem value='VIDEOJUEGOS'>VIDEOJUEGOS</MenuItem>
+                      <MenuItem value='ARTE'>ARTE</MenuItem>
+                      <MenuItem value='NEGOCIOS'>NEGOCIOS</MenuItem>
+                      <MenuItem value='MODA'>MODA</MenuItem>
+                      <MenuItem value='DEPORTE'>DEPORTE</MenuItem>
+                      <MenuItem value='GASTRONOMIA'>GASTRONOMIA</MenuItem>
+                      <MenuItem value='FIESTAS'>FIESTAS</MenuItem>
+                      <MenuItem value='CONFERENCIAS'>CONFERENCIAS</MenuItem>
+                      <MenuItem value='CITA'>CITA</MenuItem>
+                      <MenuItem value='LECTURA'>LECTURA</MenuItem>
+                      <MenuItem value='APRENDIZAJE'>APRENDIZAJE</MenuItem>
+                      <MenuItem value='VARIOS'>VARIOS</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+              </div>
+            </div>
             <textarea
               required
               id='inputDescripcionParche'
@@ -323,34 +413,6 @@ const CrearParcheModal = () => {
               rows='7'
               cols='75'
             />
-
-            <Box sx={{ minWidth: 210, marginTop: 2 }} className='bg-gray-100'>
-              <FormControl fullWidth>
-                <InputLabel id='inputCategiriaLabel'>Categoria</InputLabel>
-                <Select
-                  labelId='inputCategiria'
-                  id='inputCategiria'
-                  name='categoria'
-                  onChange={handleInputChange}
-                  value={categoria}
-                  label='Categoria'
-                >
-                  <MenuItem value='tecnologia'>TECNOLOGIA</MenuItem>
-                  <MenuItem value='videojuegos'>VIDEOJUEGOS</MenuItem>
-                  <MenuItem value='arte'>ARTE</MenuItem>
-                  <MenuItem value='negocios'>NEGOCIOS</MenuItem>
-                  <MenuItem value='moda'>MODA</MenuItem>
-                  <MenuItem value='deporte'>DEPORTE</MenuItem>
-                  <MenuItem value='gastronomia'>GASTRONOMIA</MenuItem>
-                  <MenuItem value='fiesta'>FIESTAS</MenuItem>
-                  <MenuItem value='conferencias'>CONFERENCIAS</MenuItem>
-                  <MenuItem value='cita'>CITA</MenuItem>
-                  <MenuItem value='lectura'>LECTURA</MenuItem>
-                  <MenuItem value='aprendizaje'>APRENDIZAJE</MenuItem>
-                  <MenuItem value='varios'>VARIOS</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
 
             <hr className='my-6' />
 
