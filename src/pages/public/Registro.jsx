@@ -8,7 +8,7 @@ import BotonRegistroGoogle from '../../components/public/BotonRegistroGoogle'
 
 const Registro = () => {
   return (
-    <Box sx={{ flexGrow: 1, mt: 5}}>
+    <Box sx={{ flexGrow: 1, mt: 5}} className='posi'>
     {/* <AppBar sx={{bottom: 0 ,top: 'auto' }} position="absolute" color='success'> */}
         <Toolbar>
           <Box sx={{mx:'auto'}}>

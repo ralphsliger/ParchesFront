@@ -1,6 +1,6 @@
 .contenedor{
     width: 100%;
-    background-color: #53acf1ff;
+    background-color: #f0f2f1ff;
     display: flex;
     text-align: center;
     align-items: center;
@@ -27,8 +27,9 @@
     animation: animacion 3s linear infinite ;
     transform: rotate(15deg) translate(-15%, -100%);
 }
+
 .manos{
-    height: 50%;
+    height: 10%;
 }
 
 @keyframes animacion {
@@ -109,7 +110,7 @@
     justify-content: center;
     position: relative;
     margin-bottom: 30%;
-    margin-top: 10%;
+    margin-top: 15%;
 }
 
 .contenedor-letras img:hover{

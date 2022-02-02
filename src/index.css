@@ -21,15 +21,14 @@
   
   .sidebar-route-disable:hover{
     background-color:#140D4F
-
   }
 
-html {
-  min-height: 100%;
-  position: relative;
-}
+  html {
+    min-height: 100%;
+    position: relative;
+  }
 
-.App {
-  text-align: center;
-  min-height: calc(100vh - 85px);
-}
+.posi {
+    min-height: calc(100vh - 164px);
+  }
+

@@ -12,7 +12,7 @@ import Registro from './components/public/Registro'
 
 function App() {
   return (
-    <div className='App'>
+    <div >
       <BrowserRouter>
         <Routes>
           <Route path='/public' element={<PublicLayout />}>

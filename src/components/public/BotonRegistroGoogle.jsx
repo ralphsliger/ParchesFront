@@ -36,15 +36,16 @@ export default function BotonInicioGoogle() {
 
   return (
     <>
-    <Button
-      className={classes.root}
-      variant='contained'
-      color='primary'
-      startIcon={<GoogleIcon />}
-      onClick={IniciarSesion}
-    >
-      Ingresar con google
-    </Button>
+      <Button
+        className={classes.root}
+        variant="contained"
+        color="primary"
+        fullWidth
+        startIcon={<GoogleIcon />}
+        onClick={IniciarSesion}
+      >
+        Ingresar con google
+      </Button>
     </>
-  )
+  );
 }

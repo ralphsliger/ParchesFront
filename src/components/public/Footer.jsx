@@ -14,10 +14,9 @@ import Link from '@mui/material/Link';
 
 export default function Footer() {
     return (
-        <Box sx={{ flexGrow: 1, mt: 5}} style={{boxShadow: '0px 2px 5px #888, 0px -2px 5px #888'}}>
+        <Box sx={{ flexGrow: 1}} style={{boxShadow: '0px 2px 5px #888, 0px -2px 5px #888'}}>
             <AppBar sx={{bottom: 0 ,top: 'auto' }} position="relative" color='success'>
                 <Toolbar>
-                    
                     <Box sx={{ mx: "auto"}} >
                     <Link id="botonGitHubFooter" href="https://github.com/SofkaU2021-4/ParchesFront" target="_blank">
                         <IconButton arial-label="git-hub" color='primary' >

@@ -8,7 +8,7 @@ import BotonIniciarGoogle from '../../components/public/BotonIniciarGoogle'
 
 const IniciarSesion = () => {
   return (
-    <Box sx={{ flexGrow: 1, mt: 5}}>
+    <Box sx={{ flexGrow: 1, mt: 5}} className='posi'>
         <Toolbar>
           <Box sx={{mx:'auto'}}>
           <Typography variant='h1'>
