@@ -4,14 +4,6 @@ on:
   push:
     branches:
       - main 
-    paths-ignore:
-      - "*.md"
-
-  pull_request:
-    branches:
-      - main 
-    paths-ignore:
-      - "*.md"
 
 env:
     VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
@@ -23,63 +15,17 @@ env:
     VITE_APP_ID: ${{ secrets.VITE_APP_ID }}
 
 jobs:
-  buildAndTest:
-    name: Build & Test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "16"
-
-      - uses: actions/cache@v2
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-
-
-      - name: INSTALL
-        uses: pnpm/action-setup@v2.0.1
-        with:
-          version: 6.22.2
-          run_install: true
-
-      - name: BUILD
-        run: pnpm build:ci
-
-      - uses: actions/upload-artifact@v2
-        with:
-          name: dist
-          path: dist/
-
   deploy:
-    name: Deploy
-    needs: buildAndTest
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "16"
-
-      - uses: actions/download-artifact@v2
-        with:
-          name: dist
-          path: dist/
-
-      # Deploy dist folder to gh pages
-      - name: DEPLOY
+      - run: yarn
+      - run: yarn build
+      - name: Deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PARCHES }}'
           channelId: live
           projectId: parches-84287
