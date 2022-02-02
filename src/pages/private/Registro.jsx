@@ -6,7 +6,7 @@ import {
   registroExitoso
 } from '../../redux/actions/registro/registroActions'
 import { useNavigate } from 'react-router-dom'
-import BotonRegistroGoogle from './BotonRegistroGoogle'
+import BotonRegistroGoogle from '../../components/public/BotonRegistroGoogle'
 import Container from '@mui/material/Container'
 import { Avatar, Button, CssBaseline, Typography, TextField } from '@mui/material'
 import { validaciones } from '../../utils/registro/validaciones'

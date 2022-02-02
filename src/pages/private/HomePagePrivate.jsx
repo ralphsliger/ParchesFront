@@ -12,6 +12,7 @@ import ManoIzquierda from '../../Assents/Mano1.png'
 import ManoDerecha from '../../Assents/Mano2.png'
 import Exclamacion from '../../Assents/Exclamacion.png'
 import Typography from '@mui/material/Typography'
+import { Box } from '@mui/system'
 
 const HomePagePrivate = () => {
   return (

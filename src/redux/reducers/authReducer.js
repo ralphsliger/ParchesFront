@@ -24,7 +24,7 @@ export default function authReducer (state = initialState, action) {
         ...state,
         email: payload.email,
         uid: payload.uid,
-        imagenUrl: payload.imageUrl,
+        imagenUrl: payload.imagenUrl,
         nombres: payload.nombres
       }
     default:

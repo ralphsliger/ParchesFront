@@ -6,7 +6,7 @@ import axios from 'axios'
 import { inicioSesion } from '../../redux/actions/registro/registroActions'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import BotonInicioGoogle from './BotonIniciarGoogle'
+import BotonInicioGoogle from '../../components/public/BotonIniciarGoogle'
 import { Button, Typography, TextField, Avatar, CssBaseline, Link } from '@mui/material'
 
 import Container from '@mui/material/Container'

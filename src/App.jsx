@@ -6,12 +6,12 @@ import HomePagePublic from './pages/public/HomePagePublic'
 import HomePagePrivate from './pages/private/HomePagePrivate'
 import MisParchesPage from './pages/private/MisParchesPage'
 import UnParchePagePrivate from './pages/private/UnParchePagePrivate'
-import InicioSesion from './components/public/InicioSesion'
-import Registro from './components/public/Registro'
+import InicioSesion from './pages/private/InicioSesion'
+import Registro from './pages/private/Registro'
 import Perfil from './pages/private/VerPerfil'
 import NotFound from './components/NotFound'
 
-function App() {
+function App () {
   return (
     <div>
       <BrowserRouter>
