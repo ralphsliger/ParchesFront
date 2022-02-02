@@ -1,6 +1,7 @@
 /* eslint-disable multiline-ternary */
 import React, { useState } from 'react'
 import { Stack, Button, Backdrop, Box, Modal, Fade, Typography } from '@mui/material'
+import { useSelector } from 'react-redux'
 import {
   Delete as DeleteIcon,
   Edit as EditIcon,
@@ -10,6 +11,7 @@ import {
   ErrorOutline as ErrorOutlineIcon
 } from '@mui/icons-material'
 import { Link } from 'react-router-dom'
+
 
 const style = {
   position: 'absolute',
@@ -27,6 +29,8 @@ function ParcheButtons () {
   const [openBorrar, setOpenBorrar] = useState(false)
   const handleOpenBorrar = () => setOpenBorrar(true)
   const handleCloseBorrar = () => setOpenBorrar(false)
+  const { uid } = useSelector(state => state.auth)
+
   const handleBorrar = () => {
     setOpenBorrar(false)
     console.log('borrando')
@@ -79,7 +83,7 @@ function ParcheButtons () {
         </Button>
       )}
 
-      <Link to='/private/detalle-parche/61f9621eac72f6612f84c5f2/xxx'>
+      <Link to='/private/detalle-parche/61f9e35e5726d85867ffae41/xxx'>
         <Button
           id='boton-verMas-parche'
           color='info'

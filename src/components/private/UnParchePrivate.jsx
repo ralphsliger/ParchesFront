@@ -1,7 +1,8 @@
 import * as React from 'react'
 import {
   Button,
-  Typography
+  Typography,
+  Box
 } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import Card from '@mui/material/Card'
@@ -11,7 +12,7 @@ import CardActions from '@mui/material/CardActions'
 import Avatar from '@mui/material/Avatar'
 import IconButton from '@mui/material/IconButton'
 import { red } from '@mui/material/colors'
-import { MapContainer, TileLayer, Marker, Popup, MapConsumer } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
 const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
   const formateadorFecha = (fecha) => {
@@ -29,7 +30,7 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
         <CardHeader
           avatar={
             <Avatar ls={{ bgcolor: red[500] }} aria-label='recipe'>
-              {unParche.duenoDelParche.substring(0, 1).toUpperCase()}
+              {unParche.duenoDelParche.nombres.substring(0, 1).toUpperCase()}
             </Avatar>
           }
           action={
@@ -37,26 +38,28 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
               <EditIcon />
             </IconButton>
           }
-          title={'Evento creado por: ' + unParche.duenoDelParche}
+          title={'Evento creado por: ' + unParche.duenoDelParche.nombres}
           subheader={'Total Asistentes: ' + unParche.cantidadAsistentes}
         />
         <CardContent>
-          <Typography variant='body2' color='textSecondary' component='p'>
-            Fecha Inicio: {formateadorFecha(unParche.fechaDeInicio.valorFecha)}
+          <Typography>
+            <Box component='span' fontWeight='fontWeightBold'>Fecha Inicio: </Box>
+            {formateadorFecha(unParche.fechaDeInicio.valorFecha)}
           </Typography>
-          <Typography variant='body2' color='textSecondary' component='p'>
-            Fecha Fin: {formateadorFecha(unParche.fechaFin.valorFecha)}
+          <Typography>
+            <Box component='span' fontWeight='fontWeightBold'>Fecha Fin: </Box>
+            {formateadorFecha(unParche.fechaFin.valorFecha)}
           </Typography>
-          <Typography variant='h6' color='textSecondary' component='p'>
-            Categoria: {unParche.categoria}
+          <Typography>
+            <Box component='span' fontWeight='fontWeightBold'>Categoria: </Box>
+            {unParche.categoria}
           </Typography>
-          <Typography variant='h6' color='textSecondary' component='p'>
-            Cupos: {unParche.capacidadMaxima.valorCapacidad}
+          <Typography>
+            <Box component='span' fontWeight='fontWeightBold'>Cupos: </Box>
+            {unParche.capacidadMaxima.valorCapacidad}
           </Typography>
-          <Typography variant='subtitle1' color='textSecondary' component='p'>
-            Descripción:
-          </Typography>
-          <Typography variant='body1' color='text.secondary'>
+          <Typography>
+            <Box component='span' fontWeight='fontWeightBold'>Descripción </Box>
             {unParche.descripcion.valorDescripcion}
           </Typography>
 
@@ -79,7 +82,7 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
 
         </CardContent>
         <CardActions disableSpacing>
-          {unParche && unParche.inscripcion
+          {unParche && unParche.inscripcion.id !== null
             ? <Button
                 variant='contained'
                 color='success'
@@ -90,8 +93,8 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
             : <Button
                 variant='contained'
                 color='primary'
-                disabled={unParche.capacidadMaxima === unParche.totalAssistants}
-                onClick={inscribirse}
+                disabled={unParche.capacidadMaxima.valorCapacidad === unParche.cantidadAsistentes}
+                onClick={(e) => inscribirse(e)}
               >
               Inscribirse
               </Button>}

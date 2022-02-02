@@ -1,27 +1,32 @@
+import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUnParche } from '../../redux/middlewares/getUnParche'
 import { postInscripcion } from '../../redux/middlewares/postInscripcion'
 import { deleteInscripcion } from '../../redux/middlewares/deleteInscripcion'
 import UnParchePrivate from '../../components/private/UnParchePrivate'
 import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
 import { Grid } from '@mui/material'
 
 const UnParchePagePrivate = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const { isLoading, unParche, error } = useSelector(state => state.unParche)
+  const auth = useSelector(state => state.auth)
+  const uid = 'xxx'
+  console.log(auth, 'Mi uid esta aqui')
 
   useEffect(() => {
-    dispatch(getUnParche(id, 'xxx'))
-  }, [dispatch, id])
+    dispatch(getUnParche(id, uid))
+  }, [dispatch, id, uid])
 
-  const desinscribirse = (id) => {
-    dispatch(deleteInscripcion(unParche.inscripcion.id))
+  const desinscribirse = (e) => {
+    e.preventDefault()
+    dispatch(deleteInscripcion(unParche.inscripcion.id, uid, id))
   }
 
-  const inscribirse = (userId) => {
-    dispatch(postInscripcion(userId, unParche.id))
+  const inscribirse = (e) => {
+    e.preventDefault()
+    dispatch(postInscripcion(uid, unParche.id))
   }
 
   return (

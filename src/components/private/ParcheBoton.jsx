@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 function ParcheBoton () {
   return (
     <Stack height={35} direction='row' spacing={3}>
-      <Link to='/private/detalle-parche/61f9621eac72f6612f84c5f2/xxx'>
+      <Link to='/private/detalle-parche/61f9e35e5726d85867ffae41/xxx'>
         <Button
           id='boton-verMas-parche'
           color='info'
