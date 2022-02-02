@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
 
-const EditarParcheModal = ({ open, handleClose, handleConfirm, msgModal,setNombre,nombre }) => {
+const EditarParcheModal = ({open, handleClose, handleConfirm, msgModal,setNombre,nombre }) => {
   return <div>
            <Dialog open={open} onClose={handleClose}>
         <DialogTitle>{msgModal.titulo}</DialogTitle>
@@ -24,6 +24,8 @@ const EditarParcheModal = ({ open, handleClose, handleConfirm, msgModal,setNombr
             type="text"
             fullWidth
             variant="standard"
+            value={nombre}
+            onChange={(e)=>{setNombre(e.target.value)}}
           />
         </DialogContent>
         <DialogActions>

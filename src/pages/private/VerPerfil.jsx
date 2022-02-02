@@ -1,22 +1,23 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import { useSelector } from 'react-redux';
 import Typography from "@mui/material/Typography";
-import ManoIzquierda from '../../Assents/Mano1.png'
 import ModeEditIcon from '@mui/icons-material/ModeEdit'
 import IconButton from '@mui/material/IconButton'
 import EditarParcheModal from '../../components/private/EditarParcheModal';
 
 const VerPerfil = () => {
-  const auth = useSelector(state => state.auth)
-
-
     const auth = useSelector(state=>state.auth)
     const [open, setOpen] = useState(false);
-    console.log(auth);
+    const [nombre, setNombre] = useState(auth.nombres);
+
     const msgModal = {
-      msg: "Ingrese aceptar para actualizar el nombre",
+      msg: "Ingrese el nombre nuevo",
       titulo: "Actualizar nombre",
     };
+
+    useEffect(()=>{
+      setNombre(auth.nombres)
+    },[])
 
     const editarPerfil=(id)=>{
       console.clear();
@@ -28,7 +29,16 @@ const VerPerfil = () => {
     };
   
     const handleConfirm = () => {
+      const usuario={
+        "email":auth.email,
+        "imagenUrl":auth.imagenUrl,
+        "nombres": nombre,
+        "uid":auth.uid
+      }
+      console.log(usuario);
+
       setOpen(false);
+      
     }
 
   return (  <div>
@@ -44,6 +54,8 @@ const VerPerfil = () => {
         <IconButton color='primary' onClick={()=>editarPerfil()}><ModeEditIcon/></IconButton> 
         </div>
         <EditarParcheModal
+          nombre={nombre}
+          setNombre={setNombre}
           msgModal={msgModal}
           open={open}
           handleClose={handleClose}
