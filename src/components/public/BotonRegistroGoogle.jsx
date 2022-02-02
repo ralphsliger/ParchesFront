@@ -8,7 +8,7 @@ import { crearUsuario } from '../../redux/middlewares/crearUsuario'
 import useStyles from '../../utils/materialStyles'
 import { useNavigate } from 'react-router-dom'
 
-export default function BotonInicioGoogle() {
+export default function BotonRegistroGoogle () {
   const auth = app.auth()
   const dispatch = useDispatch()
   // const [usuario] = useAuthState(auth);
@@ -16,30 +16,27 @@ export default function BotonInicioGoogle() {
   const navigate = useNavigate()
   const classes = useStyles()
 
-  function IniciarSesion() {
+  function IniciarSesion () {
     auth.signInWithPopup(google)
-    // dispatch(iniciarSesion(email, uid));
-  }
-
-  useEffect(() => {
-    app.auth().onAuthStateChanged((usuario) => {
-      if (usuario) {
-        const uid = usuario.multiFactor.user.uid
-        const email = usuario.multiFactor.user.email
-        const nombres = usuario.multiFactor.user.displayName
-        const imagenUrl = usuario.multiFactor.user.photoURL
+      .then(user => {
+        const uid = user.user.multiFactor.user.uid
+        const email = user.user.multiFactor.user.email
+        const nombres = user.user.multiFactor.user.displayName
+        const imagenUrl = user.user.multiFactor.user.photoURL
         dispatch(crearUsuario(uid, email, nombres, imagenUrl))
-        navigate('/private')
-      }
-    })
-  }, [])
+        navigate('/private/inicio')
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
 
   return (
     <>
       <Button
         className={classes.root}
-        variant="contained"
-        color="primary"
+        variant='contained'
+        color='primary'
         fullWidth
         startIcon={<GoogleIcon />}
         onClick={IniciarSesion}
@@ -47,5 +44,5 @@ export default function BotonInicioGoogle() {
         Ingresar con google
       </Button>
     </>
-  );
+  )
 }
