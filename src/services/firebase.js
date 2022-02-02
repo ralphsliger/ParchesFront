@@ -1,6 +1,7 @@
 
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
+
 /*
 const projectId = import.meta.env.VITE_PROJECT_ID || false
 const appId = import.meta.env.VITE_APP_ID || false
@@ -16,10 +17,11 @@ const storageBucket = import.meta.env.VITE_STORAGE_BUCKET ||  "parches-final.app
 const apiKey = import.meta.env.VITE_API_KEY || "AIzaSyAbA1zwGW0JdPZFI7ysiB9atOgWD0oZ-CQ" 
 const authDomain = import.meta.env.VITE_AUTH_DOMAIN || "parches-final.firebaseapp.com"
 const messagingSenderId = import.meta.env.VITE_MESSAGING_SENDER_ID || "137898043687"
+
 export const app = firebase.initializeApp({
   apiKey,
   authDomain,
-  projectId, 
+  projectId,
   storageBucket,
   messagingSenderId,
   appId

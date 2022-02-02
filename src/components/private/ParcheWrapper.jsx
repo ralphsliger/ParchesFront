@@ -3,7 +3,7 @@ import React from 'react'
 import ParcheButtons from './ParcheButtons'
 import ParcheData from './ParcheData'
 
-export default function ParcheWrapper() {
+export default function ParcheWrapper () {
   return (
     <Stack
       id='componente-parche'
