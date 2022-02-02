@@ -8,3 +8,7 @@
   border: solid 1.5px rgb(53, 52, 52);
   border-radius: 2%;
 }
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+  max-width: 720px !important; 
+}

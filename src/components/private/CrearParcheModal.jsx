@@ -300,7 +300,7 @@ const CrearParcheModal = () => {
                   htmlFor='inputCupoMaximo'
                 >
                   <strong>
-                    Cupo del parche:
+                    Cantidad de personas:
                   </strong>
                 </label>
                 <i className='fas fa-calculator date-budget' />
