@@ -2,6 +2,8 @@
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 
+
+
 const projectId = import.meta.env.VITE_PROJECT_ID || "parches-final"
 const appId = import.meta.env.VITE_APP_ID || "1:137898043687:web:552540ef7292c7d6532102" 
 const storageBucket = import.meta.env.VITE_STORAGE_BUCKET ||  "parches-final.appspot.com"

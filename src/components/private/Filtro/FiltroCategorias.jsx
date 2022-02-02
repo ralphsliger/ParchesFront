@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
+import { useDispatch } from 'react-redux'
+import { selectValueCategorias } from '../../../redux/actions/filtrarMisParchesActions'
 
 const options = [
   'Tecnología',
@@ -19,8 +21,14 @@ const options = [
 ]
 
 export default function FiltroCategorias() {
-  const [value, setValue] = useState(options[0])
+  const [value, setValue] = useState(null)
   const [inputValue, setInputValue] = useState('')
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(selectValueCategorias(value))
+  }, [value])
+
   return (
     <div>
       {/* <div>{`value: ${value !== null ? `'${value}'` : 'null'}`}</div>

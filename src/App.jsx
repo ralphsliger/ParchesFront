@@ -28,7 +28,7 @@ function App () {
             <Route path='parches' element={<ListaParchesPage />} />
             <Route path='Mi_perfil' element={<Perfil />} />
             <Route path='mis-parches/:usuarioId' element={<MisParchesPage />} />
-            <Route path='detalle-parche/:id' element={<UnParchePagePrivate />} />
+            <Route path='detalle-parche/:id/:usuarioId' element={<UnParchePagePrivate />} />
             <Route path='*' element={<NotFound />} />
             <Route path='mis-parches' element={<MisParchesPage />} />
             <Route path='editar-parche' element={<CrearParchePage />} />
