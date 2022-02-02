@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { registroFallido, registroExitoso } from '../../redux/actions/registro/registroActions';
 import { styles } from '../../utils/registro/styles'
 import { useNavigate } from "react-router-dom";
+import { validaciones } from '../../utils/registro/validaciones';
 
 const Registro = () => {
 
@@ -16,31 +17,17 @@ const Registro = () => {
         nombre: "",
         email: "",
         password: "",
-        confPassword: ""
+        confPassword: "",
+        habilitar: true
     });
 
     const onSubmit = async (e) => {
-        //validacion de input email
         e.preventDefault();
-        let expRegEmail = new RegExp('^[^@]+@[^@]+\\.[a-zA-Z]{2,50}$');
-        let result = expRegEmail.test(state.email);
-
-        //validacion de contraseña
-        let expRegPassword = new RegExp('^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{6,20}$');
-        let resultPassword = expRegPassword.test(state.password)
-        let resultConfPassword = expRegPassword.test(state.password)
-
-        if(!resultPassword || !resultConfPassword){
-            dispatch(registroFallido("La contraseña debe contener minimo 1 MAYUS, 1 MINUS y 1 caracter especial, MIN 6 caracteres y MAX 20 en total."))
-        }
-
-        if(state.password !== state.confPassword){
-            dispatch(registroFallido("Las contraseñas deben coincidir."))
-        }
         
+        let validacion = validaciones(state.nombre, state.email, state.password, state.confPassword);
 
-        if(!result){
-            dispatch(registroFallido("El email debe tener la siguiente estructura: correo@email.com"))
+        if(typeof validacion === 'string'){
+            dispatch(registroFallido(validacion));
         }else{
             const usuario = await registrarUsuario(state.email, state.password, state.nombre);
             console.log(usuario)
@@ -54,7 +41,7 @@ const Registro = () => {
     }
 
     useEffect(() => {
-
+        
     },[dispatch, error])
 
     return (
@@ -70,7 +57,7 @@ const Registro = () => {
                     setState({...state, email: e.target.value})
                 }} required={true} autoComplete='on'/>
                 <br />
-                <input style={styles.input} type="password" id="password" placeholder='Contraseña' onChange={(e) => {
+                <input style={styles.input} type="text" id="password" placeholder='Contraseña' onChange={(e) => {
                     setState({...state, password: e.target.value})
                 }} required={true}/>
                 <br />
@@ -78,7 +65,7 @@ const Registro = () => {
                     setState({...state, confPassword: e.target.value})
                 }} required={true}/>
                 <br />
-                <button style={styles.button} type='submit'>Crear Cuenta</button>
+                <button style={styles.button} type='submit' disabled={(state.nombre && state.email && state.password && state.confPassword) ? false : true}>Crear Cuenta</button>
             </form>
             {error !== null ? (
                 <span>{error}</span>
