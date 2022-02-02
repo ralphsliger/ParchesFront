@@ -1,4 +1,4 @@
-import { Grid, Skeleton, Box, Stack } from '@mui/material'
+import { Grid, Skeleton, Box } from '@mui/material'
 import React, { useEffect } from 'react'
 import FiltroWrapper from '../../components/private/FiltroWrapper'
 import ParcheWrapper from '../../components/private/ParcheWrapper'
