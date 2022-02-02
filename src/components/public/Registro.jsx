@@ -116,11 +116,14 @@ const Registro = () => {
             sx={{ mt: 1, mb: 1 }}
           />
           <Button
-            type="button"
+            type='button'
             fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 1, "&:hover": { backgroundColor: "#f58442ff" } }}
+            variant='contained'
             onClick={onSubmit}
+            activestyle={{background: 'red', color: 'white'}}
+            isactive={(state.nombre && state.email && state.password && state.confPassword) ? 'true' : 'false'}
+            disabled={(state.nombre && state.email && state.password && state.confPassword) ? false : true}
+            sx={{ mt: 3, mb: 1, '&:hover': { backgroundColor: '#f58442ff' } }}
           >
             Crear Cuenta
           </Button>

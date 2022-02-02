@@ -3,7 +3,6 @@ import 'firebase/firestore'
 import 'firebase/auth'
 
 import axios from 'axios'
-import { useDispatch } from 'react-redux'
 
 const URL_API = 'http://localhost:8080' // TODO:actualizar esto
 
