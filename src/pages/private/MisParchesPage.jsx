@@ -14,6 +14,7 @@ const MisParchesPage = () => {
   }, [])
 
   const misParches = useSelector(state => state.misParches)
+  const { uid } = useSelector(state => state.auth)
   console.log(misParches)
 
   return (
@@ -30,7 +31,7 @@ const MisParchesPage = () => {
       {misParches.MisParches && misParches.MisParches.map((parche, index) => {
         return (
           <Grid key={index} item xs={9}>
-            <ParcheWrapper parche={parche} />
+            <ParcheWrapper parche={parche} uid={uid} />
           </Grid>
         )
       })}

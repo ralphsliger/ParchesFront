@@ -3,7 +3,7 @@ import { MoreHoriz as MoreHorizIcon } from '@mui/icons-material'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const ParchesWrapper = ({ parche }) => {
+const ParchesWrapper = ({ parche, uid }) => {
   return (
     <Stack
       borderBottom={1}
@@ -21,7 +21,7 @@ const ParchesWrapper = ({ parche }) => {
         <Typography variant='subtitule2'>{parche.cantidadParticipantes.valorCantidadParticipantes}</Typography>
       </Stack>
       <Stack height={35} direction='row' spacing={3}>
-        <Link to={`/private/detalle-parche/${parche.id}`}>
+        <Link to={`/private/detalle-parche/${parche.id}/${uid}`}>
           <Button
             id='boton-verMas-parche'
             color='info'

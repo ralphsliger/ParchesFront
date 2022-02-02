@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Stack, Button, Backdrop, Modal, Fade, Typography } from '@mui/material'
-import { useSelector } from 'react-redux'
 import {
   Delete as DeleteIcon,
   Edit as EditIcon,
@@ -23,11 +22,10 @@ const style = {
   p: 4
 }
 
-const ParcheWrapper = () => {
+const ParcheWrapper = ({ parche, uid }) => {
   const [openBorrar, setOpenBorrar] = useState(false)
   const handleOpenBorrar = () => setOpenBorrar(true)
   const handleCloseBorrar = () => setOpenBorrar(false)
-  const { uid } = useSelector(state => state.auth)
 
   const handleBorrar = () => {
     setOpenBorrar(false)
@@ -72,7 +70,7 @@ const ParcheWrapper = () => {
         </Typography>
       </Stack>
       <Stack height={35} direction='row' spacing={2}>
-        <Link to='/private/editar-parche/123456'>
+        <Link to={`/private/editar-parche/${parche.id}`}>
           <Button id='boton-editar-parche' size='small' variant='contained' startIcon={<EditIcon />}>
             Editar
           </Button>
@@ -111,7 +109,7 @@ const ParcheWrapper = () => {
             </Button>
             )}
 
-        <Link to='/private/detalle-parche/61f9e35e5726d85867ffae41/xxx'>
+        <Link to={`/private/detalle-parche/${parche.id}/${uid}`}>
           <Button
             id='boton-verMas-parche'
             color='info'
