@@ -28,8 +28,7 @@ export const getDireccion = (position) => {
   }
 }
 
-export function enviarDatos (
-  uId,
+export function enviarParche (uId,
   nombreParche,
   fechaParche,
   horaParche,
@@ -38,28 +37,21 @@ export function enviarDatos (
   descripcionParche,
   categoria,
   cupoMaximo,
-  position,
-  direccion) {
-  return dispatch => {
-    dispatch(crearParcheLoading())
-    position.formatted = direccion
-    // Body JSON para enviar al POST en backend
-    const parche = {
-      duenoDelParche: uId,
-      nombreParche: nombreParche,
-      descripcion: descripcionParche,
-      fechaInicio: `${fechaParche}T${horaParche}:00.00`,
-      fechaFin: `${fechaFin}T${horaFin}:00.00`,
-      estado: 'HABILITADO',
-      categoria: categoria,
-      capacidadMaxima: cupoMaximo,
-      ubicacionParche: position
-    }
-    dispatch(enviarParche(parche))
+  position) {
+  // Body JSON para enviar al POST en backend
+  const parche = {
+    duenoDelParche: uId,
+    nombreParche: nombreParche,
+    descripcion: descripcionParche,
+    fechaInicio: `${fechaParche}T${horaParche}:00.00`,
+    fechaFin: `${fechaFin}T${horaFin}:00.00`,
+    estado: 'HABILITADO',
+    categoria: categoria,
+    capacidadMaxima: cupoMaximo,
+    ubicacionParche: position
   }
-}
 
-export function enviarParche (parche) {
+  // Peticion de envio al servidor:
   return dispatch => {
     axios.post(URL_API_POST, parche)
       .then(function (response) {

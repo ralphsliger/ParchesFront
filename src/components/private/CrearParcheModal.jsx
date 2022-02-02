@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import Dialog from '@mui/material/Dialog'
 import { useForm } from '../../hooks/useForm'
-import { enviarDatos, getDireccion } from '../../redux/actions/CrearParcheActions'
+import { enviarParche, getDireccion } from '../../redux/actions/CrearParcheActions'
 import { useDispatch, useSelector } from 'react-redux'
 import DialogTittleModal from './DialogTittleModal'
 import DialogContentModal from './DialogContentModal'
@@ -99,7 +99,8 @@ const CrearParcheModal = () => {
   const handleEnviarFormulario = (e) => {
     e.preventDefault()
     reset()
-    dispatch(enviarDatos(
+    position.formatted = direccion
+    dispatch(enviarParche(
       perfilQuemado.uId,
       nombreParche,
       fechaParche,
@@ -109,8 +110,7 @@ const CrearParcheModal = () => {
       descripcionParche,
       categoria,
       cupoMaximo,
-      position,
-      direccion
+      position
     ))
     handleClose()
   }
