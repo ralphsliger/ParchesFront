@@ -41,39 +41,40 @@ const HomePagePublic = () => {
       <Box
         sx={{
           width: 800,
-          alignItems: 'center',
-          mb: 10
+          alignItems: "center",
+          mb: 10,
         }}
       >
         <Typography
           component="h2"
           variant="h6"
           style={{ margin: "50px 20px 40px 20px" }}
-          color="primary"
+          color="secondary"
+          align="justify"
         >
           ¡El parche, un lugar donde puedes crear eventos y parchar con
           sofkianos con tus mismos gustos, te esperamos para tener momentos que
           deberian ser eternos!
         </Typography>
-          <Button
-            color="primary"
-            variant="contained"
-            sx={{
-              "&:hover": { backgroundColor: "#f58442ff" },
-            }}
-          >
-            Registro
-          </Button>
-          <Button
-            color="primary"
-            variant="contained"
-            sx={{
-              m: 2,
-              "&:hover": { backgroundColor: "#f58442ff" },
-            }}
-          >
-            Inicio de sesión
-          </Button>
+        <Button
+          color="primary"
+          variant="contained"
+          sx={{
+            "&:hover": { backgroundColor: "#f58442ff" },
+          }}
+        >
+          Registro
+        </Button>
+        <Button
+          color="primary"
+          variant="contained"
+          sx={{
+            m: 2,
+            "&:hover": { backgroundColor: "#f58442ff" },
+          }}
+        >
+          Inicio de sesión
+        </Button>
         <Typography
           component="h2"
           variant="h4"
@@ -86,7 +87,8 @@ const HomePagePublic = () => {
           component="h2"
           variant="h6"
           style={{ margin: "20px 20px 60px 20px" }}
-          color="primary"
+          color="secondary"
+          align="justify"
         >
           El proyecto permitirá el acceso a cualquier Sofkiano Colaborador; como
           buscar un evento, indicar la asistencia y visualización de quienes van

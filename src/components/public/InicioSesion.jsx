@@ -21,8 +21,8 @@ import { Link } from "@mui/material";
 const URL_API = "http://localhost:8080"; //Cambiar por la del back
 
 const InicioSesion = () => {
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -117,4 +117,4 @@ const InicioSesion = () => {
   );
 };
 
-export default InicioSesion;
+export default InicioSesion

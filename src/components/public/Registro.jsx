@@ -9,9 +9,9 @@ import { styles } from "../../utils/registro/styles";
 import { useNavigate } from "react-router-dom";
 import BotonInicioGoogle from "./BotonRegistroGoogle";
 import Container from "@mui/material/Container";
-import { Avatar } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
 import { CssBaseline } from "@mui/material";
-import { LockOutlined } from "@mui/icons-material";
+import { HowToRegIcon } from "@mui/icons-material/HowToReg";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 import { TextField } from "@mui/material";
@@ -45,7 +45,6 @@ const Registro = () => {
         state.password,
         state.nombre
       );
-      console.log(usuario);
       if (typeof usuario === "object") {
         dispatch(registroExitoso(usuario.data.uid, state.email, state.nombre));
         navigate("/private");
@@ -69,9 +68,7 @@ const Registro = () => {
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "primary" }}>
-          <LockOutlined />
-        </Avatar>
+        <Avatar sx={{ m: 1, bgcolor: "primary" }}></Avatar>
         <Typography component="h2" variant="h6">
           Registro
         </Typography>
@@ -81,64 +78,55 @@ const Registro = () => {
             fullWidth
             type="text"
             id="emailIngreso"
-            label="Email"
-            autoComplete="email"
-            sx={{ mt: 1, mb: 2 }}
+            label="Nombre"
+            sx={{ mt: 1, mb: 1 }}
             onChange={(event) => {
               setEmail(event.target.value);
             }}
           />
-          <input
-            type="text"
-            id="nombre"
-            onChange={(e) => {
-              setState({ ...state, nombre: e.target.value });
-            }}
-            placeholder="Nombre"
-            maxLength={50}
-            required={true}
-            autoComplete="on"
-          />
-          <br />
-          <input
-            style={styles.input}
+          <TextField
             type="email"
             id="email"
-            placeholder="correo@email.com"
+            label="correo@email.com"
             onChange={(e) => {
               setState({ ...state, email: e.target.value });
             }}
-            required={true}
-            autoComplete="on"
+            required
+            fullWidth
+            sx={{ mt: 1, mb: 1 }}
           />
-          <br />
-          <input
-            style={styles.input}
+          <TextField
             type="password"
             id="password"
-            placeholder="Contraseña"
+            label="Contraseña"
             onChange={(e) => {
               setState({ ...state, password: e.target.value });
             }}
             maxLength={20}
             minLength={6}
-            required={true}
+            required
+            fullWidth
+            sx={{ mt: 1, mb: 1 }}
           />
-          <br />
-          <input
-            style={styles.input}
+          <TextField
             type="password"
             id="confPassword"
-            placeholder="Verificar Contraseña"
+            label="Confirmar Contraseña"
             onChange={(e) => {
               setState({ ...state, confPassword: e.target.value });
             }}
-            required={true}
+            required
+            fullWidth
+            sx={{ mt: 1, mb: 1 }}
           />
-          <br />
-          <button style={styles.button} type="submit">
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 1, "&:hover": { backgroundColor: "#f58442ff" } }}
+          >
             Crear Cuenta
-          </button>
+          </Button>
           <BotonInicioGoogle />
         </Box>
         {error !== null ? <span>{error}</span> : null}
