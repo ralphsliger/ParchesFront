@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { sesionIniciada } from './../actions/authActions'
+import { sesionIniciada } from './../actions/AuthActions'
 import { API_URL } from '../../utils/Conexion'
 
 export const crearUsuario = (uid, email, nombres, imagenUrl) => async (dispatch) => {
