@@ -24,22 +24,23 @@ const InicioSesion = () => {
     var respuesta
     //TODO: Redireccionar a la página nueva
     const auth = app.auth();
-    const user = await auth.signInWithEmailAndPassword(email, password)
-      .then((userResponse) => userResponse.user)
     
     try{
+      const user = await auth.signInWithEmailAndPassword(email, password)
+        .then((userResponse) => userResponse.user)
       respuesta = await axios.get(`${URL_API}/inicioSesion/${user.uid}`)
       .then(data => data.data)
       dispatch(inicioSesion(respuesta.uid,
         respuesta.email, respuesta.nombres, respuesta.imagenUrl))
         navigate("/private");
       } catch(e){
-      respuesta = 'error'
-      Swal.fire({
-        icon: 'error',
-        title: 'Error...',
-        text: 'Correo y/o contraseña incorrecta',
-      })
+        respuesta = 'error'
+        console.log(e.message)
+        Swal.fire({
+          icon: 'error',
+          title: 'Error...',
+          text: 'Correo y/o contraseña incorrecta',
+        })
     }
     return respuesta
   };
