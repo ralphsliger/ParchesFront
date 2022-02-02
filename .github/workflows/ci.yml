@@ -1,0 +1,84 @@
+name: App CI
+
+on:
+  push:
+    branches:
+      - main 
+    paths-ignore:
+      - "*.md"
+
+  pull_request:
+    branches:
+      - main 
+    paths-ignore:
+      - "*.md"
+
+env:
+    VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
+    VITE_AUTH_DOMAIN: ${{ secrets.VITE_AUTH_DOMAIN }}
+    VITE_APP_DATABASE_URL: ${{ secrets.VITE_APP_DATABASE_URL }}
+    VITE_PROJECT_ID: ${{ secrets.VITE_PROJECT_ID }}
+    VITE_STORAGE_BUCKET: ${{ secrets.VITE_STORAGE_BUCKET }}
+    VITE_MESSAGING_SENDER_ID: ${{ secrets.VITE_MESSAGING_SENDER_ID }}
+    VITE_APP_ID: ${{ secrets.VITE_APP_ID }}
+
+jobs:
+  buildAndTest:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-
+
+      - name: INSTALL
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.22.2
+          run_install: true
+
+      - name: BUILD
+        run: pnpm build:ci
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist/
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: dist/
+
+      # Deploy dist folder to gh pages
+      - name: DEPLOY
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          publish_dir: ./dist
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PARCHES }}'
+          channelId: live
+          projectId: parches-84287
