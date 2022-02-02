@@ -28,3 +28,11 @@ html {
   min-height: 100%;
   position: relative;
 }
+
+.footer{
+ background-color: #F58442
+}
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+  max-width: 720px !important; 
+}
