@@ -1,10 +1,10 @@
 import * as React from 'react'
 import {
   Button,
-  Stack,
-  Typography
+  Typography,
+  Box
 } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import EditIcon from '@mui/icons-material/Edit'
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
@@ -12,96 +12,96 @@ import CardActions from '@mui/material/CardActions'
 import Avatar from '@mui/material/Avatar'
 import IconButton from '@mui/material/IconButton'
 import { red } from '@mui/material/colors'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import ShareIcon from '@mui/icons-material/Share'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
-
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props
-  return <IconButton {...other} />
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest
-  })
-}))
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
 const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
-  const [expanded, setExpanded] = React.useState(false)
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded)
+  const formateadorFecha = (fecha) => {
+    const fechaFormateada = new Date(fecha)
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+    return fechaFormateada.toLocaleDateString('es-ES', options)
   }
+
+  const position = [unParche.ubicacionParche.lat, unParche.ubicacionParche.lng]
+
   return (
-    <Stack>
+    <>
       <Typography align='center' color='primary' variant='h3'>{unParche.nombreParche.valorNombre}</Typography>
-
-      <div>Creador: {unParche.duenoDelParche}</div>
-      <p>Descripción: {unParche.descripcion.valorDescripcion}</p>
-      <p>Categoria: {unParche.categoria}</p>
-      <p>Fecha Inicio{unParche.fechaDeInicio.valorFecha}</p>
-      <p>Total Asistentes: {unParche.cantidadAsistentes}</p>
-      <p>Cupos: {unParche.capacidadMaxima.valorCapacidad}</p>
-      <p>Ubicación: {unParche.ubicacion}</p>
-
-      {unParche && unParche.inscripcion
-        ? <Button
-            variant='contained'
-            color='success'
-            onClick={desinscribirse}
-          >
-          Desinscribirse
-        </Button>
-        : <Button
-            variant='contained'
-            color='primary'
-            disabled={unParche.capacidadMaxima === unParche.totalAssistants}
-            onClick={inscribirse}
-          >
-          Inscribirse
-        </Button>}
-
-      <Card sx={{ maxWidth: 500 }}>
+      <Card sx={{ width: '100%' }} style={{ border: 'none', boxShadow: 'none' }}>
         <CardHeader
           avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label='recipe'>
-              U
+            <Avatar ls={{ bgcolor: red[500] }} aria-label='recipe'>
+              {unParche.duenoDelParche.nombres.substring(0, 1).toUpperCase()}
             </Avatar>
-        }
+          }
           action={
             <IconButton aria-label='settings'>
-              <MoreVertIcon />
+              <EditIcon />
             </IconButton>
-        }
-          title={unParche.nombreParche.valorNombre}
-          subheader='September 14, 2016'
+          }
+          title={'Evento creado por: ' + unParche.duenoDelParche.nombres}
+          subheader={'Total Asistentes: ' + unParche.cantidadAsistentes}
         />
         <CardContent>
-          <Typography variant='body2' color='text.secondary'>
-            Descripciuon de prueba
+          <Typography>
+            <Box component='span' fontWeight='fontWeightBold'>Fecha Inicio: </Box>
+            {formateadorFecha(unParche.fechaDeInicio.valorFecha)}
           </Typography>
+          <Typography>
+            <Box component='span' fontWeight='fontWeightBold'>Fecha Fin: </Box>
+            {formateadorFecha(unParche.fechaFin.valorFecha)}
+          </Typography>
+          <Typography>
+            <Box component='span' fontWeight='fontWeightBold'>Categoria: </Box>
+            {unParche.categoria}
+          </Typography>
+          <Typography>
+            <Box component='span' fontWeight='fontWeightBold'>Cupos: </Box>
+            {unParche.capacidadMaxima.valorCapacidad}
+          </Typography>
+          <Typography>
+            <Box component='span' fontWeight='fontWeightBold'>Descripción </Box>
+            {unParche.descripcion.valorDescripcion}
+          </Typography>
+
+          <MapContainer
+            id='map'
+            center={position}
+            zoom={14}
+            scrollWheelZoom={false}
+          >
+            <TileLayer
+              attribution='
+                &copy;
+                SofkaU'
+              url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            />
+            <Marker position={position}>
+              <Popup />
+            </Marker>
+          </MapContainer>
+
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label='add to favorites'>
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label='share'>
-            <ShareIcon />
-          </IconButton>
-          <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label='show more'
-          >
-            <ExpandMoreIcon />
-          </ExpandMore>
+          {unParche && unParche.inscripcion.id !== null
+            ? <Button
+                variant='contained'
+                color='success'
+                onClick={desinscribirse}
+              >
+              Desinscribirse
+              </Button>
+            : <Button
+                variant='contained'
+                color='primary'
+                disabled={unParche.capacidadMaxima.valorCapacidad === unParche.cantidadAsistentes}
+                onClick={(e) => inscribirse(e)}
+              >
+              Inscribirse
+              </Button>}
         </CardActions>
       </Card>
 
-    </Stack>
+    </>
   )
 }
 

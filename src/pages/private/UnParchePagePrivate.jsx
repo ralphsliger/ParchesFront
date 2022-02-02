@@ -1,38 +1,30 @@
+import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUnParche } from '../../redux/middlewares/getUnParche'
 import { postInscripcion } from '../../redux/middlewares/postInscripcion'
+import { deleteInscripcion } from '../../redux/middlewares/deleteInscripcion'
 import UnParchePrivate from '../../components/private/UnParchePrivate'
 import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
 import { Grid } from '@mui/material'
 
 const UnParchePagePrivate = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const { isLoading, unParche, error } = useSelector(state => state.unParche)
-
-  /* const unParche = {
-    id: '1',
-    nombre: 'Un parche',
-    duenoDelParche: 'Juan',
-    descripcion: 'Un parche de prueba',
-    categorias: 'Categoría 1',
-    fechaInicio: '2020-01-01',
-    totalAsistentes: '0',
-    capacidadMaxima: '10',
-    ubicacion: 'Calle falsa 123'
-  } */
+  const { uid } = useSelector(state => state.auth)
 
   useEffect(() => {
-    dispatch(getUnParche(id, 'xxx'))
-  }, [dispatch, id])
+    dispatch(getUnParche(id, uid))
+  }, [dispatch, id, uid])
 
-  const desinscribirse = (id) => {
-    // dispatch(deleteInscripcion(unParche.inscripcion.id))
+  const desinscribirse = (e) => {
+    e.preventDefault()
+    dispatch(deleteInscripcion(unParche.inscripcion.id, uid, id))
   }
 
-  const inscribirse = (userId) => {
-    dispatch(postInscripcion(userId, unParche.id))
+  const inscribirse = (e) => {
+    e.preventDefault()
+    dispatch(postInscripcion(uid, unParche.id))
   }
 
   return (
@@ -45,14 +37,14 @@ const UnParchePagePrivate = () => {
             justifyContent='center'
             alignItems='center'
           >
-            <Grid item xs={8}>
+            <Grid item xs={10}>
               <UnParchePrivate
                 unParche={unParche}
                 inscribirse={inscribirse}
                 desinscribirse={desinscribirse}
               />
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={10}>
               <div>
                 <hr />
                 <h3>Comentarios</h3>

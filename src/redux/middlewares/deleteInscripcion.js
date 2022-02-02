@@ -1,20 +1,16 @@
-/* import axios from 'axios'
-import { unParcheLoadSuccess, unParcheLoadError, unParcheLoading } from '../actions/UnParcheActions'
+import axios from 'axios'
 import { API_URL } from '../../utils/Conexion'
+import { getUnParche } from './getUnParche'
 
-export const deleteInscripcion = (id) => (dispatch) => {
-  dispatch(unParcheLoading())
-
+export const deleteInscripcion = (id, usuarioId, parcheId) => (dispatch) => {
   const options = {
     method: 'DELETE',
-    url: `${API_URL}/desincribirse/${id}`
+    url: `${API_URL}/cancelar-inscripcion/${id}`
   }
 
   axios.request(options).then(function (response) {
-    dispatch(unParcheLoadSuccess(response.data))
-    console.log(response.data)
+    dispatch(getUnParche(parcheId, usuarioId))
   }).catch(function (error) {
-    dispatch(unParcheLoadError(error.message))
     console.error(error)
   })
-} */
+}

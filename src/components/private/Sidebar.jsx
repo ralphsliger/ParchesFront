@@ -13,23 +13,23 @@ const Logo = () => {
 }
 
 const Sidebar = () => {
-  const auth = app.auth();
+  const auth = app.auth()
   const [open, setOpen] = useState(true)
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handler = () => {
-    auth.signOut();
-    navigate("/public")
+    auth.signOut()
+    navigate('/public')
   }
-  
+
   return (
     <div className='flex flex-col md:flex-row flex-no-wrap md:h-full'>
       <div className='sidebar hidden md:flex w-56 ml-6 my-3 '>
-        <div className='w-full h-full flex flex-col'> 
+        <div className='w-full h-full flex flex-col'>
           <Logo />
           <CrearParcheModal />
           <ul className='h-full flex flex-col '>
-            <SidebarRoute to='' title='Home' icon='fas fa-home fa-lg' />
+            <SidebarRoute to='inicio' title='Home' icon='fas fa-home fa-lg' />
             <SidebarRoute to='page/estudiantes/proyectos' title='Mi perfil' icon='fas fa-user-cog fa-lg' />
             <SidebarRoute to='mis-parches/xxx' title='Mis parches' icon='fas fa-people-arrows fa-lg' />
             <SidebarRoute to='parches' title='Parches' icon='fas fa-users fa-lg' />
@@ -39,10 +39,10 @@ const Sidebar = () => {
                   onClick={() => {
                   }}
                 > */}
-                  <div className='flex' onClick={handler}>
-                    <LogoutRoundedIcon className='text-white ' />
-                    <span className='text-sm self-center ml-2 font-semibold'>Cerrar Sesión</span>
-                  </div>
+                <div className='flex' onClick={handler}>
+                  <LogoutRoundedIcon className='text-white ' />
+                  <span className='text-sm self-center ml-2 font-semibold'>Cerrar Sesión</span>
+                </div>
                 {/* </NavLink> */}
               </li>
 
