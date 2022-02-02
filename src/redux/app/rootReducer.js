@@ -13,5 +13,6 @@ const rootReducer = () => {
       auth: authReducer
     }
   )
+}
 
 export default rootReducer
