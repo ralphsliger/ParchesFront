@@ -20,9 +20,25 @@ const Registro = () => {
     });
 
     const onSubmit = async (e) => {
+        //validacion de input email
         e.preventDefault();
-        let expRegEmail = new RegExp('^[^@]+@[^@]+\\.[a-zA-Z]{2,}$');
+        let expRegEmail = new RegExp('^[^@]+@[^@]+\\.[a-zA-Z]{2,50}$');
         let result = expRegEmail.test(state.email);
+
+        //validacion de contraseña
+        let expRegPassword = new RegExp('^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{6,20}$');
+        let resultPassword = expRegPassword.test(state.password)
+        let resultConfPassword = expRegPassword.test(state.password)
+
+        if(!resultPassword || !resultConfPassword){
+            dispatch(registroFallido("La contraseña debe contener minimo 1 MAYUS, 1 MINUS y 1 caracter especial, MIN 6 caracteres y MAX 20 en total."))
+        }
+
+        if(state.password !== state.confPassword){
+            dispatch(registroFallido("Las contraseñas deben coincidir."))
+        }
+        
+
         if(!result){
             dispatch(registroFallido("El email debe tener la siguiente estructura: correo@email.com"))
         }else{
@@ -55,7 +71,7 @@ const Registro = () => {
                 <br />
                 <input style={styles.input} type="password" id="password" placeholder='Contraseña' onChange={(e) => {
                     setState({...state, password: e.target.value})
-                }} maxLength={20} minLength={6} required={true}/>
+                }} required={true}/>
                 <br />
                 <input style={styles.input} type="password" id="confPassword" placeholder='Verificar Contraseña' onChange={(e) => {
                     setState({...state, confPassword: e.target.value})
