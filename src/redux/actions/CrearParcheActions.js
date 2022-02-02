@@ -67,7 +67,8 @@ export function enviarDatos (
         capacidadMaxima: cupoMaximo,
         ubicacionParche: position
       }
-      dispatch(enviarParche(parche))
+      // dispatch(enviarParche(parche))
+      console.log(parche)
     }).catch(function (error) {
       dispatch(crearParcheError(error))
     })
