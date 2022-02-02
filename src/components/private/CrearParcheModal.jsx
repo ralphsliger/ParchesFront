@@ -112,7 +112,7 @@ const CrearParcheModal = () => {
       position,
       direccion
     ))
-    // handleClose()
+    handleClose()
   }
 
   return (
