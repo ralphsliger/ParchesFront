@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { sesionIniciada } from './../actions/AuthActions'
+import { sesionIniciada } from '../actions/AuthActions'
 import { API_URL } from '../../utils/Conexion'
 
 export const obtenerUsuario = (uid) => async (dispatch) => {
