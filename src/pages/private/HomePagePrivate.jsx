@@ -12,40 +12,64 @@ import ManoIzquierda from '../../Assents/Mano1.png'
 import ManoDerecha from '../../Assents/Mano2.png'
 import Exclamacion from '../../Assents/Exclamacion.png'
 import Typography from '@mui/material/Typography'
+import { Box } from '@mui/system'
 
 const HomePagePrivate = () => {
-  return <div className='contenedor' >
+  return (
+    <div className='contenedor'>
 
-    <div className='contenedor-animacion'>
-      <img src={ManoIzquierda}></img>
-      <img src={ManoDerecha}></img>
-      <img src={Exclamacion}></img>
-      <div className='manos'></div>
+      <div className='contenedor-animacion'>
+        <img src={ManoIzquierda} />
+        <img src={ManoDerecha} />
+        <img src={Exclamacion} />
+        <div className='manos' />
 
+      </div>
+
+      <div className='contenedor-letras'>
+        <img className='letras' src={Letra1} />
+        <img className='letras' src={Letra2} />
+        <div style={{ width: '4%' }} />
+        <img className='letras' src={Letra3} />
+        <img className='letras' src={Letra4} />
+        <img className='letras' src={Letra5} />
+        <img className='letras' src={Letra6} />
+        <img className='letras' src={Letra7} />
+        <img className='letras' src={Letra8} />
+        <span className='letras' />
+
+      </div>
+      <Box
+        sx={{
+          width: 800,
+          alignItems: 'center',
+          mb: 10
+        }}
+      >
+        <Typography
+          component='h2'
+          variant='h6'
+          style={{ margin: '50px 20px 40px 20px' }}
+          color='secondary'
+          align='justify'
+        >¡El parche, un lugar donde puedes crear eventos y parchar con sofkianos con tus mismos gustos, te esperamos para tener momentos que deberian ser eternos!
+        </Typography>
+        <Typography
+          component='h2'
+          variant='h4'
+          style={{ margin: '20px 20px 20px 20px' }}
+          color='primary'
+        >Descripción</Typography>
+        <Typography
+          component='h2'
+          variant='h6'
+          style={{ margin: '20px 20px 60px 20px' }}
+          color='secondary'
+          align='justify'
+        >El proyecto permitirá el acceso a cualquier Sofkiano Colaborador; como buscar un evento, indicar la asistencia y visualización de quienes van a participar, pertenecer a una o varias comunidades donde se realicen eventos constantemente logrando enlazar la mayor cantidad de personas con gustos similares, y con el tiempo filtrar cual será el próximo evento en la ubicación más cercana según donde se encuentre el usuario.</Typography>
+      </Box>
     </div>
-
-    <div className='contenedor-letras'>
-      <img className='letras' src={Letra1}></img>
-      <img className='letras' src={Letra2}></img>
-      <div style={{ width: '4%' }}></div>
-      <img className='letras' src={Letra3}></img>
-      <img className='letras' src={Letra4}></img>
-      <img className='letras' src={Letra5}></img>
-      <img className='letras' src={Letra6}></img>
-      <img className='letras' src={Letra7}></img>
-      <img className='letras' src={Letra8}></img>
-      <span className='letras'></span>
-
-    </div>
-    <Typography variant="h6" style={{ margin: "60px 20px 60px 20px" }} color="primary">¡El parche, un lugar donde puedes crear eventos y parchar con sofkianos con tus mismos gustos, te esperamos para tener momentos que deberian ser eternos!
-    </Typography>
-    <Typography variant="h3" style={{ margin: "20px 20px 20px 20px" }} color="primary">Descripción</Typography>
-    <Typography variant="h8" style={{ margin: "20px 20px 60px 20px" }} color="primary">El proyecto permitirá el acceso a cualquier Sofkiano Colaborador; como buscar un evento, indicar la asistencia y visualización de quienes van a participar, pertenecer a una o varias comunidades donde se realicen eventos constantemente logrando enlazar la mayor cantidad de personas con gustos similares, y con el tiempo filtrar cual será el próximo evento en la ubicación más cercana según donde se encuentre el usuario.</Typography>
-  </div>;
-
-
-};
-
-
+  )
+}
 
 export default HomePagePrivate

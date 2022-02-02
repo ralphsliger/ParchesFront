@@ -28,7 +28,7 @@ export const getDireccion = (position) => {
   }
 }
 
-export function enviarDatos (
+export function   enviarDatos (
   uId,
   nombreParche,
   fechaParche,
