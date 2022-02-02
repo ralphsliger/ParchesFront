@@ -1,6 +1,7 @@
 import actionsTypesEditarParche from './actionsTypes/ActionsTypeEditarParche'
 import axios from 'axios'
 
+const URL_API_PUT = 'https://el-parche.herokuapp.com/detalle-parche/'
 const URL_API_REVERSE = 'https://api.geoapify.com/v1/geocode/reverse'
 const API_KEY_REVERSE = '1b48259b810e48ddb151889f9ea58db0'
 
@@ -65,20 +66,23 @@ export const actualizaDireccion = (direccion) => {
   }
 }
 
-export const EditarParche = (idParche,bodyParche) => {
-    return async function(dispatch) {
-        return await fetch(URL + idParche + "/parche", {
-            method: "PUT",
-            body: JSON.stringify(bodyParche),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(response => response.json())
-        .then(json => {
-            dispatch({ type: LOAD_SUCCESS_EDITAR_PARCHE, payload: json })
-        })  
-        .catch(error => console.error('Error:', error))
-    };
+export const EditarParche = (parche) => {
+  return dispatch => {
+    axios.put(URL_API_PUT, parche)
+      .then(function (response) {
+        dispatch(editarParche(response.data))
+      })
+      .catch(function (error) {
+        dispatch(EditarParcheError(error))
+      })
+  }
+}
+
+export const editarParche = (parche) => {
+  return {
+    type: actionsTypesEditarParche.LOAD_SUCCESS_EDITAR_PARCHE,
+    payload: parche
+  }
 }
 
 export const EditarParcheError = (error) => {
