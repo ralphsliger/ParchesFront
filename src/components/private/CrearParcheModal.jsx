@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
@@ -7,12 +7,12 @@ import Dialog from '@mui/material/Dialog'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import { Box } from '@mui/system'
-import { MapContainer, TileLayer, Marker, Popup, MapConsumer } from 'react-leaflet'
 import { OpenStreetMapProvider } from 'leaflet-geosearch'
 import { useForm } from '../../hooks/useForm'
 import { enviarDatos, getDireccion } from '../../redux/actions/CrearParcheActions'
 import { FaSearchLocation, FaPlus } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
+import Map from './Map'
 
 const CrearParcheModal = () => {
   // useForm:
@@ -102,38 +102,6 @@ const CrearParcheModal = () => {
 
   const handleClose = () => {
     setOpen(false)
-  }
-
-  // funcion del mapa para mover el marcador:
-
-  function DraggableMarker () {
-    const markerRef = useRef(null)
-    const eventHandlers = useMemo(
-      () => ({
-        dragend () {
-          const marker = markerRef.current
-          if (marker != null) {
-            console.log('marker', marker.getLatLng())
-            setPosition(marker.getLatLng())
-          }
-        }
-      }),
-      []
-    )
-    return (
-      <Marker
-        draggable
-        eventHandlers={eventHandlers}
-        position={position}
-        ref={markerRef}
-      >
-        <Popup minWidth={90}>
-          <span>
-            {direccion}
-          </span>
-        </Popup>
-      </Marker>
-    )
   }
 
   // handle's de formulario
@@ -460,26 +428,8 @@ const CrearParcheModal = () => {
             </div>
 
             {/* Mapa */}
-            <MapContainer
-              id='map'
-              center={[6.247148764180042, -75.56969157043916]}
-              zoom={14}
-              scrollWheelZoom={false}
-            >
-              <TileLayer
-                attribution='
-                &copy;
-                SofkaU'
-                url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-              />
-              <DraggableMarker />
-              <MapConsumer>
-                {(map) => {
-                  map.flyTo(position)
-                  return null
-                }}
-              </MapConsumer>
-            </MapContainer>
+            <Map setPosition={setPosition} position={position} direccion={direccion} />
+
             <div className='flex justify-center text-sm'>
               <span><strong>Direccion:</strong> {direccion}</span>
             </div>
