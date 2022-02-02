@@ -4,7 +4,7 @@ import UnParcheReducer from '../reducers/UnParcheReducer'
 import registroReducer from '../reducers/registroReducer'
 import authReducer from './../reducers/authReducer'
 import ParchesReducer from '../reducers/ParchesReducer'
-import MisParchesReducer from '../reducers/MisParchesReducer'
+import misParchesReducer from '../reducers/misParchesReducer'
 import EditarParcheReducer from '../reducers/EditarParcheReducer'
 import filtroMisParchesReducer from '../reducers/filtroMisParchesReducer'
 
@@ -17,7 +17,7 @@ const rootReducer = () => {
       filtroMisParches: filtroMisParchesReducer,
       auth: authReducer,
       listaParches: ParchesReducer,
-      misParches: MisParchesReducer,
+      misParches: misParchesReducer,
       ParcheEditado: EditarParcheReducer
     }
   )

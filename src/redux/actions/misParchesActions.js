@@ -1,9 +1,9 @@
 import actionsTypesMisParches from './actionsTypes/ActionsTypeMisParches'
 
-export const misParchesLoadSuccess = (unParche) => {
+export const misParchesLoadSuccess = (misParches) => {
   return {
     type: actionsTypesMisParches.LOAD_SUCCESS_MIS_PARCHES,
-    payload: unParche
+    payload: misParches
   }
 }
 
