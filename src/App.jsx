@@ -10,6 +10,7 @@ import InicioSesion from './pages/private/InicioSesion'
 import Registro from './pages/private/Registro'
 import Perfil from './pages/private/VerPerfil'
 import NotFound from './components/NotFound'
+import CrearParchePage from './pages/private/CrearParchePage'
 
 function App () {
   return (
@@ -29,6 +30,9 @@ function App () {
             <Route path='mis-parches/:usuarioId' element={<MisParchesPage />} />
             <Route path='detalle-parche/:id/:usuarioId' element={<UnParchePagePrivate />} />
             <Route path='*' element={<NotFound />} />
+            <Route path='mis-parches' element={<MisParchesPage />} />
+            <Route path='editar-parche' element={<CrearParchePage />} />
+            <Route path='parche/:id' element={<UnParchePagePrivate />} />
           </Route>
         </Routes>
       </BrowserRouter>
