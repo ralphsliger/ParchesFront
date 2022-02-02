@@ -16,8 +16,8 @@ export default function BarraNavegacion() {
 
   return (
 
-    <Box sx={{ flexGrow: 1, boxShadow: 2, mb: 15 }}>
-      <AppBar position='fixed' color='secondary'>
+    <Box sx={{ flexGrow: 1, boxShadow: 2, }}>
+      <AppBar position='relative' color='secondary'>
         <Toolbar>
           <Link to='inicio'>
             <IconButton
