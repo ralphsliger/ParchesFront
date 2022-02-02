@@ -3,7 +3,7 @@ import React from 'react'
 import ParcheButtons from './ParcheButtons'
 import ParcheData from './ParcheData'
 
-export default function ParcheWrapper () {
+export default function ParcheWrapper({ parche }) {
   return (
     <Stack
       id='componente-parche'
@@ -14,7 +14,7 @@ export default function ParcheWrapper () {
       direction='row'
       spacing={4}
     >
-      <ParcheData />
+      <ParcheData parche={parche} />
       <ParcheButtons />
     </Stack>
   )
