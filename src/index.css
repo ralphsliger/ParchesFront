@@ -21,10 +21,18 @@
   
   .sidebar-route-disable:hover{
     background-color:#140D4F
-
   }
 
-html {
-  min-height: 100%;
-  position: relative;
+  html {
+    min-height: 100%;
+    position: relative;
+  }
+
+.posi {
+    min-height: calc(100vh - 164px);
+  }
+
+.footer{
+ background-color: #F58442
 }
+
