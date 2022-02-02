@@ -5,13 +5,11 @@ import {
   registroFallido,
   registroExitoso
 } from '../../redux/actions/registro/registroActions'
-import { styles } from '../../utils/registro/styles'
 import { useNavigate } from 'react-router-dom'
 import BotonRegistroGoogle from './BotonRegistroGoogle'
 import Container from '@mui/material/Container'
 import { Avatar, Button, CssBaseline, Typography, TextField } from '@mui/material'
-
-import { HowToRegIcon } from '@mui/icons-material/HowToReg'
+import { validaciones } from '../../utils/registro/validaciones'
 import { Box } from '@mui/system'
 
 const Registro = () => {
@@ -29,14 +27,13 @@ const Registro = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault()
-    const expRegEmail = new RegExp('^[^@]+@[^@]+\\.[a-zA-Z]{2,}$')
-    const result = expRegEmail.test(state.email)
-    if (!result) {
-      dispatch(
-        registroFallido(
-          'El email debe tener la siguiente estructura: correo@email.com'
-        )
-      )
+    console.log(state)
+
+    const validacion = validaciones(state.nombre, state.email,
+      state.password, state.confPassword)
+
+    if (typeof validacion === 'string') {
+      dispatch(registroFallido(validacion))
     } else {
       const usuario = await registrarUsuario(
         state.email,

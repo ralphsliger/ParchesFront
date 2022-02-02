@@ -10,7 +10,6 @@ export const obtenerUsuario = (uid) => async (dispatch) => {
 
   axios.request(options).then(function (response) {
     dispatch(sesionIniciada(response.data.email, response.data.uid, response.data.imageUrl, response.data.nombres))
-    console.log(response.data)
   }).catch(function (error) {
     console.error(error)
   })

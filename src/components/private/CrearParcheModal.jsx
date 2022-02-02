@@ -15,7 +15,9 @@ import { FaSearchLocation, FaPlus } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 
 const CrearParcheModal = () => {
-  // useForm:
+  const user = useSelector(state => state.auth)
+
+  console.log(user)
 
   const [values, handleInputChange, reset] = useForm({
     busquedaMapa: '',
