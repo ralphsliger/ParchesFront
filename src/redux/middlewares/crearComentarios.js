@@ -1,10 +1,11 @@
 import axios from 'axios'
 import { getUnParche } from './getUnParche'
+import { API_URL } from '../../utils/Conexion'
 
 export const crearComentario = (datos) => async (dispatch) => {
   const options = {
     method: 'POST',
-    url: 'http://localhost:8080/crearComentario',
+    url: `${API_URL}/crearComentario`,
     headers: { 'Content-Type': 'application/json' },
     data: datos
   }

@@ -1,8 +1,12 @@
 import axios from 'axios'
 import { MisParchesLoadSuccess, MisParchesLoadError, MisParchesLoading } from '../actions/MisParchesActions'
+import { API_URL } from '../../utils/Conexion'
 
 const getMisParches = (id) => async (dispatch) => {
-  const options = { method: 'GET', url: `http://localhost:8080/${id}/misParches` }
+  const options = {
+    method: 'GET',
+    url: `${API_URL}/${id}/misParches`
+  }
 
   dispatch(MisParchesLoading())
 
