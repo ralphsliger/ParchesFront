@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded'
-import CrearParcheModal from './CrearParcheModal'
+import CrearParcheModal from './CrearParcheModal/CrearParcheModal'
 import { app } from '../../services/firebase'
 
 const Logo = () => {
