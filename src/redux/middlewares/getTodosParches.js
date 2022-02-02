@@ -4,7 +4,7 @@ import { ListaParchesLoadSuccess, ListaParchesLoadError, ListaParchesLoading } f
 const getTodosParches = () => async (dispatch) => {
   dispatch(ListaParchesLoading())
 
-  const options = { method: 'GET', url: 'http://localhost:8080/api/parches' }
+  const options = { method: 'GET', url: 'http://localhost:8080/parches' }
   axios.request(options)
     .then(function (response) {
       dispatch(ListaParchesLoadSuccess(response.data))
