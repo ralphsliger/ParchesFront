@@ -1,0 +1,35 @@
+.contenido {
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedorimag {
+    width: 15%;
+}
+
+.imgusuario {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin: auto;
+}
+
+.nombreusuario{
+    margin-right: 30px;
+    font-weight: bold;
+    font: 90% monospace;
+    font-size: 1.4em;
+}
+
+.fechacreacion{
+    color: darkgray;
+}
+
+.cuerpo {
+    width: 75%;
+}
+
+.eliminar {
+    width: 10%;
+}
