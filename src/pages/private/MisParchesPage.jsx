@@ -1,4 +1,7 @@
-import { Grid, Skeleton, Box } from '@mui/material'
+/* eslint-disable multiline-ternary */
+/* eslint-disable indent */
+/* eslint-disable react/jsx-indent */
+import { Grid, Skeleton, Box, Typography } from '@mui/material'
 import React, { useEffect } from 'react'
 import FiltroWrapper from '../../components/private/FiltroWrapper'
 import ParcheWrapper from '../../components/private/ParcheWrapper'
@@ -9,19 +12,12 @@ import { getMisParches } from '../../redux/middlewares/getMisParches'
 
 const MisParchesPage = () => {
   const { isLoading, misParches, error } = useSelector((state) => state.misParches)
+  const { misParchesFiltrados, busquedaErronea } = useSelector((state) => state.filtroMisParches)
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getMisParches({}))
   }, [dispatch])
-
-  console.log(misParches)
-  if (misParches) {
-    console.log('id', misParches[0]?.id)
-    console.log('nombreParche', misParches[0]?.nombreParche?.valorNombre)
-    console.log('Participantes', misParches[0]?.cantidadParticipantes?.valorCantidadParticipantes)
-    console.log('categoria', misParches[0]?.categoria)
-  }
 
   return (
     <>
@@ -36,24 +32,32 @@ const MisParchesPage = () => {
           <TituloParche />
         </Grid>
 
-        {misParches?.map((parche) => (
-          <Grid key={parche.id} item xs={9}>
-            <ParcheWrapper parche={parche} />
+        {busquedaErronea && (
+          <Grid item xs={9}>
+            <Typography
+              letterSpacing={3}
+              textAlign='center'
+              id='texto-titulo-filtro'
+              color='secondary'
+              variant='h5'
+              gutterBottom
+              component='div'
+            >
+              No se encuentra lo buscado.
+            </Typography>
           </Grid>
-        ))}
-
-        {/* <Grid item xs={9}>
-        <ParcheWrapper />
-      </Grid>
-      <Grid item xs={9}>
-        <ParcheWrapper />
-      </Grid>
-      <Grid item xs={9}>
-        <ParcheWrapper />
-      </Grid>
-      <Grid item xs={9}>
-        <ParcheWrapper />
-      </Grid> */}
+        )}
+        {misParchesFiltrados.length > 0
+          ? misParchesFiltrados?.map((parche) => (
+              <Grid key={parche.id} item xs={9}>
+                <ParcheWrapper parche={parche} />
+              </Grid>
+            ))
+          : misParches?.map((parche) => (
+              <Grid key={parche.id} item xs={9}>
+                <ParcheWrapper parche={parche} />
+              </Grid>
+            ))}
       </Grid>
       {isLoading && (
         <Box pl={20} sx={{ width: 1000 }}>

@@ -12,7 +12,6 @@ import {
 } from '@mui/icons-material'
 import { Link } from 'react-router-dom'
 
-
 const style = {
   position: 'absolute',
   top: '50%',
@@ -25,11 +24,11 @@ const style = {
   p: 4
 }
 
-function ParcheButtons () {
+function ParcheButtons() {
   const [openBorrar, setOpenBorrar] = useState(false)
   const handleOpenBorrar = () => setOpenBorrar(true)
   const handleCloseBorrar = () => setOpenBorrar(false)
-  const { uid } = useSelector(state => state.auth)
+  const { uid } = useSelector((state) => state.auth)
 
   const handleBorrar = () => {
     setOpenBorrar(false)
