@@ -5,7 +5,7 @@ export default function CrearParchePage () {
   return (
     <>
       <CrearParcheModal />
-      <EditarParcheModal/>
+      <EditarParcheModal />
     </>
   )
 }

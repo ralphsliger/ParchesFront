@@ -17,10 +17,10 @@ export function actualizarParche (
   categoria,
   cupoMaximo,
   position
-  ) {
+) {
   // Body JSON para enviar al PUT en backend
   const parche = {
-    id : id,
+    id: id,
     duenoDelParche: uId,
     nombreParche: nombreParche,
     descripcion: descripcionParche,
@@ -43,8 +43,7 @@ export function actualizarParche (
         dispatch(editarParcheError(error))
       })
   }
-} 
-
+}
 
 export const editarParche = (parche) => {
   return {

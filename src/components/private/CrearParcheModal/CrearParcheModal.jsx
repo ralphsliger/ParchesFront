@@ -53,7 +53,6 @@ const CrearParcheModal = () => {
     lat: 6.247148764180042,
     lng: -75.56969157043916
   }
-  const descriptionElementRef = useRef(null)
 
   // estados del mapa:
 
@@ -63,6 +62,7 @@ const CrearParcheModal = () => {
 
   const [open, setOpen] = useState(false)
   const [scroll, setScroll] = useState('paper')
+  const descriptionElementRef = useRef(null)
 
   // variable de fecha para formulario:
 
