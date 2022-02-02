@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded'
 import CrearParcheModal from './CrearParcheModal'
+import { app } from '../../services/firebase'
 
 const Logo = () => {
   return (
@@ -12,13 +13,19 @@ const Logo = () => {
 }
 
 const Sidebar = () => {
+  const auth = app.auth();
   const [open, setOpen] = useState(true)
+  const navigate = useNavigate();
+
+  const handler = () => {
+    auth.signOut();
+    navigate("/public")
+  }
+  
   return (
     <div className='flex flex-col md:flex-row flex-no-wrap md:h-full'>
-
       <div className='sidebar hidden md:flex w-56 ml-6 my-3 '>
-
-        <div className='w-full h-full flex flex-col'>
+        <div className='w-full h-full flex flex-col'> 
           <Logo />
           <CrearParcheModal />
           <ul className='h-full flex flex-col '>
@@ -26,18 +33,17 @@ const Sidebar = () => {
             <SidebarRoute to='page/estudiantes/proyectos' title='Mi perfil' icon='fas fa-user-cog fa-lg' />
             <SidebarRoute to='mis-parches/xxx' title='Mis parches' icon='fas fa-people-arrows fa-lg' />
             <SidebarRoute to='parches' title='Parches' icon='fas fa-users fa-lg' />
-
             <div className=' flex flex-col text-white h-full justify-end mb-12 mx-4 '>
               <li className=' sidebar-route-disable sidebar-route' to='/'>
-                <NavLink
-                  to='/' onClick={() => {
+                {/* <NavLink
+                  onClick={() => {
                   }}
-                >
-                  <div className='flex'>
+                > */}
+                  <div className='flex' onClick={handler}>
                     <LogoutRoundedIcon className='text-white ' />
                     <span className='text-sm self-center ml-2 font-semibold'>Cerrar Sesión</span>
                   </div>
-                </NavLink>
+                {/* </NavLink> */}
               </li>
 
             </div>
@@ -49,7 +55,6 @@ const Sidebar = () => {
         <i className='fas fa-home' />
       </div>
       {open && <ResponsiveSidebar />}
-
     </div>
   )
 }

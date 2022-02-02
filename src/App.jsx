@@ -12,17 +12,17 @@ import Registro from './components/public/Registro'
 
 function App() {
   return (
-    <div className='App'>
+    <div >
       <BrowserRouter>
         <Routes>
           <Route path='/public' element={<PublicLayout />}>
             <Route path='' element={<TestPublicPage />} />
-            <Route path='home' element={<HomePagePublic />} />
+            <Route path='inicio' element={<HomePagePublic />} />
             <Route path='inicio-sesion' element={<InicioSesion />} />
             <Route path='crear-cuenta' element={<Registro />} />
           </Route>
           <Route path='/private' element={<PrivateLayout />}>
-            <Route path='home' element={<HomePagePrivate />} />
+            <Route path='inicio' element={<HomePagePrivate />} />
             <Route path='parches' element={<ListaParchesPage />} />
             <Route path='mis-parches/:usuarioId' element={<MisParchesPage />} />
             <Route path='detalle-parche/:id/:usuarioId' element={<UnParchePagePrivate />} />

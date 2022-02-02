@@ -1,7 +1,7 @@
 import React from 'react'
 
 const TestPublicPage = () => {
-  return <div>TestPublicPage</div>
+  return <div className='posi'>TestPublicPage</div>
 }
 
 export default TestPublicPage
