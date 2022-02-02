@@ -3,6 +3,8 @@ import crearParcheReducer from '../reducers/CrearParcheReducer'
 import UnParcheReducer from '../reducers/UnParcheReducer'
 import registroReducer from '../reducers/registroReducer'
 import authReducer from './../reducers/authReducer'
+import ParchesReducer from '../reducers/ParchesReducer'
+import MisParchesReducer from '../reducers/MisParchesReducer'
 
 const rootReducer = () => {
   return combineReducers(
@@ -10,8 +12,10 @@ const rootReducer = () => {
       unParche: UnParcheReducer,
       registro: registroReducer,
       parcheCreado: crearParcheReducer,
-      auth: authReducer
+      auth: authReducer,
+      listaParches: ParchesReducer,
+      misParches: MisParchesReducer
     }
   )
-  }
+}
 export default rootReducer
