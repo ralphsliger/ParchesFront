@@ -5,7 +5,6 @@ import "firebase/auth";
 import axios from "axios";
 import { inicioSesion } from "../../redux/actions/registro/registroActions";
 import { useDispatch } from "react-redux";
-import { styles } from "../../utils/registro/styles";
 import { useNavigate } from "react-router-dom";
 import BotonInicioGoogle from "./BotonRegistroGoogle";
 import { Button } from "@mui/material";
@@ -35,7 +34,6 @@ const InicioSesion = () => {
     const user = await auth
       .signInWithEmailAndPassword(email, password)
       .then((userResponse) => userResponse.user);
-
     try {
       respuesta = await axios
         .get(`${URL_API}/inicioSesion/${user.uid}`)
@@ -97,6 +95,7 @@ const InicioSesion = () => {
             }}
           />
           <Button
+            type='button'
             color="primary"
             fullWidth
             variant="contained"

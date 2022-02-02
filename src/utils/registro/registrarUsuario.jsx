@@ -14,13 +14,13 @@ export async function registrarUsuario (correo, password, nombre) {
   try {
     const user = await auth.createUserWithEmailAndPassword(correo, password)
       .then((usuarioFirebase) => usuarioFirebase.user)
-
+    console.log(user.uid)
     respuesta = await axios.post(`${URL_API}/crearUsuario`, {
       uid: user.uid,
       nombres: nombre,
       email: correo,
       imagenUrl: 'imagen'
-    }).catch((error) => error)
+    }).catch((error) => console.log(error))
   } catch (error) {
     respuesta = 'El email ya se encuentra registrado.'
     console.log(error)

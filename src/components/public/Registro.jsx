@@ -5,22 +5,21 @@ import {
   registroFallido,
   registroExitoso,
 } from "../../redux/actions/registro/registroActions";
-import { styles } from "../../utils/registro/styles";
 import { useNavigate } from "react-router-dom";
 import BotonInicioGoogle from "./BotonRegistroGoogle";
 import Container from "@mui/material/Container";
 import { Avatar, Button } from "@mui/material";
 import { CssBaseline } from "@mui/material";
-import { HowToRegIcon } from "@mui/icons-material/HowToReg";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 import { TextField } from "@mui/material";
+import { validaciones } from "../../utils/registro/validaciones";
 
 const Registro = () => {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.registro.error);
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const [state, setState] = useState({
     nombre: "",
@@ -30,15 +29,14 @@ const Registro = () => {
   });
 
   const onSubmit = async (e) => {
-    e.preventDefault();
-    let expRegEmail = new RegExp("^[^@]+@[^@]+\\.[a-zA-Z]{2,}$");
-    let result = expRegEmail.test(state.email);
-    if (!result) {
-      dispatch(
-        registroFallido(
-          "El email debe tener la siguiente estructura: correo@email.com"
-        )
-      );
+    e.preventDefault()
+    console.log(state)
+
+    let validacion = validaciones(state.nombre,state.email,
+      state.password, state.confPassword)
+
+    if (typeof validacion === "string") {
+      dispatch(registroFallido(validacion));
     } else {
       const usuario = await registrarUsuario(
         state.email,
@@ -52,9 +50,7 @@ const Registro = () => {
         dispatch(registroFallido(usuario));
       }
     }
-  };
-
-  useEffect(() => {}, [dispatch, error]);
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -77,11 +73,11 @@ const Registro = () => {
             required
             fullWidth
             type="text"
-            id="emailIngreso"
+            id="nombreIngreso"
             label="Nombre"
             sx={{ mt: 1, mb: 1 }}
             onChange={(event) => {
-              setEmail(event.target.value);
+              setState({...state, nombre: event.target.value});
             }}
           />
           <TextField
@@ -120,10 +116,11 @@ const Registro = () => {
             sx={{ mt: 1, mb: 1 }}
           />
           <Button
-            type="submit"
+            type="button"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 1, "&:hover": { backgroundColor: "#f58442ff" } }}
+            onClick={onSubmit}
           >
             Crear Cuenta
           </Button>
