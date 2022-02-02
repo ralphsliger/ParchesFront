@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from 'react-redux'
 const CrearParcheModal = () => {
   const user = useSelector(state => state.auth)
 
-  console.log(user)
+  console.log("en el modal ",user)
 
   const [values, handleInputChange, reset] = useForm({
     busquedaMapa: '',
@@ -46,9 +46,9 @@ const CrearParcheModal = () => {
   // perfil que vendra de firebase QUEMADO:
 
   const perfilQuemado = {
-    uId: 'xxx-xxx-xxx-xxx',
-    fotoPerfil: 'https://us.123rf.com/450wm/kritchanut/kritchanut1308/kritchanut130800012/21528485-avatar-hombre-foto-de-perfil-vector.jpg?ver=6',
-    nombreUsuario: 'Anthony Colmenares Rivas'
+    uId: user.uid,
+    fotoPerfil: user.imagenUrl,
+    nombreUsuario: user.nombres
   }
 
   // constantes redux:
