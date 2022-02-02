@@ -1,6 +1,7 @@
 import actionsTypesCrearParche from './actionsTypes/ActionsTypeCrearParche'
 import axios from 'axios'
 
+const URL_API_POST = 'https://el-parche.herokuapp.com/parches/crear'
 const URL_API_REVERSE = 'https://api.geoapify.com/v1/geocode/reverse'
 const API_KEY_REVERSE = '1b48259b810e48ddb151889f9ea58db0'
 
@@ -27,7 +28,17 @@ export const getDireccion = (position) => {
   }
 }
 
-export function enviarDatos (nombreParche, fechaParche, horaParche, descripcionParche, position) {
+export function enviarDatos (
+  uId,
+  nombreParche,
+  fechaParche,
+  horaParche,
+  fechaFin,
+  horaFin,
+  descripcionParche,
+  categoria,
+  cupoMaximo,
+  position) {
   return dispatch => {
     const direccion = {
       method: 'GET',
@@ -43,18 +54,35 @@ export function enviarDatos (nombreParche, fechaParche, horaParche, descripcionP
 
     axios.request(direccion).then(function (response) {
       dispatch(crearParcheLoading())
+      position.formatted = response.data.results[0].formatted
+      // Body JSON para enviar al POST en backend
       const parche = {
+        duenoDelParche: uId,
         nombreParche: nombreParche,
-        fechaParche: fechaParche,
-        horaParche: horaParche,
-        descripcionParche: descripcionParche,
-        poscicionMapa: position,
-        direccion: response.data.results[0].formatted
+        descripcion: descripcionParche,
+        fechaInicio: `${fechaParche}T${horaParche}:00.00`,
+        fechaFin: `${fechaFin}T${horaFin}:00.00`,
+        estado: 'HABILITADO',
+        categoria: categoria,
+        capacidadMaxima: cupoMaximo,
+        ubicacionParche: position
       }
-      dispatch(crearParche(parche))
+      dispatch(enviarParche(parche))
     }).catch(function (error) {
       dispatch(crearParcheError(error))
     })
+  }
+}
+
+export function enviarParche (parche) {
+  return dispatch => {
+    axios.post(URL_API_POST, parche)
+      .then(function (response) {
+        dispatch(crearParche(response.data))
+      })
+      .catch(function (error) {
+        dispatch(crearParcheError(error))
+      })
   }
 }
 

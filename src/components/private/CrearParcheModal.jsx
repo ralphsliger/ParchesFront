@@ -1,4 +1,8 @@
 import { useState, useRef, useEffect, useMemo } from 'react'
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import FormControl from '@mui/material/FormControl'
+import Select from '@mui/material/Select'
 import Dialog from '@mui/material/Dialog'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
@@ -18,7 +22,11 @@ const CrearParcheModal = () => {
     nombreParche: '',
     fechaParche: '',
     horaParche: '',
-    descripcionParche: ''
+    fechaFin: '',
+    horaFin: '',
+    descripcionParche: '',
+    categoria: '',
+    cupoMaximo: 0
   })
 
   const {
@@ -26,8 +34,20 @@ const CrearParcheModal = () => {
     nombreParche,
     fechaParche,
     horaParche,
-    descripcionParche
+    fechaFin,
+    horaFin,
+    descripcionParche,
+    categoria,
+    cupoMaximo
   } = values
+
+  // perfil que vendra de firebase QUEMADO:
+
+  const perfilQuemado = {
+    uId: 'xxx-xxx-xxx-xxx',
+    fotoPerfil: 'https://us.123rf.com/450wm/kritchanut/kritchanut1308/kritchanut130800012/21528485-avatar-hombre-foto-de-perfil-vector.jpg?ver=6',
+    nombreUsuario: 'Anthony Colmenares Rivas'
+  }
 
   // constantes redux:
 
@@ -35,6 +55,8 @@ const CrearParcheModal = () => {
   const direccion = useSelector(store => store.parcheCreado.direccion)
 
   // constantes del mapa:
+
+  // constante predefinida del mapa:
 
   const center = {
     lat: 6.247148764180042,
@@ -119,11 +141,17 @@ const CrearParcheModal = () => {
   const handleEnviarFormulario = (e) => {
     e.preventDefault()
     reset()
+    console.log(categoria, cupoMaximo)
     dispatch(enviarDatos(
+      perfilQuemado.uId,
       nombreParche,
       fechaParche,
       horaParche,
+      fechaFin,
+      horaFin,
       descripcionParche,
+      categoria,
+      cupoMaximo,
       position
     ))
     // handleClose()
@@ -200,13 +228,16 @@ const CrearParcheModal = () => {
                   />
                 </div>
 
-                {/* Info de usuario traido de firebase auth PENDIENTE */}
+                {/* Info de usuario traido de firebase auth QUEMADO */}
                 <div className='flex self-center mx-2'>
-                  <div className='flex space-x-4'>
-                    <img className='rounded-full w-10 h-10' alt='Profile' />
+                  <div className='flex space-x-4 ml-3'>
+                    <img
+                      src={perfilQuemado.fotoPerfil}
+                      className='rounded-full w-14 h-14'
+                      alt='fotoPerfil'
+                    />
                     <div className='flex flex-col'>
-                      <span className='font-semibold text-sm'>oe</span>
-                      <span className='text-xs font-medium text-blue-500'>oe</span>
+                      <span className='font-semibold text-sm'>{perfilQuemado.nombreUsuario}</span>
                     </div>
                   </div>
                 </div>
@@ -217,13 +248,15 @@ const CrearParcheModal = () => {
           </DialogTitle>
 
           <DialogContent dividers={scroll === 'paper'}>
-            <div className='flex justify-center'>
-              <div className='flex mt-2'>
+            <div className='flex justify-between'>
+              <div className='flex flex-col'>
                 <label
                   className='text-gray-600'
                   htmlFor='inputFechaParche'
                 >
-                  Fecha y hora del parche:
+                  <strong>
+                    Fecha de inicio:
+                  </strong>
                 </label>
                 <input
                   required
@@ -232,30 +265,136 @@ const CrearParcheModal = () => {
                   onChange={handleInputChange}
                   value={fechaParche}
                   className='
-                  ml-2
                   rounded-lg
                   bg-gray-100
                   px-1 '
                   type='date'
                   min={datePick}
                 />
-
-                <div className='space-x-2'>
-                  <i className='fas fa-calculator date-budget' />
-                  <input
-                    required
-                    id='inputHoraParche'
-                    name='horaParche'
-                    onChange={handleInputChange}
-                    value={horaParche}
-                    className='
+              </div>
+              <div className='flex flex-col'>
+                <label
+                  className='text-gray-600'
+                  htmlFor='inputHoraParche'
+                >
+                  <strong>
+                    Hora de inicio:
+                  </strong>
+                </label>
+                <i className='fas fa-calculator date-budget' />
+                <input
+                  required
+                  id='inputHoraParche'
+                  name='horaParche'
+                  onChange={handleInputChange}
+                  value={horaParche}
+                  className='
                     rounded-lg
                     bg-gray-100
                     px-1 pl-1'
-                    type='time'
-                  />
-                </div>
+                  type='time'
+                />
+              </div>
+              <div className='flex flex-col'>
+                <label
+                  className='text-gray-600'
+                  htmlFor='inputCupoMaximo'
+                >
+                  <strong>
+                    Cantidad de personas:
+                  </strong>
+                </label>
+                <i className='fas fa-calculator date-budget' />
+                <input
+                  required
+                  id='inputCupoMaximo'
+                  name='cupoMaximo'
+                  onChange={handleInputChange}
+                  value={cupoMaximo}
+                  className='
+                    rounded-lg
+                    bg-gray-100
+                    px-1 pl-1'
+                  type='number'
+                />
+              </div>
+            </div>
 
+            <div className='flex justify-between mt-5'>
+              <div className='flex flex-col'>
+                <label
+                  className='text-gray-600'
+                  htmlFor='inputFechaFin'
+                >
+                  <strong>
+                    Fecha de Fin:
+                  </strong>
+                </label>
+                <input
+                  required
+                  id='inputFechaFin'
+                  name='fechaFin'
+                  onChange={handleInputChange}
+                  value={fechaFin}
+                  className='
+                  rounded-lg
+                  bg-gray-100
+                  px-1 '
+                  type='date'
+                  min={datePick}
+                />
+              </div>
+              <div className='flex flex-col'>
+                <label
+                  className='text-gray-600'
+                  htmlFor='inputHoraFin'
+                >
+                  <strong>
+                    Hora de Fin:
+                  </strong>
+                </label>
+                <i className='fas fa-calculator date-budget' />
+                <input
+                  required
+                  id='inputHoraFin'
+                  name='horaFin'
+                  onChange={handleInputChange}
+                  value={horaFin}
+                  className='
+                    rounded-lg
+                    bg-gray-100
+                    px-1 pl-1'
+                  type='time'
+                />
+              </div>
+              <div className='flex'>
+                <Box sx={{ minWidth: 190 }} className='bg-gray-100'>
+                  <FormControl fullWidth>
+                    <InputLabel id='inputCategiriaLabel'>Categoria</InputLabel>
+                    <Select
+                      labelId='inputCategiria'
+                      id='inputCategiria'
+                      name='categoria'
+                      onChange={handleInputChange}
+                      value={categoria}
+                      label='Categoria'
+                    >
+                      <MenuItem value='TECNOLOGIA'>TECNOLOGIA</MenuItem>
+                      <MenuItem value='VIDEOJUEGOS'>VIDEOJUEGOS</MenuItem>
+                      <MenuItem value='ARTE'>ARTE</MenuItem>
+                      <MenuItem value='NEGOCIOS'>NEGOCIOS</MenuItem>
+                      <MenuItem value='MODA'>MODA</MenuItem>
+                      <MenuItem value='DEPORTE'>DEPORTE</MenuItem>
+                      <MenuItem value='GASTRONOMIA'>GASTRONOMIA</MenuItem>
+                      <MenuItem value='FIESTAS'>FIESTAS</MenuItem>
+                      <MenuItem value='CONFERENCIAS'>CONFERENCIAS</MenuItem>
+                      <MenuItem value='CITA'>CITA</MenuItem>
+                      <MenuItem value='LECTURA'>LECTURA</MenuItem>
+                      <MenuItem value='APRENDIZAJE'>APRENDIZAJE</MenuItem>
+                      <MenuItem value='VARIOS'>VARIOS</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
               </div>
             </div>
             <textarea
@@ -265,16 +404,16 @@ const CrearParcheModal = () => {
               onChange={handleInputChange}
               value={descripcionParche}
               className='
+              w-full
               mt-4
               pl-2 pt-2
               text-sm
               rounded-md
               bg-gray-100'
-              placeholder='Describe tu parche!'
+              placeholder='¡Describe tu parche!'
               rows='7'
               cols='75'
             />
-            <input type='text' name='lider' className='hidden' />
 
             <hr className='my-6' />
 
@@ -286,7 +425,9 @@ const CrearParcheModal = () => {
                 text-gray-600'
                   htmlFor='nombreParche'
                 >
-                  Busca tu direccion:
+                  <strong>
+                    Ubica tu parche:
+                  </strong>
                 </label>
                 <input
                   id='inputBusqueda'
