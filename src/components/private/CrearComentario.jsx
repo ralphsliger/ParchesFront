@@ -14,7 +14,7 @@ const CrearComentario = () => {
     e.preventDefault()
     if(data.length > 0 && data.length <= 256){
       const form = {
-        userId: 'qowpcC6q88ORtaVyvvyO7XNqU202',
+        userId: 'qowpcC6q88ORtaVyvvyO7XNqU202', //Id de Usuario quemada
         parcheId: unParche.id,
         mensaje: data
       }
