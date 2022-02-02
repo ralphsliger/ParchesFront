@@ -38,10 +38,35 @@ const HomePagePrivate = () => {
         <span className='letras' />
 
       </div>
-      <Typography variant='h6' style={{ margin: '60px 20px 60px 20px' }} color='primary'>¡El parche, un lugar donde puedes crear eventos y parchar con sofkianos con tus mismos gustos, te esperamos para tener momentos que deberian ser eternos!
-      </Typography>
-      <Typography variant='h3' style={{ margin: '20px 20px 20px 20px' }} color='primary'>Descripción</Typography>
-      <Typography variant='h8' style={{ margin: '20px 20px 60px 20px' }} color='primary'>El proyecto permitirá el acceso a cualquier Sofkiano Colaborador; como buscar un evento, indicar la asistencia y visualización de quienes van a participar, pertenecer a una o varias comunidades donde se realicen eventos constantemente logrando enlazar la mayor cantidad de personas con gustos similares, y con el tiempo filtrar cual será el próximo evento en la ubicación más cercana según donde se encuentre el usuario.</Typography>
+      <Box
+        sx={{
+          width: 800,
+          alignItems: 'center',
+          mb: 10
+        }}
+      >
+        <Typography
+          component='h2'
+          variant='h6'
+          style={{ margin: '50px 20px 40px 20px' }}
+          color='secondary'
+          align='justify'
+        >¡El parche, un lugar donde puedes crear eventos y parchar con sofkianos con tus mismos gustos, te esperamos para tener momentos que deberian ser eternos!
+        </Typography>
+        <Typography
+          component='h2'
+          variant='h4'
+          style={{ margin: '20px 20px 20px 20px' }}
+          color='primary'
+        >Descripción</Typography>
+        <Typography
+          component='h2'
+          variant='h6'
+          style={{ margin: '20px 20px 60px 20px' }}
+          color='secondary'
+          align='justify'
+        >El proyecto permitirá el acceso a cualquier Sofkiano Colaborador; como buscar un evento, indicar la asistencia y visualización de quienes van a participar, pertenecer a una o varias comunidades donde se realicen eventos constantemente logrando enlazar la mayor cantidad de personas con gustos similares, y con el tiempo filtrar cual será el próximo evento en la ubicación más cercana según donde se encuentre el usuario.</Typography>
+      </Box>
     </div>
   )
 }

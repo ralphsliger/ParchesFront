@@ -1,5 +1,4 @@
 import { Button } from '@mui/material'
-import React, { useEffect } from 'react'
 import GoogleIcon from '@mui/icons-material/Google'
 import { useDispatch } from 'react-redux'
 import { google, app } from '../../services/firebase'
@@ -8,7 +7,7 @@ import { crearUsuario } from '../../redux/middlewares/crearUsuario'
 import useStyles from '../../utils/materialStyles'
 import { useNavigate } from 'react-router-dom'
 
-export default function BotonRegistroGoogle () {
+export default function BotonRegistroGoogle() {
   const auth = app.auth()
   const dispatch = useDispatch()
   // const [usuario] = useAuthState(auth);
@@ -16,7 +15,7 @@ export default function BotonRegistroGoogle () {
   const navigate = useNavigate()
   const classes = useStyles()
 
-  function IniciarSesion () {
+  function IniciarSesion() {
     auth.signInWithPopup(google)
       .then(user => {
         const uid = user.user.multiFactor.user.uid

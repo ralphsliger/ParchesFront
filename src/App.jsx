@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import TestPublicPage from './pages/public/TestPublicPage'
 import PublicLayout from './layouts/PublicLayout'
 import PrivateLayout from './layouts/PrivateLayout'
 import ListaParchesPage from './pages/private/ListaParchesPage'
@@ -12,13 +11,12 @@ import Registro from './components/public/Registro'
 import Perfil from './pages/private/VerPerfil'
 import NotFound from './components/NotFound'
 
-function App () {
+function App() {
   return (
     <div>
       <BrowserRouter>
         <Routes>
           <Route path='/public' element={<PublicLayout />}>
-            <Route path='' element={<TestPublicPage />} />
             <Route path='inicio' element={<HomePagePublic />} />
             <Route path='inicio-sesion' element={<InicioSesion />} />
             <Route path='crear-cuenta' element={<Registro />} />
