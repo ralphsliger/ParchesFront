@@ -3,10 +3,10 @@
 /* eslint-disable react/jsx-indent */
 import { Grid, Skeleton, Box, Typography } from '@mui/material'
 import React, { useEffect } from 'react'
-import FiltroWrapper from '../../components/private/FiltroWrapper'
-import ParcheWrapper from '../../components/private/ParcheWrapper'
-import TituloFiltro from '../../components/private/TituloFiltro'
-import TituloParche from '../../components/private/TituloParche'
+import FiltroWrapper from '../../components/private/Filtro/FiltroWrapper'
+import ParcheWrapper from '../../components/private/Parche/ParcheWrapper'
+import TituloFiltro from '../../components/private/Filtro/TituloFiltro'
+import TituloParche from '../../components/private/Parche/TituloParche'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMisParches } from '../../redux/middlewares/getMisParches'
 

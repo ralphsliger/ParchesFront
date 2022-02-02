@@ -2,7 +2,7 @@ import React from 'react'
 import { Stack, Button } from '@mui/material'
 import { Search as SearchIcon } from '@mui/icons-material'
 import { useDispatch, useSelector } from 'react-redux'
-import { filtrarMisParches, busquedaErronea } from '../../redux/actions/filtrarMisParchesActions'
+import { filtrarMisParches, busquedaErronea } from '../../../redux/actions/filtrarMisParchesActions'
 
 export default function FiltroButton() {
   const { misParches } = useSelector((state) => state.misParches)

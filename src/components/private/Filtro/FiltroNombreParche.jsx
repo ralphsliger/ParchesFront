@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import TextField from '@mui/material/TextField'
 import { useDispatch } from 'react-redux'
-import { inputValueNombreParche } from '../../redux/actions/filtrarMisParchesActions'
+import { inputValueNombreParche } from '../../../redux/actions/filtrarMisParchesActions'
 
 export default function FiltroNombreParche() {
   const [name, setName] = useState('')
