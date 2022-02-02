@@ -3,7 +3,6 @@ import actionsTypesEditarParche from '../actions/actionsTypes/ActionsTypeEditarP
 const initialState = {
   isLoading: false,
   parcheSeleccionado: null,
-  direccion: null,
   error: null
 }
 
@@ -14,13 +13,6 @@ const EditarParcheReducer = (state = initialState, { type, payload }) => {
         ...state,
         isLoading: false,
         parcheSeleccionado: payload,
-        error: null
-      }
-    case actionsTypesEditarParche.LOAD_ACTUALIZAR_DIRECCION:
-      return {
-        ...state,
-        isLoading: false,
-        direccion: payload,
         error: null
       }
     case actionsTypesEditarParche.LOAD_FAILURE_EDITAR_PARCHE:
