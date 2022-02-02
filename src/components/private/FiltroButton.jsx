@@ -40,6 +40,7 @@ export default function FiltroButton() {
     }
 
     if (!inputValueNombreParche && !selectValueCategorias) {
+      dispatch(busquedaErronea(false))
       dispatch(filtrarMisParches(misParches))
     }
   }
