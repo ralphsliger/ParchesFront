@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { registrarUsuario } from '../../utils/registro/registrarUsuario'
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -9,8 +9,10 @@ import { useNavigate } from 'react-router-dom'
 import BotonRegistroGoogle from '../../components/public/BotonRegistroGoogle'
 import Container from '@mui/material/Container'
 import { Avatar, Button, CssBaseline, Typography, TextField } from '@mui/material'
-import { validaciones } from '../../utils/registro/validaciones'
+
 import { Box } from '@mui/system'
+
+import { validaciones } from '../../utils/registro/validaciones'
 
 const Registro = () => {
   const dispatch = useDispatch()
@@ -49,8 +51,6 @@ const Registro = () => {
     }
   }
 
-  useEffect(() => {}, [dispatch, error])
-
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
@@ -74,6 +74,7 @@ const Registro = () => {
             type='text'
             id='nombreIngreso'
             label='Nombre'
+            inputProps={{ maxLength: 50 }}
             sx={{ mt: 1, mb: 1 }}
             onChange={(event) => {
               setState({ ...state, nombre: event.target.value })
@@ -97,8 +98,7 @@ const Registro = () => {
             onChange={(e) => {
               setState({ ...state, password: e.target.value })
             }}
-            maxLength={20}
-            minLength={6}
+            inputProps={{ maxLength: 20, minLength: 6 }}
             required
             fullWidth
             sx={{ mt: 1, mb: 1 }}
@@ -107,6 +107,7 @@ const Registro = () => {
             type='password'
             id='confPassword'
             label='Confirmar Contraseña'
+            inputProps={{ maxLength: 20, minLength: 6 }}
             onChange={(e) => {
               setState({ ...state, confPassword: e.target.value })
             }}
@@ -115,10 +116,13 @@ const Registro = () => {
             sx={{ mt: 1, mb: 1 }}
           />
           <Button
-            type='submit'
+            type='button'
             fullWidth
             variant='contained'
             onClick={onSubmit}
+            activestyle={{ background: 'red', color: 'white' }}
+            isactive={(state.nombre && state.email && state.password && state.confPassword) ? 'true' : 'false'}
+            disabled={!((state.nombre && state.email && state.password && state.confPassword))}
             sx={{ mt: 3, mb: 1, '&:hover': { backgroundColor: '#f58442ff' } }}
           >
             Crear Cuenta
