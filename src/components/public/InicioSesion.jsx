@@ -7,6 +7,7 @@ import { inicioSesion } from "../../redux/actions/registro/registroActions";
 import { useDispatch } from "react-redux";
 import { styles } from '../../utils/registro/styles'
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 const URL_API = 'http://localhost:8080' //Cambiar por la del back
 
@@ -34,6 +35,11 @@ const InicioSesion = () => {
         navigate("/private");
       } catch(e){
       respuesta = 'error'
+      Swal.fire({
+        icon: 'error',
+        title: 'Error...',
+        text: 'Correo y/o contraseña incorrecta',
+      })
     }
     return respuesta
   };
@@ -57,6 +63,8 @@ const InicioSesion = () => {
           id="claveIngreso"
           placeholder="Contraseña"
           style={styles.input}
+          minLength={6}
+          maxLength={20}
           onChange={(event) => {
             setPassword(event.target.value);
           }}

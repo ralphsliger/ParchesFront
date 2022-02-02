@@ -12,7 +12,7 @@ export const validaciones = (nombre, email, password, confPassword) => {
     console.log(resultNombre);
 
     if(!resultNombre){
-        return "El nombre debe contar con letras y/o carácteres numéricos solamente y debe tener como máximo 50 carácteres.";
+        return "El nombre debe contar con letras y/o carácteres numéricos solamente y debe tener como máximo 50 carácteres";
     }
 
     if(!resultEmail){
@@ -20,11 +20,11 @@ export const validaciones = (nombre, email, password, confPassword) => {
     }
 
     if(!resultPassword){
-        return "La contraseña debe contener minimo 1 MAYUS, 1 MINUS y 1 caracter especial, MIN 6 caracteres y MAX 20 en total.";
+        return "La contraseña debe contener minimo 1 MAYUS, 1 MINUS y 1 caracter especial, MIN 6 caracteres y MAX 20 en total";
     }
 
     if(password !== confPassword){
-        return "Las contraseñas deben coincidir.";
+        return "Las contraseñas deben coincidir";
     }
 
     return true;

@@ -40,9 +40,7 @@ const Registro = () => {
         } 
     }
 
-    useEffect(() => {
-        
-    },[dispatch, error])
+    useEffect(() => {},[dispatch, error])
 
     return (
         <div className='text-center'>
@@ -57,7 +55,7 @@ const Registro = () => {
                     setState({...state, email: e.target.value})
                 }} required={true} autoComplete='on'/>
                 <br />
-                <input style={styles.input} type="text" id="password" placeholder='Contraseña' onChange={(e) => {
+                <input style={styles.input} type="password" id="password" placeholder='Contraseña' onChange={(e) => {
                     setState({...state, password: e.target.value})
                 }} required={true}/>
                 <br />
