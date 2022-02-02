@@ -57,6 +57,7 @@ jobs:
 
   deploy:
     name: Deploy
+    needs: buildAndTest
     runs-on: ubuntu-latest
 
     steps:
