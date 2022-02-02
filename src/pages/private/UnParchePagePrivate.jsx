@@ -6,6 +6,8 @@ import { deleteInscripcion } from '../../redux/middlewares/deleteInscripcion'
 import UnParchePrivate from '../../components/private/UnParchePrivate'
 import { useEffect } from 'react'
 import { Grid } from '@mui/material'
+import Comentarios from '../../components/private/Comentarios'
+import CrearComentario from '../../components/private/CrearComentario'
 
 const UnParchePagePrivate = () => {
   const { id } = useParams()
@@ -45,9 +47,14 @@ const UnParchePagePrivate = () => {
               />
             </Grid>
             <Grid item xs={10}>
-              <div>
+            <div>
                 <hr />
-                <h3>Comentarios</h3>
+              </div>
+              <div className='m-auto'>
+                {(unParche.comentarioDTOS.length > 0) ? <div className=' overflow-y-auto h-96'> <Comentarios comentarios={unParche.comentarioDTOS} /></div> : <span>No existen comentarios</span>}
+                <div className='my-4'>
+                  <CrearComentario uid={uid} />
+                </div>
               </div>
             </Grid>
           </Grid>
