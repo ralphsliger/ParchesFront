@@ -14,6 +14,7 @@ const ListaParchesPage = () => {
   }, [])
 
   const parches = useSelector(state => state.listaParches)
+  const { uid } = useSelector(state => state.auth)
 
   return (
     <Grid my={3} container spacing={4} justifyContent='center' alignItems='center'>
@@ -29,7 +30,7 @@ const ListaParchesPage = () => {
       {parches.Parches && parches.Parches.map((parche, index) => {
         return (
           <Grid key={index} item xs={9}>
-            <ParchesWrapper parche={parche} />
+            <ParchesWrapper parche={parche} uid={uid} />
           </Grid>
         )
       })}

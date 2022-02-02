@@ -2,17 +2,17 @@ import actionsTypesMisParches from '../actions/actionsTypes/ActionsTypeMisParche
 
 const initialState = {
   isLoading: false,
-  MisParches: null,
+  misParches: null,
   error: null
 }
 
-const MisParchesReducer = (state = initialState, { type, payload }) => {
+const misParchesReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case actionsTypesMisParches.LOAD_SUCCESS_MIS_PARCHES:
       return {
         ...state,
         isLoading: false,
-        MisParches: payload,
+        misParches: payload,
         error: null
       }
     case actionsTypesMisParches.LOAD_FAILURE_MIS_PARCHES:
@@ -21,14 +21,15 @@ const MisParchesReducer = (state = initialState, { type, payload }) => {
         isLoading: false,
         error: payload
       }
-    case actionsTypesMisParches.LOADING_MIS_PARCHES
-      :
+    case actionsTypesMisParches.LOADING_MIS_PARCHES:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+        error: null
       }
-    default: return state
+    default:
+      return state
   }
 }
 
-export default MisParchesReducer
+export default misParchesReducer
