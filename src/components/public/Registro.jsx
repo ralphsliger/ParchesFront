@@ -27,7 +27,6 @@ const Registro = () => {
             dispatch(registroFallido("El email debe tener la siguiente estructura: correo@email.com"))
         }else{
             const usuario = await registrarUsuario(state.email, state.password, state.nombre);
-            console.log(usuario)
             if(typeof usuario === 'object'){
                 dispatch(registroExitoso(usuario.data.uid, state.email, state.nombre))
                 navigate("/private");
@@ -65,7 +64,7 @@ const Registro = () => {
                 <button style={styles.button} type='submit'>Crear Cuenta</button>
             </form>
             {error !== null ? (
-                <span>{error}</span>
+                <span id='span-error'>{error}</span>
             ):(null)}
         </div>
     )

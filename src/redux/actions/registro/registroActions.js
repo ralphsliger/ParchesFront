@@ -13,7 +13,6 @@ export const registroExitoso = (uid, email, nombre) => {
     }
 }
 
-//Tal vez enviar un mensaje registroFallido = (msg) => {//code}
 export const registroFallido = (msg) => {
     return {
         type: REGISTRO_FALLIDO,
