@@ -6,6 +6,7 @@ import authReducer from './../reducers/authReducer'
 import ParchesReducer from '../reducers/ParchesReducer'
 import MisParchesReducer from '../reducers/MisParchesReducer'
 import EditarParcheReducer from '../reducers/EditarParcheReducer'
+import filtroMisParchesReducer from '../reducers/filtroMisParchesReducer'
 
 const rootReducer = () => {
   return combineReducers(
@@ -13,6 +14,7 @@ const rootReducer = () => {
       unParche: UnParcheReducer,
       registro: registroReducer,
       parcheCreado: crearParcheReducer,
+      filtroMisParches: filtroMisParchesReducer,
       auth: authReducer,
       listaParches: ParchesReducer,
       misParches: MisParchesReducer,
