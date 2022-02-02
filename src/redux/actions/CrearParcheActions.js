@@ -38,40 +38,24 @@ export function enviarDatos (
   descripcionParche,
   categoria,
   cupoMaximo,
-  position) {
+  position,
+  direccion) {
   return dispatch => {
-    const direccion = {
-      method: 'GET',
-      url: URL_API_REVERSE,
-      params: {
-        lat: position.lat,
-        lon: position.lng,
-        format: 'json',
-        apiKey: API_KEY_REVERSE
-      },
-      headers: { 'Content-Type': 'application/json' }
+    dispatch(crearParcheLoading())
+    position.formatted = direccion
+    // Body JSON para enviar al POST en backend
+    const parche = {
+      duenoDelParche: uId,
+      nombreParche: nombreParche,
+      descripcion: descripcionParche,
+      fechaInicio: `${fechaParche}T${horaParche}:00.00`,
+      fechaFin: `${fechaFin}T${horaFin}:00.00`,
+      estado: 'HABILITADO',
+      categoria: categoria,
+      capacidadMaxima: cupoMaximo,
+      ubicacionParche: position
     }
-
-    axios.request(direccion).then(function (response) {
-      dispatch(crearParcheLoading())
-      position.formatted = response.data.results[0].formatted
-      // Body JSON para enviar al POST en backend
-      const parche = {
-        duenoDelParche: uId,
-        nombreParche: nombreParche,
-        descripcion: descripcionParche,
-        fechaInicio: `${fechaParche}T${horaParche}:00.00`,
-        fechaFin: `${fechaFin}T${horaFin}:00.00`,
-        estado: 'HABILITADO',
-        categoria: categoria,
-        capacidadMaxima: cupoMaximo,
-        ubicacionParche: position
-      }
-      // dispatch(enviarParche(parche))
-      console.log(parche)
-    }).catch(function (error) {
-      dispatch(crearParcheError(error))
-    })
+    dispatch(enviarParche(parche))
   }
 }
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import { MapConsumer, MapContainer, TileLayer } from 'react-leaflet'
-import DraggableMarker from './DraggableMarker'
+import DraggableMarkerModal from './DraggableMarkerModal'
 
-const Map = ({ setPosition, position, direccion }) => {
+const MapModal = ({ setPosition, position, direccion }) => {
   return (
     <MapContainer
       id='map'
@@ -16,7 +16,7 @@ const Map = ({ setPosition, position, direccion }) => {
         SofkaU'
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
-      <DraggableMarker setPosition={setPosition} position={position} direccion={direccion} />
+      <DraggableMarkerModal setPosition={setPosition} position={position} direccion={direccion} />
       <MapConsumer>
         {(map) => {
           map.flyTo(position)
@@ -27,4 +27,4 @@ const Map = ({ setPosition, position, direccion }) => {
   )
 }
 
-export default Map
+export default MapModal

@@ -1,17 +1,11 @@
 import { useState, useRef, useEffect } from 'react'
 import Dialog from '@mui/material/Dialog'
-import DialogContent from '@mui/material/DialogContent'
 import { useForm } from '../../hooks/useForm'
 import { enviarDatos, getDireccion } from '../../redux/actions/CrearParcheActions'
 import { useDispatch, useSelector } from 'react-redux'
-import Map from './Map'
 import DialogTittleModal from './DialogTittleModal'
-import DropdownModal from './DropdownModal'
-import DescripcionModal from './DescripcionModal'
-import FechaModal from './FechaModal'
-import { HoraModal } from './HoraModal'
-import BusquedaDireccionModal from './BusquedaDireccionModal'
-import { FaPlus } from 'react-icons/fa'
+import DialogContentModal from './DialogContentModal'
+import BotonAbrirCrearModal from './BotonAbrirCrearModal'
 
 const CrearParcheModal = () => {
   // useForm:
@@ -105,7 +99,6 @@ const CrearParcheModal = () => {
   const handleEnviarFormulario = (e) => {
     e.preventDefault()
     reset()
-    console.log(categoria, cupoMaximo)
     dispatch(enviarDatos(
       perfilQuemado.uId,
       nombreParche,
@@ -116,7 +109,8 @@ const CrearParcheModal = () => {
       descripcionParche,
       categoria,
       cupoMaximo,
-      position
+      position,
+      direccion
     ))
     // handleClose()
   }
@@ -125,25 +119,7 @@ const CrearParcheModal = () => {
     <div>
 
       {/* Boton para abrir modal */}
-      <div className='flex justify-end m-5'>
-        <button
-          onClick={handleClickOpen('paper')}
-          className='
-          rounded-full
-          bg-yellow-500
-          p-3
-          '
-        >
-          <span
-            className='
-            cursor-pointer
-            text-xl
-            text-black'
-          >
-            <FaPlus />
-          </span>
-        </button>
-      </div>
+      <BotonAbrirCrearModal handleClickOpen={handleClickOpen} />
 
       {/* Modal */}
       <Dialog
@@ -163,89 +139,23 @@ const CrearParcheModal = () => {
             nombreUsuario={perfilQuemado.nombreUsuario}
           />
 
-          <DialogContent dividers={scroll === 'paper'}>
-            <div className='flex justify-between'>
-              <FechaModal
-                datePick={datePick}
-                handleInputChange={handleInputChange}
-                fecha={fechaParche}
-                name='fechaParche'
-                nombreLabel='Fecha de Inicio:'
-              />
-
-              <HoraModal
-                handleInputChange={handleInputChange}
-                hora={horaParche}
-                name='horaParche'
-                nombreLabel='Hora de Inicio:'
-              />
-
-              <div className='flex flex-col'>
-                <label
-                  className='text-gray-600'
-                  htmlFor='inputCupoMaximo'
-                >
-                  <strong>
-                    Cantidad de personas:
-                  </strong>
-                </label>
-                <i className='fas fa-calculator date-budget' />
-                <input
-                  required
-                  id='inputCupoMaximo'
-                  name='cupoMaximo'
-                  onChange={handleInputChange}
-                  value={cupoMaximo}
-                  className='
-                    rounded-lg
-                    bg-gray-100
-                    px-1 pl-1'
-                  type='number'
-                />
-              </div>
-            </div>
-
-            <div className='flex justify-between mt-5'>
-              <FechaModal
-                datePick={datePick}
-                handleInputChange={handleInputChange}
-                fecha={fechaFin}
-                name='fechaFin'
-                nombreLabel='Fecha de Fin:'
-              />
-
-              <HoraModal
-                handleInputChange={handleInputChange}
-                hora={horaFin}
-                name='horaFin'
-                nombreLabel='Hora de Fin:'
-              />
-
-              <div className='flex'>
-                <DropdownModal handleInputChange={handleInputChange} categoria={categoria} />
-              </div>
-            </div>
-
-            <DescripcionModal handleInputChange={handleInputChange} descripcionParche={descripcionParche} />
-
-            <hr className='my-6' />
-
-            {/* Busqueda de direccion */}
-            <BusquedaDireccionModal
-              handleInputChange={handleInputChange}
-              busquedaMapa={busquedaMapa}
-              setPosition={setPosition}
-              reset={reset}
-            />
-
-            {/* Mapa */}
-            <Map setPosition={setPosition} position={position} direccion={direccion} />
-
-            <div className='flex justify-center text-sm'>
-              <span><strong>Direccion:</strong> {direccion}</span>
-            </div>
-
-          </DialogContent>
+          <DialogContentModal
+            datePick={datePick}
+            handleInputChange={handleInputChange}
+            fechaParche={fechaParche}
+            horaParche={horaParche}
+            cupoMaximo={cupoMaximo}
+            fechaFin={fechaFin}
+            horaFin={horaFin}
+            categoria={categoria}
+            descripcionParche={descripcionParche}
+            busquedaMapa={busquedaMapa}
+            setPosition={setPosition}
+            position={position}
+            direccion={direccion}
+            reset={reset}
+            scroll={scroll}
+          />
 
           <div className='text-center'>
             <button

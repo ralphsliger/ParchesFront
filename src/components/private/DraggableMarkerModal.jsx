@@ -1,14 +1,13 @@
 import React, { useMemo, useRef } from 'react'
 import { Marker, Popup } from 'react-leaflet'
 
-const DraggableMarker = ({ setPosition, position, direccion }) => {
+const DraggableMarkerModal = ({ setPosition, position, direccion }) => {
   const markerRef = useRef(null)
   const eventHandlers = useMemo(
     () => ({
       dragend () {
         const marker = markerRef.current
         if (marker != null) {
-          console.log('marker', marker.getLatLng())
           setPosition(marker.getLatLng())
         }
       }
@@ -31,4 +30,4 @@ const DraggableMarker = ({ setPosition, position, direccion }) => {
   )
 }
 
-export default DraggableMarker
+export default DraggableMarkerModal
