@@ -17,6 +17,7 @@ env:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+    local_dir: dist
     steps:
       - uses: actions/checkout@v2
       - run: npm ci && npm run build
