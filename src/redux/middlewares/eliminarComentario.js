@@ -5,7 +5,7 @@ import { getUnParche } from './getUnParche'
 export const eliminarComentario = (id, parcheId, userId) => (dispatch) => {
   const options = {
     method: 'DELETE',
-    url: `${API_URL}eliminar/${id}`
+    url: `${API_URL}/eliminar/${id}`
   }
 
   axios.request(options).then(function (response) {

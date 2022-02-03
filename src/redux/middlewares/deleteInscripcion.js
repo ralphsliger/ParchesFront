@@ -5,7 +5,7 @@ import { getUnParche } from './getUnParche'
 export const deleteInscripcion = (id, usuarioId, parcheId) => (dispatch) => {
   const options = {
     method: 'DELETE',
-    url: `${API_URL}cancelar-inscripcion/${id}`
+    url: `${API_URL}/cancelar-inscripcion/${id}`
   }
 
   axios.request(options).then(function (response) {
