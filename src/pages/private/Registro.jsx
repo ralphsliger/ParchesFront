@@ -129,7 +129,20 @@ const Registro = () => {
           </Button>
           <BotonRegistroGoogle />
         </Box>
-        {error !== null ? <span>{error}</span> : null}
+        {error !== null ? (
+          <Box
+          sx={{
+            color: '#b71c1c',
+            bgcolor: '#ef9a9a',
+            p: 2,
+            mt: 3,
+            borderRadius: 2,
+            textAlign: 'center'
+          }}
+        >
+          <span>{error}</span>
+        </Box>
+        ) : (null)}
       </Box>
     </Container>
   )
