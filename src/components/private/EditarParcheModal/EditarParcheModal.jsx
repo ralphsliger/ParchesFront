@@ -53,17 +53,6 @@ const EditarParcheModal = () => {
     cupoMaximo
   } = values
 
-  useEffect(() => {
-    nombreParche= unParche?.nombreParche?.valorNombre,
-    fechaParche= unParche?.fechaDeInicio?.valorFecha.split('T')[0],
-    horaParche= unParche?.fechaDeInicio?.valorFecha.split('T')[1],
-    fechaFin= unParche?.fechaFin?.valorFecha.split('T')[0],
-    horaFin= unParche?.fechaFin?.valorFecha.split('T')[1],
-    descripcionParche= unParche?.descripcion?.valorDescripcion,
-    categoria= unParche?.categoria,
-    cupoMaximo= unParche?.capacidadMaxima?.valorCapacidad
-  }, [unParche])
-
   // constantes redux:
 
   const direccion = useSelector(store => store.parcheCreado.direccion)
