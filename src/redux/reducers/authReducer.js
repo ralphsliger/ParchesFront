@@ -5,7 +5,8 @@ const initialState = {
   uid: null,
   imagenUrl: null,
   nombres: null,
-  id: null
+  id: null,
+  error: null
 }
 
 export default function authReducer (state = initialState, action) {
@@ -30,7 +31,19 @@ export default function authReducer (state = initialState, action) {
         uid: payload.uid,
         imagenUrl: payload.imagenUrl,
         nombres: payload.nombres,
-        id: payload.id
+        id: payload.id,
+        error: false
+      }
+      case authTypes.ERROR_INICIAR_SESION:
+        console.log("entro al error")
+      return {
+        ...state,
+        error: payload.error
+      }
+      case authTypes.EXITO_INICIO_SESION:
+      return {
+        ...state,
+        error: payload.error
       }
     default:
       return state

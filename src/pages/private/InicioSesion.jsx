@@ -6,7 +6,7 @@ import axios from 'axios'
 import { inicioSesion } from '../../redux/actions/registro/registroActions'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import BotonInicioGoogle from '../../components/public/BotonIniciarGoogle'
+import BotonIniciarGoogle from '../../components/public/BotonIniciarGoogle'
 import { Button, Typography, TextField, Avatar, CssBaseline, Link } from '@mui/material'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -115,7 +115,7 @@ const InicioSesion = () => {
           >
             Ingresar
           </Button>
-          <BotonInicioGoogle />
+          <BotonIniciarGoogle />
           <Box sx={{ mt: 2 }}>
             <Link href='crear-cuenta' variant='body2'>
               ¿No tienes cuenta? crea una...
