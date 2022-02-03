@@ -4,7 +4,7 @@ export const cerrarSesion = () => ({
   type: authTypes.CERRAR_SESION
 })
 
-export const sesionIniciada = (email, uid, imagenUrl, nombres) => ({
+export const sesionIniciada = (email, uid, imagenUrl, nombres, id) => ({
   type: authTypes.SESION_INICIADA,
-  payload: { email, uid, imagenUrl, nombres }
+  payload: { email, uid, imagenUrl, nombres, id }
 })

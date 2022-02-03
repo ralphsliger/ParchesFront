@@ -8,11 +8,13 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import BotonInicioGoogle from '../../components/public/BotonIniciarGoogle'
 import { Button, Typography, TextField, Avatar, CssBaseline, Link } from '@mui/material'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 import Container from '@mui/material/Container'
 import { LockOutlined } from '@mui/icons-material'
 import { Box } from '@mui/system'
 import { API_URL } from '../../utils/Conexion'
-
 
 const InicioSesion = () => {
   const [password, setPassword] = useState('')
@@ -26,11 +28,11 @@ const InicioSesion = () => {
     let respuesta
     // TODO: Redireccionar a la página nueva
     const auth = app.auth()
-    const user = await auth
-      .signInWithEmailAndPassword(email, password)
-      .then((userResponse) => userResponse.user)
 
     try {
+      const user = await auth
+        .signInWithEmailAndPassword(email, password)
+        .then((userResponse) => userResponse.user)
       respuesta = await axios
         .get(`${API_URL}/inicioSesion/${user.uid}`)
         .then((data) => data.data)
@@ -45,6 +47,15 @@ const InicioSesion = () => {
       navigate('/private')
     } catch (e) {
       respuesta = 'error'
+      toast.error('Correo y/o contraseña invalidos', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      })
     }
     return respuesta
   }
@@ -86,15 +97,20 @@ const InicioSesion = () => {
             type='password'
             id='claveIngreso'
             label='Contraseña'
+            inputProps={{ maxLength: 20, minLength: 6, required: true }}
             onChange={(event) => {
               setPassword(event.target.value)
             }}
           />
           <Button
+            type='button'
             color='primary'
             fullWidth
             variant='contained'
             onClick={handleIngreso}
+            activestyle={{ background: 'red', color: 'white' }}
+            isactive={(email && password) ? 'true' : 'false'}
+            disabled={!((email && password))}
             sx={{ mt: 3, mb: 1, '&:hover': { backgroundColor: '#f58442ff' } }}
           >
             Ingresar
@@ -107,6 +123,18 @@ const InicioSesion = () => {
           </Box>
         </Box>
       </Box>
+      <ToastContainer
+        position='top-right'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+
     </Container>
   )
 }

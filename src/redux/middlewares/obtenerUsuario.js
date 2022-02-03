@@ -10,7 +10,7 @@ export const obtenerUsuario = (uid) => async (dispatch) => {
   }
 
   axios.request(options).then(function (response) {
-    dispatch(sesionIniciada(response.data.email, response.data.uid, response.data.imagenUrl, response.data.nombres))
+    dispatch(sesionIniciada(response.data.email, response.data.uid, response.data.imagenUrl, response.data.nombres, response.data.id))
     console.log('en el axios', response.data)
   }).catch(function (error) {
     console.error(error)
