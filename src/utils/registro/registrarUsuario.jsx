@@ -12,7 +12,7 @@ export async function registrarUsuario (correo, password, nombre) {
     const user = await auth.createUserWithEmailAndPassword(correo, password)
       .then((usuarioFirebase) => usuarioFirebase.user)
 
-    respuesta = await axios.post(`${API_URL}/crearUsuario`, {
+    respuesta = await axios.post(`${API_URL}crearUsuario`, {
       uid: user.uid,
       nombres: nombre,
       email: correo,
