@@ -15,7 +15,7 @@ export const getMisParches =
       const options = {
         method: 'GET',
         // url: `${API_URL}/detalle-parche/${id}/${usuarioId}`,
-        url: `${API_URL}${uid}misParches`,
+        url: `${API_URL}${uid}/misParches`,
         headers: { 'Content-Type': 'application/json' }
       }
 
