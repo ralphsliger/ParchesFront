@@ -7,6 +7,7 @@ import ParchesReducer from '../reducers/ParchesReducer'
 import misParchesReducer from '../reducers/misParchesReducer'
 import EditarParcheReducer from '../reducers/EditarParcheReducer'
 import filtroMisParchesReducer from '../reducers/filtroMisParchesReducer'
+import filtroListaParchesReducer from '../reducers/filtroListaParchesReducer'
 
 const rootReducer = () => {
   return combineReducers(
@@ -17,6 +18,7 @@ const rootReducer = () => {
       filtroMisParches: filtroMisParchesReducer,
       auth: authReducer,
       listaParches: ParchesReducer,
+      filtroListaParches: filtroListaParchesReducer,
       misParches: misParchesReducer,
       ParcheEditado: EditarParcheReducer
     }

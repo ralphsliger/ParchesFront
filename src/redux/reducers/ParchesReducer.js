@@ -2,7 +2,7 @@ import actionsTypesListaParche from '../actions/actionsTypes/ActionsTypesListPar
 
 const initialState = {
   isLoading: false,
-  Parches: null,
+  Parches: [],
   error: null
 }
 

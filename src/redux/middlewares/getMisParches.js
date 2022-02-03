@@ -5,7 +5,7 @@ import {
   misParchesLoadError,
   misParchesLoading
 } from '../actions/misParchesActions'
-// import { API_URL } from '../../utils/Conexion'
+import { API_URL } from '../../utils/Conexion'
 
 export const getMisParches =
   ({ usuarioId }) =>
@@ -15,7 +15,7 @@ export const getMisParches =
     const options = {
       method: 'GET',
       // url: `${API_URL}/detalle-parche/${id}/${usuarioId}`,
-      url: 'https://parches-prueba.herokuapp.com/Newton%20Conn/misParches',
+      url: `${API_URL}/${usuarioId}/misParches`,
       headers: { 'Content-Type': 'application/json' }
     }
 

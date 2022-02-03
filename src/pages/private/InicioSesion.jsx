@@ -12,11 +12,9 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 import Container from '@mui/material/Container'
-
 import { LockOutlined } from '@mui/icons-material'
 import { Box } from '@mui/system'
-
-const URL_API = 'http://localhost:8080' // Cambiar por la del back
+import { API_URL } from '../../utils/Conexion'
 
 const InicioSesion = () => {
   const [password, setPassword] = useState('')
@@ -36,7 +34,7 @@ const InicioSesion = () => {
         .signInWithEmailAndPassword(email, password)
         .then((userResponse) => userResponse.user)
       respuesta = await axios
-        .get(`${URL_API}/inicioSesion/${user.uid}`)
+        .get(`${API_URL}/inicioSesion/${user.uid}`)
         .then((data) => data.data)
       dispatch(
         inicioSesion(
