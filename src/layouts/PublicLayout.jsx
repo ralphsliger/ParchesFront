@@ -9,22 +9,21 @@ import Footer from './../components/public/Footer'
 import { obtenerUsuario } from '../redux/middlewares/obtenerUsuario'
 
 const PublicLayout = () => {
-  
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
     app.auth().onAuthStateChanged((usuario) => {
       if (usuario) {
         const uid = usuario.multiFactor.user.uid
         dispatch(obtenerUsuario(uid))
-        navigate('/private/inii')
+        navigate('/private/inicio')
       }
     })
   }, [])
 
   return (
-    <div className="posi">
+    <div className='posi'>
       <BarraNavegacion id='idNavBar' />
       <Outlet />
       <Footer id='idFooter' />

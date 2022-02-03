@@ -4,7 +4,8 @@ const initialState = {
   email: null,
   uid: null,
   imagenUrl: null,
-  nombres: null
+  nombres: null,
+  id: null
 }
 
 export default function authReducer (state = initialState, action) {
@@ -25,7 +26,8 @@ export default function authReducer (state = initialState, action) {
         email: payload.email,
         uid: payload.uid,
         imagenUrl: payload.imagenUrl,
-        nombres: payload.nombres
+        nombres: payload.nombres,
+        id: payload.id
       }
     default:
       return state
