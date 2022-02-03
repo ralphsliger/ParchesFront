@@ -31,7 +31,7 @@ const Sidebar = () => {
           <ul className='h-full flex flex-col '>
             <SidebarRoute to='inicio' title='Home' icon='fas fa-home fa-lg' />
             <SidebarRoute to='Mi_perfil' title='Mi perfil' icon='fas fa-user-cog fa-lg' />
-            <SidebarRoute to='mis-parches/xxx' title='Mis parches' icon='fas fa-people-arrows fa-lg' />
+            <SidebarRoute to='mis-parches/A5HH6a2wWmg52bshHGIvQLHk8jQ' title='Mis parches' icon='fas fa-people-arrows fa-lg' />
             <SidebarRoute to='parches' title='Parches' icon='fas fa-users fa-lg' />
             <div className=' flex flex-col text-white h-full justify-end mb-12 mx-4 '>
               <li className=' sidebar-route-disable sidebar-route' to='/'>

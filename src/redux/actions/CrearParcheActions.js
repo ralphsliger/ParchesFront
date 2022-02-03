@@ -1,7 +1,8 @@
 import actionsTypesCrearParche from './actionsTypes/ActionsTypeCrearParche'
 import axios from 'axios'
+import { API_URL } from '../../utils/Conexion'
 
-const URL_API_POST = 'http://localhost:8080/parches/crear'
+const URL_API_POST = `${API_URL}/parches/crear`
 const URL_API_REVERSE = 'https://api.geoapify.com/v1/geocode/reverse'
 const API_KEY_REVERSE = '1b48259b810e48ddb151889f9ea58db0'
 

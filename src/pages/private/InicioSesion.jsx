@@ -8,13 +8,11 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import BotonInicioGoogle from '../../components/public/BotonIniciarGoogle'
 import { Button, Typography, TextField, Avatar, CssBaseline, Link } from '@mui/material'
-
 import Container from '@mui/material/Container'
-
 import { LockOutlined } from '@mui/icons-material'
 import { Box } from '@mui/system'
+import { API_URL } from '../../utils/Conexion'
 
-const URL_API = 'http://localhost:8080' // Cambiar por la del back
 
 const InicioSesion = () => {
   const [password, setPassword] = useState('')
@@ -34,7 +32,7 @@ const InicioSesion = () => {
 
     try {
       respuesta = await axios
-        .get(`${URL_API}/inicioSesion/${user.uid}`)
+        .get(`${API_URL}/inicioSesion/${user.uid}`)
         .then((data) => data.data)
       dispatch(
         inicioSesion(

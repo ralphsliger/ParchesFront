@@ -1,11 +1,8 @@
 import { app } from '../../services/firebase'
 import 'firebase/firestore'
 import 'firebase/auth'
-
 import axios from 'axios'
-import { useDispatch } from 'react-redux'
-
-const URL_API = 'http://localhost:8080' // TODO:actualizar esto
+import { API_URL } from '../Conexion'
 
 export async function registrarUsuario (correo, password, nombre) {
   const auth = app.auth()
@@ -15,7 +12,7 @@ export async function registrarUsuario (correo, password, nombre) {
     const user = await auth.createUserWithEmailAndPassword(correo, password)
       .then((usuarioFirebase) => usuarioFirebase.user)
 
-    respuesta = await axios.post(`${URL_API}/crearUsuario`, {
+    respuesta = await axios.post(`${API_URL}/crearUsuario`, {
       uid: user.uid,
       nombres: nombre,
       email: correo,
