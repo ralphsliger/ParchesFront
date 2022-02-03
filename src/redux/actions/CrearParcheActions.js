@@ -2,7 +2,6 @@ import actionsTypesCrearParche from './actionsTypes/ActionsTypeCrearParche'
 import axios from 'axios'
 import { API_URL } from '../../utils/Conexion'
 import { getMisParches } from '../middlewares/getMisParches'
-import { getTodosParches } from '../middlewares/getTodosParches'
 const URL_API_POST = `${API_URL}parches/crear`
 const URL_API_REVERSE = 'https://api.geoapify.com/v1/geocode/reverse'
 const API_KEY_REVERSE = '1b48259b810e48ddb151889f9ea58db0'
@@ -58,7 +57,6 @@ export function enviarParche (uId,
       .then(function (response) {
         dispatch(crearParche(response.data))
         dispatch(getMisParches(parche.duenoDelParche))
-        dispatch(getTodosParches())
       })
       .catch(function (error) {
         dispatch(crearParcheError(error))
