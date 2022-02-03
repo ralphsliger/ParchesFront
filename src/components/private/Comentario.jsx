@@ -7,6 +7,7 @@ import EliminarModal from './EliminarModal'
 
 const Comentario = ({ comentario }) => {
   const { unParche } = useSelector(state => state.unParche)
+  const { uid } = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const [ estado, setEstado ] = useState(false)
 
@@ -17,7 +18,6 @@ const Comentario = ({ comentario }) => {
 
   const eliminar = (e) => {
     e.preventDefault()
-    console.log("Voy a eliminar")
     setEstado(true)    
   }
 
@@ -46,9 +46,9 @@ const Comentario = ({ comentario }) => {
           </div>
         </div>
         <div className='eliminar'>
-        {unParche.duenoDelParche.uid === 'ylDP5A9acSU0SxZPJm4cD2XqDmJ2' || comentario.usuario.uid === 'ylDP5A9acSU0SxZPJm4cD2XqDmJ2' ?          
+        {unParche.duenoDelParche.uid === uid || comentario.usuario.uid === uid ?          
             <button id='botonEliminarComentario' onClick={(e) => eliminar(e)}><DeleteForeverIcon sx={{ color: '#140d4fff', '&:hover': { color: '#c0392b' } }} /></button>          
-          : console.log(unParche)
+          : null
         }  
         </div>      
       </div>

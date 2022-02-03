@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 
 const CrearComentario = () => {
   const { unParche } = useSelector(state => state.unParche)
+  const { uid } = useSelector(state => state.auth)
 
   const [data, setData] = useState('')
   const dispatch = useDispatch()
@@ -14,7 +15,7 @@ const CrearComentario = () => {
     e.preventDefault()
     if(data.length > 0 && data.length <= 256){
       const form = {
-        userId: 'ylDP5A9acSU0SxZPJm4cD2XqDmJ2', //Id de Usuario quemada
+        userId: uid,
         parcheId: unParche.id,
         mensaje: data
       }
