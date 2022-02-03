@@ -1,4 +1,4 @@
-import { NUEVO_REGISTRO, REGISTRO_FALLIDO, INICIO_SESION } from '../actions/registro/registroActionTypes'
+import { NUEVO_REGISTRO, REGISTRO_FALLIDO, INICIO_SESION, SANEAR_ESTADO } from '../actions/registro/registroActionTypes'
 
 const initialState = {
   uid: null,
@@ -37,6 +37,12 @@ const registroReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         error: payload.error
+      }
+    }
+    case SANEAR_ESTADO:{
+      return {
+        ...state,
+        error: null
       }
     }
     default:
