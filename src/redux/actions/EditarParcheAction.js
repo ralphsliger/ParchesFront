@@ -1,6 +1,7 @@
 import actionsTypesEditarParche from './actionsTypes/ActionsTypeEditarParche'
 import axios from 'axios'
 import { API_URL } from '../../utils/Conexion'
+import { getUnParche } from '../middlewares/getUnParche'
 
 const URL_API_PUT = `${API_URL}parches/editar`
 
@@ -26,8 +27,8 @@ export function actualizarParche (
     nombreParche: nombreParche,
     descripcion: descripcionParche,
     fechaCreacion: fechaCreacion,
-    fechaInicio: `${fechaParche}T${horaParche}:00.00`,
-    fechaFin: `${fechaFin}T${horaFin}:00.00`,
+    fechaInicio: `${fechaParche}T${horaParche}`,
+    fechaFin: `${fechaFin}T${horaFin}`,
     estado: estado,
     categoria: categoria,
     capacidadMaxima: cupoMaximo,
@@ -38,6 +39,7 @@ export function actualizarParche (
   return dispatch => {
     axios.put(URL_API_PUT, parche)
       .then(function (response) {
+        dispatch(getUnParche(id))
         dispatch(editarParche(response.data))
       })
       .catch(function (error) {

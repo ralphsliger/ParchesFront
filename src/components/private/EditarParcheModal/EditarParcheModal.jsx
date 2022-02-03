@@ -16,39 +16,16 @@ const EditarParcheModal = () => {
 
   const [position, setPosition] = useState(null)
 
-  const perfilQuemado = {
-    uId: user.uid,
-    fotoPerfil: user.imagenUrl,
-    nombreUsuario: user.nombres
-  }
-
   useEffect(() => {
     dispatch(getUnParche(parcheId))
-    console.log('para el editar ', unParche)
   }, [])
 
   useEffect(() => {
-    setPosition([unParche?.ubicacionParche?.lat, unParche?.ubicacionParche?.lng])
+    setPosition({
+      lat: unParche?.ubicacionParche?.lat,
+      lng: unParche?.ubicacionParche?.lng
+    })
   }, [unParche])
-
-  /* const parcheQuemado = {
-    id: '61f9ae55c281fc06a82d3506',
-    duenoDelParche: 'Nata8',
-    nombreParche: { valorNombre: 'parche editar Nata8' },
-    descripcion: { valorDescripcion: 'fghjn' },
-    fechaCreacion: { valorFecha: '2022-02-01T22:49' },
-    fechaInicio: { valorFecha: '2022-12-12T10:59' },
-    fechaFin: { valorFecha: '2022-12-12T12:59:00' },
-    estado: 'HABILITADO',
-    categoria: 'MODA',
-    capacidadMaxima: { valorCapacidad: 12 },
-    ubicacionParche: {
-      lat: 1,
-      lng: 1,
-      direccion: 'CIUDAD DE COLOMBIA'
-    },
-    cantidadParticipantes: null
-  }  */
 
   // useForm:
 
@@ -79,8 +56,6 @@ const EditarParcheModal = () => {
   // constantes redux:
 
   const direccion = useSelector(store => store.parcheCreado.direccion)
-
-  // estados del mapa:
 
   // variable de fecha para formulario:
 
@@ -126,8 +101,8 @@ const EditarParcheModal = () => {
             <DialogTittleModal
               handleInputChange={handleInputChange}
               nombreParche={nombreParche}
-              fotoPerfil={perfilQuemado.fotoPerfil}
-              nombreUsuario={perfilQuemado.nombreUsuario}
+              fotoPerfil={user.imagenUrl}
+              nombreUsuario={user.nombres}
             />
 
             <DialogContentModal

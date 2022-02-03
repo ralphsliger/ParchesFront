@@ -11,6 +11,8 @@ import {
   ErrorOutline as ErrorOutlineIcon
 } from '@mui/icons-material'
 import { Link } from 'react-router-dom'
+import { deleteParche } from '../../../redux/middlewares/deleteParche'
+import { deshabParche } from '../../../redux/middlewares/deshabilitarParche'
 
 const style = {
   position: 'absolute',
@@ -24,16 +26,15 @@ const style = {
   p: 4
 }
 
-const dispatch = useDispatch()
-
-function ParcheButtons({ parche }) {
+function ParcheButtons ({ parche }) {
+  const dispatch = useDispatch()
   const [openBorrar, setOpenBorrar] = useState(false)
   const handleOpenBorrar = () => setOpenBorrar(true)
   const handleCloseBorrar = () => setOpenBorrar(false)
   const { uid } = useSelector((state) => state.auth)
 
   const handleBorrar = () => {
-    // TODO aca va el dispatch al action de eliminar
+    dispatch(deleteParche(parche?.id, parche?.duenoDelParche))
     setOpenBorrar(false)
   }
 
@@ -41,7 +42,19 @@ function ParcheButtons({ parche }) {
   const handleOpenDeshabilitar = () => setOpenDeshabilitar(true)
   const handleCloseDeshabilitar = () => setOpenDeshabilitar(false)
   const handleDeshabilitar = () => {
-    // TODO aca va el dispatch al action de deshabilitar
+    console.log(parche)
+    dispatch(deshabParche(
+      parche?.id,
+      parche?.duenoDelParche,
+      parche?.nombreParche,
+      parche?.descripcion,
+      parche?.fechaCreacion.valorFecha,
+      parche?.fechaInicio.valorFecha,
+      parche?.fechaFin.valorFecha,
+      parche?.estado,
+      parche?.categoria,
+      parche?.capacidadMaxima.valorCapacidad,
+      parche?.ubicacionParche))
     setOpenDeshabilitar(false)
   }
 

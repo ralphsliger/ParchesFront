@@ -5,7 +5,7 @@ import { API_URL } from '../../utils/Conexion'
 export const obtenerUsuario = (uid) => async (dispatch) => {
   const options = {
     method: 'GET',
-    url: `${API_URL}/inicioSesion/${uid}`,
+    url: `${API_URL}inicioSesion/${uid}`,
     headers: { 'Content-Type': 'application/json' }
   }
 

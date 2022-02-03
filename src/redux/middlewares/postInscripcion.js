@@ -5,7 +5,7 @@ import { API_URL } from '../../utils/Conexion'
 export const postInscripcion = (usuarioId, parcheId) => (dispatch) => {
   const options = {
     method: 'POST',
-    url: `${API_URL}/crear-inscripcion/${parcheId}/${usuarioId}`,
+    url: `${API_URL}crear-inscripcion/${parcheId}/${usuarioId}`,
     headers: { 'Content-Type': 'application/json' }
   }
 

@@ -9,7 +9,7 @@ import EditarParcheReducer from '../reducers/EditarParcheReducer'
 import filtroMisParchesReducer from '../reducers/filtroMisParchesReducer'
 import filtroListaParchesReducer from '../reducers/filtroListaParchesReducer'
 import EliminarParcheReducer from '../reducers/EliminarParcheReducer'
-import DeshabilitarParcheReducer from '../reducers/DeshabilitarReducer'
+import DeshabilitarParcheReducer from '../reducers/DeshabilitarParcheReducer'
 
 const rootReducer = () => {
   return combineReducers(
