@@ -7,7 +7,7 @@ export const crearUsuario = (uid, email, nombres, imagenUrl) => async (dispatch)
 
   const options = {
     method: 'POST',
-    url: `${API_URL}/crearUsuario`,
+    url: `${API_URL}crearUsuario`,
     headers: { 'Content-Type': 'application/json' },
     data: {
       uid: uid,
