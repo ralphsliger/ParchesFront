@@ -34,7 +34,7 @@ const InicioSesion = () => {
         .signInWithEmailAndPassword(email, password)
         .then((userResponse) => userResponse.user)
       respuesta = await axios
-        .get(`${API_URL}/inicioSesion/${user.uid}`)
+        .get(`${API_URL}inicioSesion/${user.uid}`)
         .then((data) => data.data)
       dispatch(
         inicioSesion(

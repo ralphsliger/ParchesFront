@@ -29,16 +29,15 @@ const Registro = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault()
-    console.log(state)
-
-    const validacion = validaciones(state.nombre, state.email,
+    let correo = state.email.toLowerCase()
+    const validacion = validaciones(state.nombre, correo,
       state.password, state.confPassword)
 
     if (typeof validacion === 'string') {
       dispatch(registroFallido(validacion))
     } else {
       const usuario = await registrarUsuario(
-        state.email,
+        correo,
         state.password,
         state.nombre
       )
@@ -129,7 +128,20 @@ const Registro = () => {
           </Button>
           <BotonRegistroGoogle />
         </Box>
-        {error !== null ? <span>{error}</span> : null}
+        {error !== null ? (
+          <Box
+          sx={{
+            color: '#b71c1c',
+            bgcolor: '#ef9a9a',
+            p: 2,
+            mt: 3,
+            borderRadius: 2,
+            textAlign: 'center'
+          }}
+        >
+          <span>{error}</span>
+        </Box>
+        ) : (null)}
       </Box>
     </Container>
   )
