@@ -1,6 +1,6 @@
 /* eslint-disable multiline-ternary */
 import React, { useState } from 'react'
-import { Stack, Button, Backdrop, Box, Modal, Fade, Typography } from '@mui/material'
+import { Stack, Button, Backdrop, Modal, Fade, Typography } from '@mui/material'
 import { useSelector } from 'react-redux'
 import {
   Delete as DeleteIcon,

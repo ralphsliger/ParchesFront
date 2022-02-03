@@ -1,6 +1,3 @@
-/* eslint-disable multiline-ternary */
-/* eslint-disable indent */
-/* eslint-disable react/jsx-indent */
 import { Grid, Skeleton, Box, Typography } from '@mui/material'
 import React, { useEffect } from 'react'
 import FiltroWrapper from '../../components/private/Filtro/FiltroWrapper'
@@ -13,10 +10,12 @@ import { getMisParches } from '../../redux/middlewares/getMisParches'
 const MisParchesPage = () => {
   const { isLoading, misParches, error } = useSelector((state) => state.misParches)
   const { misParchesFiltrados, busquedaErronea } = useSelector((state) => state.filtroMisParches)
+  const user = useSelector((state) => state.auth)
   const dispatch = useDispatch()
+  console.log('para mis parches', user.uid)
 
   useEffect(() => {
-    dispatch(getMisParches({}))
+    dispatch(getMisParches(user.uid))
   }, [dispatch])
 
   return (
@@ -49,15 +48,15 @@ const MisParchesPage = () => {
         )}
         {misParchesFiltrados.length > 0
           ? misParchesFiltrados?.map((parche) => (
-              <Grid key={parche.id} item xs={9}>
-                <ParcheWrapper parche={parche} />
-              </Grid>
+            <Grid key={parche.id} item xs={9}>
+              <ParcheWrapper parche={parche} />
+            </Grid>
             ))
           : misParches?.map((parche) => (
-              <Grid key={parche.id} item xs={9}>
-                <ParcheWrapper parche={parche} />
-              </Grid>
-            ))}
+            <Grid key={parche.id} item xs={9}>
+              <ParcheWrapper parche={parche} />
+            </Grid>
+          ))}
       </Grid>
       {isLoading && (
         <Box pl={20} sx={{ width: 1000 }}>
