@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 
 const CrearComentario = () => {
   const { unParche } = useSelector(state => state.unParche)
+  const { uid } = useSelector(state => state.auth)
 
   const [data, setData] = useState('')
   const dispatch = useDispatch()
@@ -14,7 +15,7 @@ const CrearComentario = () => {
     e.preventDefault()
     if(data.length > 0 && data.length <= 256){
       const form = {
-        userId: 'qowpcC6q88ORtaVyvvyO7XNqU202', //Id de Usuario quemada
+        userId: uid,
         parcheId: unParche.id,
         mensaje: data
       }
@@ -38,10 +39,10 @@ const CrearComentario = () => {
     <>
       <form className='flex border-4 p-2 contenido'>
         <div className=' w-11/12'>
-          <textarea value={data} onChange={(e) => setData(e.target.value)} maxLength='256' className='w-11/12 p-2 resize-none' id='comentario' required name='comentario' type='text' placeholder='Escribe tu comentario...' />
+          <textarea id='textMensajeComentario' value={data} onChange={(e) => setData(e.target.value)} maxLength='256' className='w-11/12 p-2 resize-none' id='comentario' required name='comentario' type='text' placeholder='Escribe tu comentario...' />
         </div>
         <div>
-          <button className='button' onClick={(e) => { submitForm(e) }}><SendIcon /></button>
+          <button id='botonEnviarComentario' className='button' onClick={(e) => { submitForm(e) }}><SendIcon /></button>
         </div>
       </form>
     </>

@@ -29,8 +29,8 @@ const EditarParcheModal = ({open, handleClose, handleConfirm, msgModal,setNombre
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={handleConfirm}>Actualizar</Button>
+          <Button id="btn-cancelar" onClick={handleClose}>Cancelar</Button>
+          <Button id="btn-actualizar" onClick={handleConfirm}>Actualizar</Button>
         </DialogActions>
       </Dialog>
   </div>;

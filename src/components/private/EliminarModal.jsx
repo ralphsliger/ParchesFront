@@ -21,11 +21,11 @@ function EliminarModal({ open, handleClose, handleConfirm, msgModal }) {
             <DialogContentText>{msgModal.msg}</DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button autoFocus onClick={handleClose} color="primary">
-              No
+            <Button id='botonCancelarEliminacionComentario' autoFocus onClick={handleClose} color="primary">
+              Cancelar
             </Button>
-            <Button onClick={handleConfirm} color="primary">
-              Si
+            <Button id='botonAceptarEliminacionComentario' onClick={handleConfirm} color="primary">
+              Aceptar
             </Button>
           </DialogActions>
         </Dialog>
