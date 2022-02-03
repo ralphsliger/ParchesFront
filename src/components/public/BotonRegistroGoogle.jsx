@@ -10,14 +10,14 @@ import { useNavigate } from 'react-router-dom'
 export default function BotonRegistroGoogle() {
   const auth = app.auth()
   const dispatch = useDispatch()
-  // const [usuario] = useAuthState(auth);
 
   const navigate = useNavigate()
   const classes = useStyles()
 
-  function IniciarSesion() {
+  function handle() {
     auth.signInWithPopup(google)
       .then(user => {
+        console.log(user.user.multiFactor.user.displayName);
         const uid = user.user.multiFactor.user.uid
         const email = user.user.multiFactor.user.email
         const nombres = user.user.multiFactor.user.displayName
@@ -27,6 +27,7 @@ export default function BotonRegistroGoogle() {
       })
       .catch(error => {
         console.log(error)
+        // navigate('iniciar-sesion')
       })
   }
 
@@ -38,7 +39,7 @@ export default function BotonRegistroGoogle() {
         color='primary'
         fullWidth
         startIcon={<GoogleIcon />}
-        onClick={IniciarSesion}
+        onClick={handle}
       >
         Ingresar con google
       </Button>

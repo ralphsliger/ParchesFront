@@ -19,7 +19,7 @@ export default function BarraNavegacion() {
     <Box sx={{ flexGrow: 1, boxShadow: 2, }}>
       <AppBar position='relative' color='secondary'>
         <Toolbar>
-          <Link to='inicio'>
+          <Link to='/'>
             <IconButton
               size='large'
               edge='start'

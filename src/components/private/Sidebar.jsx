@@ -3,6 +3,8 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded'
 import CrearParcheModal from './CrearParcheModal/CrearParcheModal'
 import { app } from '../../services/firebase'
+import { cerrarSesion } from '../../redux/actions/authActions'
+import { useDispatch } from 'react-redux'
 
 const Logo = () => {
   return (
@@ -16,9 +18,11 @@ const Sidebar = () => {
   const auth = app.auth()
   const [open, setOpen] = useState(true)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handler = () => {
     auth.signOut()
+    dispatch(cerrarSesion())
     navigate('/public')
   }
 

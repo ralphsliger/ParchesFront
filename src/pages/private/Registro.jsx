@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { registrarUsuario } from '../../utils/registro/registrarUsuario'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   registroFallido,
-  registroExitoso
+  registroExitoso,
+  sanearEstado
 } from '../../redux/actions/registro/registroActions'
 import { useNavigate } from 'react-router-dom'
 import BotonRegistroGoogle from '../../components/public/BotonRegistroGoogle'
@@ -19,6 +20,10 @@ const Registro = () => {
   const error = useSelector((state) => state.registro.error)
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    dispatch(sanearEstado())
+  }, [navigate])
 
   const [state, setState] = useState({
     nombre: '',

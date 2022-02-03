@@ -1,4 +1,4 @@
-import { INICIO_SESION, NUEVO_REGISTRO, REGISTRO_FALLIDO } from './registroActionTypes'
+import { INICIO_SESION, NUEVO_REGISTRO, REGISTRO_FALLIDO, SANEAR_ESTADO } from './registroActionTypes'
 
 // TODO: Cambiar la ruta de la imagen predefinida
 export const registroExitoso = (uid, email, nombre,url,id) => {
@@ -11,6 +11,13 @@ export const registroExitoso = (uid, email, nombre,url,id) => {
       imagenUrl: url,
       id:id
     }
+  }
+}
+
+export const sanearEstado = () => {
+  return {
+    type: SANEAR_ESTADO,
+    payload: {}
   }
 }
 
