@@ -10,15 +10,15 @@ const PublicLayout = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  useEffect(() => {
-    app.auth().onAuthStateChanged((usuario) => {
-      if (usuario) {
-        const uid = usuario.multiFactor.user.uid
-        dispatch(obtenerUsuario(uid))
-        navigate('/private/inicio')
-      }
-    })
-  }, [])
+  //  useEffect(() => {
+  //    app.auth().onAuthStateChanged((usuario) => {
+  //      if (usuario) {
+  //        const uid = usuario.multiFactor.user.uid
+  //        dispatch(obtenerUsuario(uid))
+         
+  //      }
+  //    })
+  //  }, [])
 
   return (
     <div className='posi'>
