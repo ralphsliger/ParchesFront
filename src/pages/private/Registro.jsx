@@ -43,7 +43,7 @@ const Registro = () => {
         state.nombre
       )
       if (typeof usuario === 'object') {
-        dispatch(registroExitoso(usuario.data.uid, state.email, state.nombre))
+        dispatch(registroExitoso(usuario.data.uid, usuario.data.email, usuario.data.nombres,usuario.data.imagenUrl,usuario.data.id))
         navigate('/private')
       } else {
         dispatch(registroFallido(usuario))

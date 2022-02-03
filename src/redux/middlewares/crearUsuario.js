@@ -16,7 +16,7 @@ export const crearUsuario = (uid, email, nombres, imagenUrl) => async (dispatch)
   }
 
   axios.request(options).then(function (response) {
-    dispatch(sesionIniciada(response.data.email, response.data.uid, response.data.imageUrl, response.data.nombres))
+    dispatch(sesionIniciada(response.data.email, response.data.uid, response.data.imagenUrl, response.data.nombres, response.data.id))
   }).catch(function (error) {
     console.error(error)
   })
