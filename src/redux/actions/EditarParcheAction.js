@@ -2,7 +2,7 @@ import actionsTypesEditarParche from './actionsTypes/ActionsTypeEditarParche'
 import axios from 'axios'
 import { API_URL } from '../../utils/Conexion'
 
-const URL_API_PUT = `${API_URL}/parches/editar`
+const URL_API_PUT = `${API_URL}parches/editar`
 
 export function actualizarParche (
   id,

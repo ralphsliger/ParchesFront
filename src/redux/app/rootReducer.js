@@ -8,6 +8,8 @@ import misParchesReducer from '../reducers/misParchesReducer'
 import EditarParcheReducer from '../reducers/EditarParcheReducer'
 import filtroMisParchesReducer from '../reducers/filtroMisParchesReducer'
 import filtroListaParchesReducer from '../reducers/filtroListaParchesReducer'
+import EliminarParcheReducer from '../reducers/EliminarParcheReducer'
+import DeshabilitarParcheReducer from '../reducers/DeshabilitarReducer'
 
 const rootReducer = () => {
   return combineReducers(
@@ -20,7 +22,9 @@ const rootReducer = () => {
       listaParches: ParchesReducer,
       filtroListaParches: filtroListaParchesReducer,
       misParches: misParchesReducer,
-      ParcheEditado: EditarParcheReducer
+      ParcheEditado: EditarParcheReducer,
+      ParcheEliminado: EliminarParcheReducer,
+      ParcheDeshabilitado: DeshabilitarParcheReducer
     }
   )
 }
