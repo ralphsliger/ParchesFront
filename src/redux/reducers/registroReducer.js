@@ -3,7 +3,7 @@ import { NUEVO_REGISTRO, REGISTRO_FALLIDO, INICIO_SESION } from '../actions/regi
 const initialState = {
   uid: null,
   nombre: '',
-  error: '',
+  error: null,
   email: '',
   imagenUrl: ''
 }
@@ -15,18 +15,22 @@ const registroReducer = (state = initialState, { type, payload }) => {
       // TODO: Validar errores email duplicado y fallo en conexion
       return {
         ...state,
+        email: payload.email,
         uid: payload.uid,
-        nombre: payload.nombres,
-        email: payload.email
+        imagenUrl: payload.imagenUrl,
+        nombres: payload.nombres,
+        id: payload.id,
+        error: null
       }
     }
     case INICIO_SESION: {
       return {
         ...state,
-        uid: payload.uid,
-        nombre: payload.nombres,
         email: payload.email,
-        imagenUrl: payload.imagenUrl
+        uid: payload.uid,
+        imagenUrl: payload.imagenUrl,
+        nombres: payload.nombres,
+        id: payload.id
       }
     }
     case REGISTRO_FALLIDO: {

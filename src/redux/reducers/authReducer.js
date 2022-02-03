@@ -16,7 +16,10 @@ export default function authReducer (state = initialState, action) {
       return {
         ...state,
         email: payload.email,
-        uid: payload.uid
+        uid: payload.uid,
+        imagenUrl: payload.imagenUrl,
+        nombres: payload.nombres,
+        id: payload.id
       }
     case authTypes.CERRAR_SESION:
       return initialState
