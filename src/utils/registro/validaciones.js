@@ -12,11 +12,11 @@ export const validaciones = (nombre, email, password, confPassword) => {
     return 'El nombre debe contar con letras y/o carácteres numéricos solamente y debe tener como máximo 50 carácteres'
   }
 
-  if (!resultEmail) {
+  if (!resultEmail){
     return 'El email debe tener la siguiente estructura: correo@email.com'
   }
 
-  if (!resultPassword) {
+  if (!resultPassword){
     return 'La contraseña debe contener minimo 1 MAYUS, 1 MINUS y 1 caracter especial, MIN 6 caracteres y MAX 20 en total'
   }
 
