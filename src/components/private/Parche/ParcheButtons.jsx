@@ -1,7 +1,7 @@
 /* eslint-disable multiline-ternary */
 import React, { useState } from 'react'
 import { Stack, Button, Backdrop, Modal, Fade, Typography } from '@mui/material'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import {
   Delete as DeleteIcon,
   Edit as EditIcon,
@@ -24,6 +24,8 @@ const style = {
   p: 4
 }
 
+const dispatch = useDispatch()
+
 function ParcheButtons({ parche }) {
   const [openBorrar, setOpenBorrar] = useState(false)
   const handleOpenBorrar = () => setOpenBorrar(true)
@@ -31,16 +33,16 @@ function ParcheButtons({ parche }) {
   const { uid } = useSelector((state) => state.auth)
 
   const handleBorrar = () => {
+    // TODO aca va el dispatch al action de eliminar
     setOpenBorrar(false)
-    console.log('borrando')
   }
 
   const [openDeshabilitar, setOpenDeshabilitar] = useState(false)
   const handleOpenDeshabilitar = () => setOpenDeshabilitar(true)
   const handleCloseDeshabilitar = () => setOpenDeshabilitar(false)
   const handleDeshabilitar = () => {
+    // TODO aca va el dispatch al action de deshabilitar
     setOpenDeshabilitar(false)
-    console.log('deshabilitando')
   }
 
   return (

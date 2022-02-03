@@ -29,7 +29,7 @@ const Registro = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault()
-    console.log(state)
+
 
     const validacion = validaciones(state.nombre, state.email,
       state.password, state.confPassword)

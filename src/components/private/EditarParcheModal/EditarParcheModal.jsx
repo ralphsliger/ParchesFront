@@ -14,6 +14,8 @@ const EditarParcheModal = () => {
   const user = useSelector(state => state.auth)
   const { unParche } = useSelector(state => state.unParche)
 
+  const [position, setPosition] = useState(null)
+
   const perfilQuemado = {
     uId: user.uid,
     fotoPerfil: user.imagenUrl,
@@ -22,10 +24,14 @@ const EditarParcheModal = () => {
 
   useEffect(() => {
     dispatch(getUnParche(parcheId))
-    console.log("para el editar ",unParche)
+    console.log('para el editar ', unParche)
   }, [])
 
-  const parcheQuemado = {
+  useEffect(() => {
+    setPosition([unParche?.ubicacionParche?.lat, unParche?.ubicacionParche?.lng])
+  }, [unParche])
+
+  /* const parcheQuemado = {
     id: '61f9ae55c281fc06a82d3506',
     duenoDelParche: 'Nata8',
     nombreParche: { valorNombre: 'parche editar Nata8' },
@@ -42,15 +48,15 @@ const EditarParcheModal = () => {
       direccion: 'CIUDAD DE COLOMBIA'
     },
     cantidadParticipantes: null
-  }
+  }  */
 
   // useForm:
 
   const [values, handleInputChange, reset] = useForm({
     busquedaMapa: '',
     nombreParche: unParche?.nombreParche?.valorNombre,
-    fechaParche: unParche?.fechaInicio?.valorFecha.split('T')[0],
-    horaParche: unParche?.fechaInicio?.valorFecha.split('T')[1],
+    fechaParche: unParche?.fechaDeInicio?.valorFecha.split('T')[0],
+    horaParche: unParche?.fechaDeInicio?.valorFecha.split('T')[1],
     fechaFin: unParche?.fechaFin?.valorFecha.split('T')[0],
     horaFin: unParche?.fechaFin?.valorFecha.split('T')[1],
     descripcionParche: unParche?.descripcion?.valorDescripcion,
@@ -76,8 +82,6 @@ const EditarParcheModal = () => {
 
   // estados del mapa:
 
-  const [position, setPosition] = useState([unParche.ubicacionParche.lat, unParche.ubicacionParche.lng])
-
   // variable de fecha para formulario:
 
   const datePick = new Date().toISOString().split('T')[0]
@@ -85,7 +89,9 @@ const EditarParcheModal = () => {
   // efectos del modal:
 
   useEffect(() => {
-    dispatch(getDireccion(position))
+    if (position) {
+      dispatch(getDireccion(position))
+    }
   }, [position])
 
   // handle's de formulario
@@ -95,16 +101,16 @@ const EditarParcheModal = () => {
     reset()
     position.formatted = direccion
     dispatch(actualizarParche(
-      parcheQuemado.id,
-      perfilQuemado.uId,
+      unParche?.id,
+      unParche?.duenoDelParche?.uid,
       nombreParche,
       descripcionParche,
-      parcheQuemado.fechaCreacion.valorFecha,
+      unParche.fechaDeCreacion.valorFecha,
       fechaParche,
       horaParche,
       fechaFin,
       horaFin,
-      parcheQuemado.estado,
+      'HABILITADO',
       categoria,
       cupoMaximo,
       position
@@ -112,37 +118,38 @@ const EditarParcheModal = () => {
   }
 
   return (
-    <div>
-      {/* Body */}
-      <form onSubmit={handleEnviarFormulario}>
+    <>
+      {unParche && position && (
+        <div>
+          <form onSubmit={handleEnviarFormulario}>
 
-        <DialogTittleModal
-          handleInputChange={handleInputChange}
-          nombreParche={nombreParche}
-          fotoPerfil={perfilQuemado.fotoPerfil}
-          nombreUsuario={perfilQuemado.nombreUsuario}
-        />
+            <DialogTittleModal
+              handleInputChange={handleInputChange}
+              nombreParche={nombreParche}
+              fotoPerfil={perfilQuemado.fotoPerfil}
+              nombreUsuario={perfilQuemado.nombreUsuario}
+            />
 
-        <DialogContentModal
-          datePick={datePick}
-          handleInputChange={handleInputChange}
-          fechaParche={fechaParche}
-          horaParche={horaParche}
-          cupoMaximo={cupoMaximo}
-          fechaFin={fechaFin}
-          horaFin={horaFin}
-          categoria={categoria}
-          descripcionParche={descripcionParche}
-          busquedaMapa={busquedaMapa}
-          setPosition={setPosition}
-          position={position}
-          direccion={direccion}
-          reset={reset}
-        />
+            <DialogContentModal
+              datePick={datePick}
+              handleInputChange={handleInputChange}
+              fechaParche={fechaParche}
+              horaParche={horaParche}
+              cupoMaximo={cupoMaximo}
+              fechaFin={fechaFin}
+              horaFin={horaFin}
+              categoria={categoria}
+              descripcionParche={descripcionParche}
+              busquedaMapa={busquedaMapa}
+              setPosition={setPosition}
+              position={position}
+              direccion={direccion}
+              reset={reset}
+            />
 
-        <div className='text-center'>
-          <button
-            className='
+            <div className='text-center'>
+              <button
+                className='
               px-4 py-2
               text-black
               bg-orange-500
@@ -152,13 +159,14 @@ const EditarParcheModal = () => {
               mb-5
               border
               rounded'
-            type='submit'
-          >
-            Editar
-          </button>
-        </div>
-      </form>
-    </div>
+                type='submit'
+              >
+                Editar
+              </button>
+            </div>
+          </form>
+        </div>)}
+    </>
   )
 }
 

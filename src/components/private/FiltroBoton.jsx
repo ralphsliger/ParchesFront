@@ -26,7 +26,6 @@ export default function FiltroBoton () {
       const result = Parches.filter(
         (parche) => parche.categoria.toUpperCase() === selectValueCategoria.toUpperCase()
       )
-      console.log('entro al caso', result)
       result.length === 0 ? dispatch(busquedaErronea(true)) : dispatch(busquedaErronea(false))
       dispatch(filtrarListaParches(result))
     }

@@ -14,6 +14,5 @@ export const actualizarHombre = (datos) => async (dispatch) => {
     dispatch(sesionIniciada(response.data.email, response.data.uid, response.data.imagenUrl, response.data.nombres, response.data.id))
   }).catch(function (error) {
     console.error(error)
-    console.log('errrorr')
   })
 }
