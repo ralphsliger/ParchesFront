@@ -15,6 +15,8 @@ import Typography from '@mui/material/Typography'
 import { Button } from '@mui/material'
 import { app } from '../../services/firebase'
 import { Box } from '@mui/system'
+import { Link } from 'react-router-dom'
+
 
 const HomePagePublic = () => {
   return (
@@ -46,6 +48,7 @@ const HomePagePublic = () => {
         }}
       >
         <Typography
+          id='txt-frase'
           component='h2'
           variant='h6'
           style={{ margin: '50px 20px 40px 20px' }}
@@ -56,7 +59,9 @@ const HomePagePublic = () => {
           sofkianos con tus mismos gustos, te esperamos para tener momentos que
           deberian ser eternos!
         </Typography>
+        <Link to='crear-cuenta'>
         <Button
+          id='btn-registro-home'
           color='primary'
           variant='contained'
           sx={{
@@ -65,7 +70,10 @@ const HomePagePublic = () => {
         >
           Registro
         </Button>
+        </Link>
+        <Link to='inicio-sesion'>
         <Button
+          id='btn-inicio-sesion-home'
           color='primary'
           variant='contained'
           sx={{
@@ -75,6 +83,7 @@ const HomePagePublic = () => {
         >
           Inicio de sesión
         </Button>
+        </Link>
         <Typography
           component='h2'
           variant='h4'
@@ -84,6 +93,7 @@ const HomePagePublic = () => {
           Descripción
         </Typography>
         <Typography
+          id='txt-descripcion'
           component='h2'
           variant='h6'
           style={{ margin: '20px 20px 60px 20px' }}
