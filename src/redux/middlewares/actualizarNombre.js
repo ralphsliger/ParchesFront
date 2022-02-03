@@ -2,7 +2,6 @@ import axios from 'axios'
 import { sesionIniciada } from '../actions/authActions'
 
 export const actualizarHombre = (datos) => async (dispatch) => {
-    console.log("datos",datos);
   const options = {
     method: 'PUT',
     url: 'http://localhost:8080/actualizarUsuario',
@@ -11,7 +10,6 @@ export const actualizarHombre = (datos) => async (dispatch) => {
   }
 
   axios.request(options).then(function (response) {
-      console.log("hola",response.data);
     dispatch(sesionIniciada(response.data.email, response.data.uid, response.data.imagenUrl, response.data.nombres, response.data.id))
   }).catch(function (error) {
     console.error(error)

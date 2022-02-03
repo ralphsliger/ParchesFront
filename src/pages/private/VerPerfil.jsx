@@ -21,7 +21,6 @@ const VerPerfil = () => {
     },[])
 
     const editarPerfil=(id)=>{
-      console.clear();
       setOpen(true);
   }  
 
@@ -37,7 +36,6 @@ const VerPerfil = () => {
         "nombres": nombre,
         "uid":auth.uid
       }
-      console.log("wiii",usuario);
       dispatch(actualizarHombre(usuario))
       setOpen(false);
       
@@ -45,15 +43,15 @@ const VerPerfil = () => {
 
   return (  <div>
     <div><Typography variant='h3' color='primary'>Perfíl</Typography></div>
-    <img style={{ width: '80px', margin: '20px' }} src={auth.imagenUrl} className='rounded-full' />
+    <img id='img-perfil' style={{ width: '80px', margin: '20px' }} src={auth.imagenUrl} className='rounded-full' />
     <div style={{margin:"10px"}}>
         <Typography variant='h5' color='primary' >Correo</Typography>
-        {auth.email && <Typography variant='h7' >{auth.email}</Typography>}
+        {auth.email && <Typography id="txt-email" variant='h7' >{auth.email}</Typography>}
     </div>
     <div style={{margin:"10px"}}>
         <Typography variant='h5' color='primary'>Nombre</Typography>
-        {auth.nombres && <Typography variant='h7'>{auth.nombres}</Typography>}
-        <IconButton color='primary' onClick={()=>editarPerfil()}><ModeEditIcon/></IconButton> 
+        {auth.nombres && <Typography id="txt-nombre" variant='h7'>{auth.nombres}</Typography>}
+        <IconButton id="btn-editarPerfil" color='primary' onClick={()=>editarPerfil()}><ModeEditIcon/></IconButton> 
         </div>
         <EditarParcheModal
           nombre={nombre}
