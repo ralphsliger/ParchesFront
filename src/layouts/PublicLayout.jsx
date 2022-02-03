@@ -1,5 +1,3 @@
-
-import { Box } from '@mui/system'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Outlet, useNavigate } from 'react-router-dom'

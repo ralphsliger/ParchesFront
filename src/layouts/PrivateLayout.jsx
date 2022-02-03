@@ -3,11 +3,10 @@ import Footer from '../components/public/Footer'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { app } from '../services/firebase'
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { obtenerUsuario } from '../redux/middlewares/obtenerUsuario'
 
 const PrivateLayout = () => {
-  const state = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 

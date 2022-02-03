@@ -15,7 +15,7 @@ export default function ParcheWrapper ({ parche }) {
       spacing={4}
     >
       <ParcheData parche={parche} />
-      <ParcheButtons />
+      <ParcheButtons parche={parche} />
     </Stack>
   )
 }

@@ -17,10 +17,9 @@ import { app } from '../../services/firebase'
 import { Box } from '@mui/system'
 import { Link } from 'react-router-dom'
 
-
 const HomePagePublic = () => {
   return (
-    <div className='contenedor'>
+    <div className='contenedor '>
       <div className='contenedor-animacion'>
         <img src={ManoIzquierda} />
         <img src={ManoDerecha} />
@@ -60,29 +59,29 @@ const HomePagePublic = () => {
           deberian ser eternos!
         </Typography>
         <Link to='crear-cuenta'>
-        <Button
-          id='btn-registro-home'
-          color='primary'
-          variant='contained'
-          sx={{
-            '&:hover': { backgroundColor: '#f58442ff' }
-          }}
-        >
-          Registro
-        </Button>
+          <Button
+            id='btn-registro-home'
+            color='primary'
+            variant='contained'
+            sx={{
+              '&:hover': { backgroundColor: '#f58442ff' }
+            }}
+          >
+            Registro
+          </Button>
         </Link>
         <Link to='inicio-sesion'>
-        <Button
-          id='btn-inicio-sesion-home'
-          color='primary'
-          variant='contained'
-          sx={{
-            m: 2,
-            '&:hover': { backgroundColor: '#f58442ff' }
-          }}
-        >
-          Inicio de sesión
-        </Button>
+          <Button
+            id='btn-inicio-sesion-home'
+            color='primary'
+            variant='contained'
+            sx={{
+              m: 2,
+              '&:hover': { backgroundColor: '#f58442ff' }
+            }}
+          >
+            Inicio de sesión
+          </Button>
         </Link>
         <Typography
           component='h2'

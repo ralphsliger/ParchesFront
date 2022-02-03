@@ -56,7 +56,7 @@ export function enviarParche (uId,
   return dispatch => {
     axios.post(URL_API_POST, parche)
       .then(function (response) {
-        // dispatch(crearParche(response.data))
+        dispatch(crearParche(response.data))
       })
       .catch(function (error) {
         dispatch(crearParcheError(error))
