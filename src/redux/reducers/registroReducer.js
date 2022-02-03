@@ -15,7 +15,6 @@ const registroReducer = (state = initialState, { type, payload }) => {
       // TODO: Validar errores email duplicado y fallo en conexion
       return {
         ...state,
-        error: null,
         uid: payload.uid,
         nombre: payload.nombres,
         email: payload.email

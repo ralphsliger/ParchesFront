@@ -30,20 +30,20 @@ const Registro = () => {
   const onSubmit = async (e) => {
     e.preventDefault()
     console.log(state)
-    let correo = state.email.toLowerCase()
-    const validacion = validaciones(state.nombre, correo,
+
+    const validacion = validaciones(state.nombre, state.email,
       state.password, state.confPassword)
 
     if (typeof validacion === 'string') {
       dispatch(registroFallido(validacion))
     } else {
       const usuario = await registrarUsuario(
-        correo,
+        state.email,
         state.password,
         state.nombre
       )
       if (typeof usuario === 'object') {
-        dispatch(registroExitoso(usuario.data.uid, correo, state.nombre))
+        dispatch(registroExitoso(usuario.data.uid, state.email, state.nombre))
         navigate('/private')
       } else {
         dispatch(registroFallido(usuario))
