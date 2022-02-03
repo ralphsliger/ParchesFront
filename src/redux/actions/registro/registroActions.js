@@ -1,14 +1,15 @@
 import { INICIO_SESION, NUEVO_REGISTRO, REGISTRO_FALLIDO } from './registroActionTypes'
 
 // TODO: Cambiar la ruta de la imagen predefinida
-export const registroExitoso = (uid, email, nombre) => {
+export const registroExitoso = (uid, email, nombre,url,id) => {
   return {
     type: NUEVO_REGISTRO,
     payload: {
       uid: uid,
       nombres: nombre,
       email: email,
-      imagenUrl: 'https://firebasestorage.googleapis.com/v0/b/quetions-app.appspot.com/o/pngwing.com.png?alt=media&token=ae687cb3-1160-4aa6-909c-a4e320f0a1c6'
+      imagenUrl: url,
+      id:id
     }
   }
 }
@@ -23,14 +24,15 @@ export const registroFallido = (msg) => {
   }
 }
 
-export const inicioSesion = (uid, email, nombre, imagenUrl) => {
+export const inicioSesion = (uid, email, nombre, imagenUrl,id) => {
   return {
     type: INICIO_SESION,
     payload: {
       uid: uid,
       nombres: nombre,
       email: email,
-      imagenUrl: imagenUrl
+      imagenUrl: imagenUrl,
+      id:id
     }
   }
 }
