@@ -12,7 +12,6 @@ const MisParchesPage = () => {
   const { misParchesFiltrados, busquedaErronea } = useSelector((state) => state.filtroMisParches)
   const user = useSelector((state) => state.auth)
   const dispatch = useDispatch()
-  console.log('para mis parches', user.uid)
 
   useEffect(() => {
     dispatch(getMisParches(user.uid))

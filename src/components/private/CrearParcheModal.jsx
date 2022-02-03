@@ -17,7 +17,6 @@ import { useDispatch, useSelector } from 'react-redux'
 const CrearParcheModal = () => {
   const user = useSelector(state => state.auth)
 
-  console.log("en el modal ",user)
 
   const [values, handleInputChange, reset] = useForm({
     busquedaMapa: '',
@@ -115,7 +114,6 @@ const CrearParcheModal = () => {
         dragend () {
           const marker = markerRef.current
           if (marker != null) {
-            console.log('marker', marker.getLatLng())
             setPosition(marker.getLatLng())
           }
         }
@@ -143,7 +141,6 @@ const CrearParcheModal = () => {
   const handleEnviarFormulario = (e) => {
     e.preventDefault()
     reset()
-    console.log(categoria, cupoMaximo)
     dispatch(enviarDatos(
       perfilQuemado.uId,
       nombreParche,
