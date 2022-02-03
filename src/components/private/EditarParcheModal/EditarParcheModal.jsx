@@ -5,15 +5,25 @@ import { getDireccion } from '../../../redux/actions/CrearParcheActions'
 import { useDispatch, useSelector } from 'react-redux'
 import DialogTittleModal from '../CrearParcheModal/DialogTittleModal'
 import DialogContentModal from '../CrearParcheModal/DialogContentModal'
+import { getUnParche } from '../../../redux/middlewares/getUnParche'
+import { useParams } from 'react-router-dom'
 
 const EditarParcheModal = () => {
-  // perfil que vendra de firebase QUEMADO:
+  const { parcheId } = useParams()
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.auth)
+  const { unParche } = useSelector(state => state.unParche)
 
   const perfilQuemado = {
-    uId: 'xxx-xxx-xxx-xxx',
-    fotoPerfil: 'https://us.123rf.com/450wm/kritchanut/kritchanut1308/kritchanut130800012/21528485-avatar-hombre-foto-de-perfil-vector.jpg?ver=6',
-    nombreUsuario: 'Anthony Colmenares Rivas'
+    uId: user.uid,
+    fotoPerfil: user.imagenUrl,
+    nombreUsuario: user.nombres
   }
+
+  useEffect(() => {
+    dispatch(getUnParche(parcheId))
+    console.log("para el editar ",unParche)
+  }, [])
 
   const parcheQuemado = {
     id: '61f9ae55c281fc06a82d3506',
@@ -38,14 +48,14 @@ const EditarParcheModal = () => {
 
   const [values, handleInputChange, reset] = useForm({
     busquedaMapa: '',
-    nombreParche: parcheQuemado.nombreParche.valorNombre,
-    fechaParche: parcheQuemado.fechaInicio.valorFecha.split('T')[0],
-    horaParche: parcheQuemado.fechaInicio.valorFecha.split('T')[1],
-    fechaFin: parcheQuemado.fechaFin.valorFecha.split('T')[0],
-    horaFin: parcheQuemado.fechaFin.valorFecha.split('T')[1],
-    descripcionParche: parcheQuemado.descripcion.valorDescripcion,
-    categoria: parcheQuemado.categoria,
-    cupoMaximo: parcheQuemado.capacidadMaxima.valorCapacidad
+    nombreParche: unParche?.nombreParche?.valorNombre,
+    fechaParche: unParche?.fechaInicio?.valorFecha.split('T')[0],
+    horaParche: unParche?.fechaInicio?.valorFecha.split('T')[1],
+    fechaFin: unParche?.fechaFin?.valorFecha.split('T')[0],
+    horaFin: unParche?.fechaFin?.valorFecha.split('T')[1],
+    descripcionParche: unParche?.descripcion?.valorDescripcion,
+    categoria: unParche?.categoria,
+    cupoMaximo: unParche?.capacidadMaxima?.valorCapacidad
   })
 
   const {
@@ -62,12 +72,11 @@ const EditarParcheModal = () => {
 
   // constantes redux:
 
-  const dispatch = useDispatch()
   const direccion = useSelector(store => store.parcheCreado.direccion)
 
   // estados del mapa:
 
-  const [position, setPosition] = useState([parcheQuemado.ubicacionParche.lat, parcheQuemado.ubicacionParche.lng])
+  const [position, setPosition] = useState([unParche.ubicacionParche.lat, unParche.ubicacionParche.lng])
 
   // variable de fecha para formulario:
 

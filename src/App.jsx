@@ -29,7 +29,7 @@ function App () {
             <Route path='Mi_perfil' element={<Perfil />} />
             <Route path='mis-parches' element={<MisParchesPage />} />
             <Route path='detalle-parche/:id/:usuarioId' element={<UnParchePagePrivate />} />
-            <Route path='editar-parche' element={<CrearParchePage />} />
+            <Route path='editar-parche/:parcheId' element={<CrearParchePage />} />
             <Route path='*' element={<NotFound />} />
           </Route>
         </Routes>

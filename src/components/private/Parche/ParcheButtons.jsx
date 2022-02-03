@@ -45,7 +45,7 @@ function ParcheButtons({ parche }) {
 
   return (
     <Stack height={35} direction='row' spacing={2}>
-      <Link to='/private/editar-parche/123456'>
+      <Link to={`/private/editar-parche/${parche.id}`}>
         <Button id='boton-editar-parche' size='small' variant='contained' startIcon={<EditIcon />}>
           Editar
         </Button>

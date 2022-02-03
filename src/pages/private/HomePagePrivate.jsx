@@ -44,14 +44,14 @@ const HomePagePrivate = () => {
           width: 800,
           alignItems: 'center',
           mb: 10,
-          mx : 'auto'
+          mx: 'auto'
         }}
       >
         <Typography
           id='txt-frase'
           component='h2'
           variant='h6'
-          style={{ margin: '50px 20px 40px 20px '}}
+          style={{ margin: '50px 20px 40px 20px ' }}
           color='secondary'
           align='justify'
         >¡El parche, un lugar donde puedes crear eventos y parchar con sofkianos con tus mismos gustos, te esperamos para tener momentos que deberian ser eternos!
