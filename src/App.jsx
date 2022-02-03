@@ -17,8 +17,8 @@ function App () {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path='/public' element={<PublicLayout />}>
-            <Route path='inicio' element={<HomePagePublic />} />
+          <Route path='/' element={<PublicLayout />}>
+            <Route path='' element={<HomePagePublic />} />
             <Route path='inicio-sesion' element={<InicioSesion />} />
             <Route path='crear-cuenta' element={<Registro />} />
             <Route path='*' element={<NotFound />} />
