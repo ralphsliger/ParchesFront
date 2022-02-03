@@ -47,6 +47,7 @@ const HomePagePrivate = () => {
         }}
       >
         <Typography
+        id='txt-frase'
           component='h2'
           variant='h6'
           style={{ margin: '50px 20px 40px 20px' }}
@@ -61,6 +62,7 @@ const HomePagePrivate = () => {
           color='primary'
         >Descripción</Typography>
         <Typography
+          id='txt-descripcion'
           component='h2'
           variant='h6'
           style={{ margin: '20px 20px 60px 20px' }}
