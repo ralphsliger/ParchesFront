@@ -5,7 +5,7 @@ export const validaciones = (nombre, email, password, confPassword) => {
   const expRegEmail = new RegExp('^[^@]+@[^@]+\\.[a-zA-Z]{2,50}$')
   const resultEmail = expRegEmail.test(email)
 
-  const expRegNombre = /^[A-Za-z0-9À-ÿ\s\u00f1\u00d1\u00E0-\u00FC]+$/g;
+  const expRegNombre = /^[A-Za-z0-9\s]+$/g
   const resultNombre = expRegNombre.test(nombre)
 
   if (!resultNombre) {
