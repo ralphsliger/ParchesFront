@@ -9,7 +9,6 @@ const initialState = {
 }
 
 const registroReducer = (state = initialState, { type, payload }) => {
-  console.log('', type, ': ', payload)
   switch (type) {
     case NUEVO_REGISTRO: {
       // TODO: Validar errores email duplicado y fallo en conexion

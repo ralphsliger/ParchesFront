@@ -1,7 +1,7 @@
 /* eslint-disable multiline-ternary */
 import React, { useState } from 'react'
 import { Stack, Button, Backdrop, Modal, Fade, Typography } from '@mui/material'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import {
   Delete as DeleteIcon,
   Edit as EditIcon,
@@ -11,6 +11,8 @@ import {
   ErrorOutline as ErrorOutlineIcon
 } from '@mui/icons-material'
 import { Link } from 'react-router-dom'
+import { deleteParche } from '../../../redux/middlewares/deleteParche'
+import { deshabParche } from '../../../redux/middlewares/deshabilitarParche'
 
 const style = {
   position: 'absolute',
@@ -24,23 +26,36 @@ const style = {
   p: 4
 }
 
-function ParcheButtons({ parche }) {
+function ParcheButtons ({ parche }) {
+  const dispatch = useDispatch()
   const [openBorrar, setOpenBorrar] = useState(false)
   const handleOpenBorrar = () => setOpenBorrar(true)
   const handleCloseBorrar = () => setOpenBorrar(false)
   const { uid } = useSelector((state) => state.auth)
 
   const handleBorrar = () => {
+    dispatch(deleteParche(parche?.id, parche?.duenoDelParche))
     setOpenBorrar(false)
-    console.log('borrando')
   }
 
   const [openDeshabilitar, setOpenDeshabilitar] = useState(false)
   const handleOpenDeshabilitar = () => setOpenDeshabilitar(true)
   const handleCloseDeshabilitar = () => setOpenDeshabilitar(false)
   const handleDeshabilitar = () => {
+    console.log(parche)
+    dispatch(deshabParche(
+      parche?.id,
+      parche?.duenoDelParche,
+      parche?.nombreParche,
+      parche?.descripcion,
+      parche?.fechaCreacion.valorFecha,
+      parche?.fechaInicio.valorFecha,
+      parche?.fechaFin.valorFecha,
+      parche?.estado,
+      parche?.categoria,
+      parche?.capacidadMaxima.valorCapacidad,
+      parche?.ubicacionParche))
     setOpenDeshabilitar(false)
-    console.log('deshabilitando')
   }
 
   return (
