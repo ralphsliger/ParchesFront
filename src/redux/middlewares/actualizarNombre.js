@@ -5,7 +5,7 @@ import { API_URL } from '../../utils/Conexion'
 export const actualizarHombre = (datos) => async (dispatch) => {
   const options = {
     method: 'PUT',
-    url: `${API_URL}/actualizarUsuario`,
+    url: `${API_URL}actualizarUsuario`,
     headers: { 'Content-Type': 'application/json' },
     data: datos
   }

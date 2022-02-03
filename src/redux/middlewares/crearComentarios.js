@@ -5,7 +5,7 @@ import { API_URL } from '../../utils/Conexion'
 export const crearComentario = (datos) => async (dispatch) => {
   const options = {
     method: 'POST',
-    url: `${API_URL}/crearComentario`,
+    url: `${API_URL}crearComentario`,
     headers: { 'Content-Type': 'application/json' },
     data: datos
   }
