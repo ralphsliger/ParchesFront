@@ -4,12 +4,13 @@ import Typography from "@mui/material/Typography";
 import ModeEditIcon from '@mui/icons-material/ModeEdit'
 import IconButton from '@mui/material/IconButton'
 import EditarParcheModal from '../../components/private/EditarParcheModal';
-
+import { useDispatch } from 'react-redux';
+import { actualizarHombre } from '../../redux/middlewares/actualizarNombre';
 const VerPerfil = () => {
     const auth = useSelector(state=>state.auth)
     const [open, setOpen] = useState(false);
-    const [nombre, setNombre] = useState(auth.nombres);
-
+    const [nombre, setNombre] = useState(auth.nombre);
+    const dispatch=useDispatch();
     const msgModal = {
       msg: "Ingrese el nombre nuevo",
       titulo: "Actualizar nombre",
@@ -30,13 +31,14 @@ const VerPerfil = () => {
   
     const handleConfirm = () => {
       const usuario={
+        "id":auth.id,
         "email":auth.email,
         "imagenUrl":auth.imagenUrl,
         "nombres": nombre,
         "uid":auth.uid
       }
-      console.log(usuario);
-
+      console.log("wiii",usuario);
+      dispatch(actualizarHombre(usuario))
       setOpen(false);
       
     }
