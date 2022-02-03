@@ -103,11 +103,14 @@ const DialogContentModal = (
       />
 
       {/* Mapa */}
-      <MapModal setPosition={setPosition} position={position} direccion={direccion} />
+      {position && (
+        <>
+          <MapModal setPosition={setPosition} position={position} direccion={direccion} />
 
-      <div className='flex justify-center text-sm'>
-        <span><strong>Direccion:</strong> {direccion}</span>
-      </div>
+          <div className='flex justify-center text-sm'>
+            <span><strong>Direccion:</strong> {direccion}</span>
+          </div>
+        </>)}
 
     </DialogContent>
   )
