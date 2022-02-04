@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { registrarUsuario } from '../../utils/registro/registrarUsuario'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   registroFallido,
-  registroExitoso
+  registroExitoso,
+  sanearEstado
 } from '../../redux/actions/registro/registroActions'
 import { useNavigate } from 'react-router-dom'
 import BotonRegistroGoogle from '../../components/public/BotonRegistroGoogle'
@@ -20,6 +21,10 @@ const Registro = () => {
 
   const navigate = useNavigate()
 
+  useEffect(() => {
+    dispatch(sanearEstado())
+  }, [navigate])
+
   const [state, setState] = useState({
     nombre: '',
     email: '',
@@ -29,21 +34,20 @@ const Registro = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault()
-    console.log(state)
-
-    const validacion = validaciones(state.nombre, state.email,
+    const correo = state.email.toLowerCase()
+    const validacion = validaciones(state.nombre, correo,
       state.password, state.confPassword)
 
     if (typeof validacion === 'string') {
       dispatch(registroFallido(validacion))
     } else {
       const usuario = await registrarUsuario(
-        state.email,
+        correo,
         state.password,
         state.nombre
       )
       if (typeof usuario === 'object') {
-        dispatch(registroExitoso(usuario.data.uid, usuario.data.email, usuario.data.nombres,usuario.data.imagenUrl,usuario.data.id))
+        dispatch(registroExitoso(usuario.data.uid, usuario.data.email, usuario.data.nombres, usuario.data.imagenUrl, usuario.data.id))
         navigate('/private')
       } else {
         dispatch(registroFallido(usuario))
@@ -129,7 +133,22 @@ const Registro = () => {
           </Button>
           <BotonRegistroGoogle />
         </Box>
-        {error !== null ? <span>{error}</span> : null}
+        {error !== null
+          ? (
+            <Box
+              sx={{
+                color: '#b71c1c',
+                bgcolor: '#ef9a9a',
+                p: 2,
+                mt: 3,
+                borderRadius: 2,
+                textAlign: 'center'
+              }}
+            >
+              <span>{error}</span>
+            </Box>
+            )
+          : (null)}
       </Box>
     </Container>
   )

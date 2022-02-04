@@ -19,7 +19,7 @@ export default function BarraNavegacion() {
     <Box sx={{ flexGrow: 1, boxShadow: 2, }}>
       <AppBar position='relative' color='secondary'>
         <Toolbar>
-          <Link to='inicio'>
+          <Link to='/'>
             <IconButton
               size='large'
               edge='start'
@@ -30,7 +30,7 @@ export default function BarraNavegacion() {
             </IconButton>
           </Link>
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }} />
-          <Button id='botonInicioNavBar' component={Link} to='inicio' variant='contained' color='primary' sx={{ mr: 2 }} className={classes.root} startIcon={<HomeRoundedIcon />}>Inicio</Button>
+          <Button id='botonInicioNavBar' component={Link} to='' variant='contained' color='primary' sx={{ mr: 2 }} className={classes.root} startIcon={<HomeRoundedIcon />}>Inicio</Button>
           <Button id='botonInicioSesionNavBar' component={Link} to='inicio-sesion' variant='contained' color='primary' sx={{ mr: 2 }} className={classes.root} startIcon={<LoginRoundedIcon />}>Inicio de sesión</Button>
           <Button id='botonCrearCuentaNavBar' component={Link} to='crear-cuenta' variant='contained' color='primary' className={classes.root} startIcon={<HowToRegRoundedIcon />}>Crear Cuenta</Button>
         </Toolbar>
