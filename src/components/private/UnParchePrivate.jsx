@@ -58,7 +58,7 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
         />
         <CardContent>
           <Typography>
-            <img src={'../../Assents/categoria' + unParche.categoria + '.png'} width='50px' height='50px' alt='imagen' />
+            <img src={'../../Assents/categoria/' + unParche.categoria + '.png'} width='50px' height='50px' alt='imagen' />
             <Box component='span' fontWeight='fontWeightBold'>Categoria: </Box>
             {unParche.categoria}
           </Typography>
