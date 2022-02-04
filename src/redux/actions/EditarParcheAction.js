@@ -2,6 +2,7 @@ import actionsTypesEditarParche from './actionsTypes/ActionsTypeEditarParche'
 import axios from 'axios'
 import { API_URL } from '../../utils/Conexion'
 import { getUnParche } from '../middlewares/getUnParche'
+import { toast } from 'react-toastify'
 
 const URL_API_PUT = `${API_URL}parches/editar`
 
@@ -18,7 +19,8 @@ export function actualizarParche (
   estado,
   categoria,
   cupoMaximo,
-  position
+  position,
+  navigate
 ) {
   // Body JSON para enviar al PUT en backend
   const parche = {
@@ -41,8 +43,27 @@ export function actualizarParche (
       .then(function (response) {
         dispatch(getUnParche(id))
         dispatch(editarParche(response.data))
+        navigate('/private/mis-parches')
+        toast.success(' Parche editado', {
+          position: 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined
+        })
       })
       .catch(function (error) {
+        toast.error('Error', {
+          position: 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined
+        })
         dispatch(editarParcheError(error))
       })
   }

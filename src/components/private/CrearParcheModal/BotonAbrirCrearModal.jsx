@@ -10,6 +10,7 @@ const BotonAbrirCrearModal = ({ handleClickOpen }) => {
     rounded-full
     bg-yellow-500
     p-3
+    buttonCrear
     '
       >
         <span

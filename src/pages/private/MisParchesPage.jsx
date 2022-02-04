@@ -6,6 +6,8 @@ import TituloFiltro from '../../components/private/Filtro/TituloFiltro'
 import TituloParche from '../../components/private/Parche/TituloParche'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMisParches } from '../../redux/middlewares/getMisParches'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const MisParchesPage = () => {
   const { isLoading, misParches, error } = useSelector((state) => state.misParches)
@@ -65,6 +67,19 @@ const MisParchesPage = () => {
         </Box>
       )}
       {error && <h1> Error {error} </h1>}
+      <ToastContainer
+        position='top-right'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      {/* Same as */}
+      <ToastContainer />
     </>
   )
 }

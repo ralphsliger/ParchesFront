@@ -6,8 +6,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import DialogTittleModal from './DialogTittleModal'
 import DialogContentModal from './DialogContentModal'
 import BotonAbrirCrearModal from './BotonAbrirCrearModal'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 const CrearParcheModal = () => {
+  const navigate = useNavigate()
   const user = useSelector(state => state.auth)
 
   const [values, handleInputChange, reset] = useForm({
@@ -110,7 +112,8 @@ const CrearParcheModal = () => {
       descripcionParche,
       categoria,
       cupoMaximo,
-      position
+      position,
+      navigate
     ))
     handleClose()
   }
@@ -171,7 +174,7 @@ const CrearParcheModal = () => {
               rounded'
               type='submit'
             >
-              Crear
+              Crear Parche
             </button>
           </div>
         </form>
