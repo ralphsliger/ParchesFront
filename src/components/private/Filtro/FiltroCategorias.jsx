@@ -5,13 +5,13 @@ import { useDispatch } from 'react-redux'
 import { selectValueCategorias } from '../../../redux/actions/filtrarMisParchesActions'
 
 const options = [
-  'Tecnología',
+  'Tecnologia',
   'VideoJuegos',
   'Arte',
   'Negocios',
   'Moda',
   'Deporte',
-  'Gastronomía',
+  'Gastronomia',
   'Fiestas',
   'Conferencias',
   ' Cine',
