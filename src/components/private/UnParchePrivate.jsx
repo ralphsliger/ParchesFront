@@ -20,6 +20,10 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
     return fechaFormateada.toLocaleDateString('es-ES', options)
   }
+  const formateadorHora = (fecha) => {
+    const fechaFormateada = new Date(fecha)
+    return fechaFormateada.toLocaleTimeString()
+  }
 
   const position = [unParche.ubicacionParche.lat, unParche.ubicacionParche.lng]
 
@@ -42,14 +46,6 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
           subheader={'Total Asistentes: ' + unParche.cantidadAsistentes}
         />
         <CardContent>
-          <Typography>
-            <Box component='span' fontWeight='fontWeightBold'>Fecha Inicio: </Box>
-            {formateadorFecha(unParche.fechaDeInicio.valorFecha)}
-          </Typography>
-          <Typography>
-            <Box component='span' fontWeight='fontWeightBold'>Fecha Fin: </Box>
-            {formateadorFecha(unParche.fechaFin.valorFecha)}
-          </Typography>
           <Typography>
             <Box component='span' fontWeight='fontWeightBold'>Categoria: </Box>
             {unParche.categoria}
@@ -80,6 +76,14 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
             </Marker>
           </MapContainer>
 
+          <Typography>
+            <Box component='span' fontWeight='fontWeightBold'>Fecha Inicio: </Box>
+            {`${formateadorFecha(unParche.fechaInicio.valorFecha)} - ${formateadorHora(unParche.fechaInicio.valorFecha)}`}
+          </Typography>
+          <Typography>
+            <Box component='span' fontWeight='fontWeightBold'>Fecha Fin: </Box>
+            {`${formateadorFecha(unParche.fechaFin.valorFecha)} - ${formateadorHora(unParche.fechaFin.valorFecha)}`}
+          </Typography>
         </CardContent>
         <CardActions disableSpacing>
           {unParche && unParche.inscripcion.id !== null
