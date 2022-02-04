@@ -28,6 +28,7 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
   return (
     <>
       <Typography align='right'>
+        ¿Asistirás?
         {unParche && unParche.inscripcion.id !== null
           ? <Button
               variant='contained'
@@ -42,7 +43,7 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
               disabled={unParche.capacidadMaxima.valorCapacidad === unParche.cantidadAsistentes}
               onClick={(e) => inscribirse(e)}
             >
-            ¿Asistiras?
+            Inscribirse
           </Button>}
       </Typography>
       <Typography align='center' color='primary' variant='h3'>{unParche.nombreParche.valorNombre}</Typography>
@@ -58,7 +59,6 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
         />
         <CardContent>
           <Typography>
-            <img src={'./Assents/categoria/' + unParche.categoria + '.png'} width='50px' height='50px' alt='imagen' />
             <Box component='span' fontWeight='fontWeightBold'>Categoria: </Box>
             {unParche.categoria}
           </Typography>
