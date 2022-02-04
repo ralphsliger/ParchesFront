@@ -54,11 +54,6 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
               {unParche.duenoDelParche.nombres.substring(0, 1).toUpperCase()}
             </Avatar>
           }
-          action={
-            <IconButton aria-label='settings'>
-              <EditIcon />
-            </IconButton>
-          }
           title={'Evento creado por: ' + unParche.duenoDelParche.nombres}
           subheader={'Total Asistentes: ' + unParche.cantidadAsistentes}
         />
