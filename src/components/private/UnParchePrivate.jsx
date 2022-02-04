@@ -78,11 +78,11 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
 
           <Typography>
             <Box component='span' fontWeight='fontWeightBold'>Fecha Inicio: </Box>
-            {`${formateadorFecha(unParche.fechaInicio.valorFecha)} - ${formateadorHora(unParche.fechaInicio.valorFecha)}`}
+            {`${formateadorFecha(unParche?.fechaInicio?.valorFecha)} - ${formateadorHora(unParche?.fechaInicio?.valorFecha)}`}
           </Typography>
           <Typography>
             <Box component='span' fontWeight='fontWeightBold'>Fecha Fin: </Box>
-            {`${formateadorFecha(unParche.fechaFin.valorFecha)} - ${formateadorHora(unParche.fechaFin.valorFecha)}`}
+            {`${formateadorFecha(unParche?.fechaFin?.valorFecha)} - ${formateadorHora(unParche?.fechaFin?.valorFecha)}`}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
