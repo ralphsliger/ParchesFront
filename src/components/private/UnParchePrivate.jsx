@@ -4,6 +4,7 @@ import {
   Typography,
   Box
 } from '@mui/material'
+import Imagen from '../../Assents/categoria/'
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
@@ -58,7 +59,7 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
         />
         <CardContent>
           <Typography>
-            <img src={'./Assents/categoria/' + unParche.categoria + '.png'} width='50px' height='50px' alt='imagen' />
+            <img src={Imagen + unParche.categoria + '.png'} width='50px' height='50px' alt='imagen' />
             <Box component='span' fontWeight='fontWeightBold'>Categoria: </Box>
             {unParche.categoria}
           </Typography>
