@@ -28,8 +28,7 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
 
   return (
     <>
-      <Typography>
-        <Box variant='h3' component='span' fontWeight='fontWeightBold'>{unParche.nombreParche.valorNombre} </Box>
+      <Typography align='right'>
         {unParche && unParche.inscripcion.id !== null
           ? <Button
               variant='contained'
