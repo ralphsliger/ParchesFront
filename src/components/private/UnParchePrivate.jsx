@@ -4,13 +4,12 @@ import {
   Typography,
   Box
 } from '@mui/material'
-import EditIcon from '@mui/icons-material/Edit'
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 import Avatar from '@mui/material/Avatar'
-import IconButton from '@mui/material/IconButton'
 import { red } from '@mui/material/colors'
+import DateRangeIcon from '@mui/icons-material/DateRange'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
 const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
@@ -36,7 +35,7 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
               onClick={desinscribirse}
             >
             No asistiré
-            </Button>
+          </Button>
           : <Button
               variant='contained'
               color='primary'
@@ -44,7 +43,7 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
               onClick={(e) => inscribirse(e)}
             >
             ¿Asistiras?
-            </Button>}
+          </Button>}
       </Typography>
       <Typography align='center' color='primary' variant='h3'>{unParche.nombreParche.valorNombre}</Typography>
       <Card sx={{ width: '100%' }} style={{ border: 'none', boxShadow: 'none' }}>
@@ -59,6 +58,7 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
         />
         <CardContent>
           <Typography>
+            <img src={'/src/Assents/categoria/' + unParche.categoria + '.png'} width='50px' height='50px' alt='imagen' />
             <Box component='span' fontWeight='fontWeightBold'>Categoria: </Box>
             {unParche.categoria}
           </Typography>
@@ -87,14 +87,14 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
               <Popup />
             </Marker>
           </MapContainer>
-          <img src={'/src/Assents/categoria/' + unParche.categoria + '.png'} width='50px' height='50px' alt='imagen' />
-
           <Typography>
-            <Box component='span' fontWeight='fontWeightBold'>Fecha Inicio: </Box>
+            <Box component='span' fontWeight='fontWeightBold'>
+              <DateRangeIcon /> Fecha Inicio: </Box>
             {`${formateadorFecha(unParche?.fechaDeInicio?.valorFecha)} - ${formateadorHora(unParche?.fechaDeInicio.valorFecha)}`}
           </Typography>
           <Typography>
-            <Box component='span' fontWeight='fontWeightBold'>Fecha Fin: </Box>
+            <Box component='span' fontWeight='fontWeightBold'>
+              <DateRangeIcon /> Fecha Fin: </Box>
             {`${formateadorFecha(unParche?.fechaFin?.valorFecha)} - ${formateadorHora(unParche?.fechaFin?.valorFecha)}`}
           </Typography>
         </CardContent>
