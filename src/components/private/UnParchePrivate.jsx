@@ -35,7 +35,7 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
               color='success'
               onClick={desinscribirse}
             >
-            No asistiré
+            Desinscribirse
           </Button>
           : <Button
               variant='contained'
