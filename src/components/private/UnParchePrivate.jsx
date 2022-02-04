@@ -8,7 +8,6 @@ import EditIcon from '@mui/icons-material/Edit'
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
 import Avatar from '@mui/material/Avatar'
 import IconButton from '@mui/material/IconButton'
 import { red } from '@mui/material/colors'
@@ -29,6 +28,25 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
 
   return (
     <>
+      <Typography>
+        <Box variant='h3' component='span' fontWeight='fontWeightBold'>{unParche.nombreParche.valorNombre} </Box>
+        {unParche && unParche.inscripcion.id !== null
+          ? <Button
+              variant='contained'
+              color='success'
+              onClick={desinscribirse}
+            >
+            No asistiré
+            </Button>
+          : <Button
+              variant='contained'
+              color='primary'
+              disabled={unParche.capacidadMaxima.valorCapacidad === unParche.cantidadAsistentes}
+              onClick={(e) => inscribirse(e)}
+            >
+            ¿Asistiras?
+            </Button>}
+      </Typography>
       <Typography align='center' color='primary' variant='h3'>{unParche.nombreParche.valorNombre}</Typography>
       <Card sx={{ width: '100%' }} style={{ border: 'none', boxShadow: 'none' }}>
         <CardHeader
@@ -85,24 +103,6 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
             {`${formateadorFecha(unParche?.fechaFin?.valorFecha)} - ${formateadorHora(unParche?.fechaFin?.valorFecha)}`}
           </Typography>
         </CardContent>
-        <CardActions disableSpacing>
-          {unParche && unParche.inscripcion.id !== null
-            ? <Button
-                variant='contained'
-                color='success'
-                onClick={desinscribirse}
-              >
-              Desinscribirse
-              </Button>
-            : <Button
-                variant='contained'
-                color='primary'
-                disabled={unParche.capacidadMaxima.valorCapacidad === unParche.cantidadAsistentes}
-                onClick={(e) => inscribirse(e)}
-              >
-              Inscribirse
-              </Button>}
-        </CardActions>
       </Card>
 
     </>
