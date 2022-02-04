@@ -29,6 +29,7 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
     <>
       <Typography align='right'>
         ¿Asistirás?
+        <br />
         {unParche && unParche.inscripcion.id !== null
           ? <Button
               variant='contained'
