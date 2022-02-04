@@ -87,6 +87,7 @@ const UnParchePrivate = ({ unParche, inscribirse, desinscribirse }) => {
               <Popup />
             </Marker>
           </MapContainer>
+          <img src={'/src/Assents/categoria/' + unParche.categoria + '.png'} width='50px' height='50px' alt='imagen' />
 
           <Typography>
             <Box component='span' fontWeight='fontWeightBold'>Fecha Inicio: </Box>
