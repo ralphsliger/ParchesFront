@@ -40,4 +40,11 @@
   max-width: 720px !important; 
 }
 
+.crear-parche:hover{
+  background-color:#140D4F
+}
+.buttonCrear:hover{
+  background-color:#F58442
+}
+
 
