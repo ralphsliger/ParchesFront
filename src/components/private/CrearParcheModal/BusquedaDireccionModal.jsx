@@ -5,12 +5,12 @@ import { FaSearchLocation } from 'react-icons/fa'
 const BusquedaDireccionModal = ({ handleInputChange, busquedaMapa, setPosition, reset }) => {
   const provider = new OpenStreetMapProvider()
 
-  const handleEviarBusqueda = () => {
+  const handleEviarBusqueda = (e) => {
+    e.preventDefault()
     provider.search({ query: busquedaMapa })
       .then(log => (
         setPosition({ lat: log[0].bounds[0][0], lng: log[0].bounds[0][1] })))
       .catch(e => console.log(e))
-    reset()
   }
   return (
     <div className='flex justify-center mb-5'>

@@ -6,13 +6,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import DialogTittleModal from '../CrearParcheModal/DialogTittleModal'
 import DialogContentModal from '../CrearParcheModal/DialogContentModal'
 import { getUnParche } from '../../../redux/middlewares/getUnParche'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 const EditarParcheModal = () => {
+  const navigate = useNavigate()
   const { parcheId } = useParams()
   const dispatch = useDispatch()
   const user = useSelector(state => state.auth)
-  const { unParche } = useSelector(state => state.unParche)
+  const { unParche , isLoading } = useSelector(state => state.unParche)
 
   const [position, setPosition] = useState(null)
 
@@ -88,13 +89,14 @@ const EditarParcheModal = () => {
       'HABILITADO',
       categoria,
       cupoMaximo,
-      position
+      position,
+      navigate
     ))
   }
 
   return (
     <>
-      {unParche && position && (
+      {!isLoading && position && (
         <div>
           <form onSubmit={handleEnviarFormulario}>
 

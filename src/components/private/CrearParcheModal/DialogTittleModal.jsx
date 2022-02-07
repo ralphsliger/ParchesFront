@@ -1,6 +1,6 @@
 import { DialogTitle } from '@mui/material'
 import { Box } from '@mui/system'
-import React from 'react'
+import { useEffect } from 'react'
 
 const DialogTittleModal = ({ handleInputChange, nombreParche, fotoPerfil, nombreUsuario }) => {
   return (

@@ -42,7 +42,6 @@ function ParcheButtons ({ parche }) {
   const handleOpenDeshabilitar = () => setOpenDeshabilitar(true)
   const handleCloseDeshabilitar = () => setOpenDeshabilitar(false)
   const handleDeshabilitar = () => {
-    console.log(parche)
     dispatch(deshabParche(
       parche?.id,
       parche?.duenoDelParche,

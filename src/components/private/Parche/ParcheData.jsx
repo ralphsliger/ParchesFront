@@ -7,6 +7,10 @@ export default function ParcheData({ parche }) {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
     return fechaFormateada.toLocaleDateString('es-ES', options)
   }
+  const formateadorHora = (fecha) => {
+    const fechaFormateada = new Date(fecha)
+    return fechaFormateada.toLocaleTimeString()
+  }
   return (
     <Stack>
       <Typography
@@ -16,7 +20,9 @@ export default function ParcheData({ parche }) {
         gutterBottom
         component='div'
       >
-        {formateadorFecha(parche.fechaInicio.valorFecha)}
+        {`${formateadorFecha(parche.fechaInicio.valorFecha)} - ${formateadorHora(
+          parche.fechaInicio.valorFecha
+        )}`}
       </Typography>
 
       <Typography id='texto-titulo-parche' variant='h5' gutterBottom component='div'>

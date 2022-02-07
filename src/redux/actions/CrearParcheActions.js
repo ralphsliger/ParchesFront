@@ -2,6 +2,7 @@ import actionsTypesCrearParche from './actionsTypes/ActionsTypeCrearParche'
 import axios from 'axios'
 import { API_URL } from '../../utils/Conexion'
 import { getMisParches } from '../middlewares/getMisParches'
+import { toast } from 'react-toastify'
 const URL_API_POST = `${API_URL}parches/crear`
 const URL_API_REVERSE = 'https://api.geoapify.com/v1/geocode/reverse'
 const API_KEY_REVERSE = '1b48259b810e48ddb151889f9ea58db0'
@@ -38,7 +39,8 @@ export function enviarParche (uId,
   descripcionParche,
   categoria,
   cupoMaximo,
-  position) {
+  position,
+  navigate) {
   // Body JSON para enviar al POST en backend
   const parche = {
     duenoDelParche: uId,
@@ -57,9 +59,28 @@ export function enviarParche (uId,
       .then(function (response) {
         dispatch(crearParche(response.data))
         dispatch(getMisParches(parche.duenoDelParche))
+        navigate('/private/mis-parches')
+        toast.success(' Parche Creado', {
+          position: 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined
+        })
       })
       .catch(function (error) {
         dispatch(crearParcheError(error))
+        toast.error('Error', {
+          position: 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined
+        })
       })
   }
 }

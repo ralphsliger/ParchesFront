@@ -34,13 +34,13 @@ export default function authReducer (state = initialState, action) {
         id: payload.id,
         error: false
       }
-      case authTypes.ERROR_INICIAR_SESION:
-        console.log("entro al error")
+    case authTypes.ERROR_INICIAR_SESION:
+      console.log('entro al error')
       return {
         ...state,
         error: payload.error
       }
-      case authTypes.EXITO_INICIO_SESION:
+    case authTypes.EXITO_INICIO_SESION:
       return {
         ...state,
         error: payload.error
